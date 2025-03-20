@@ -1,37 +1,113 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { X } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 
-const posts = [
+type Category = 'Personal' | 'Career' | 'Academic' | 'Misc';
+
+interface Post {
+  slug: string;
+  title: string;
+  date: string;
+  excerpt: string;
+  categories: Category[];
+}
+
+const posts: Post[] = [
   {
     slug: 'about-me',
     title: 'About Me',
     date: 'October 28, 2024',
     excerpt: 'A brief introduction to who I am and my journey in data science.',
+    categories: ['Personal']
   },
   {
     slug: 'nyc-transit-analysis',
     title: 'Analyzing NYC Transit Patterns',
     date: 'October 25, 2024',
     excerpt: 'An in-depth look at New York City\'s public transportation data and what it reveals about urban mobility.',
+    categories: ['Academic', 'Career']
   },
   {
     slug: 'machine-learning-cities',
     title: 'Machine Learning for Urban Planning',
     date: 'October 20, 2024',
     excerpt: 'Exploring how machine learning can help us better understand and plan our cities.',
+    categories: ['Academic', 'Career']
   }
 ];
 
+const allCategories: Category[] = ['Personal', 'Career', 'Academic', 'Misc'];
+
 export default function Blog() {
   const { theme } = useTheme();
+  const [selectedCategories, setSelectedCategories] = useState<Set<Category>>(new Set());
+
+  const toggleCategory = (category: Category) => {
+    setSelectedCategories(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(category)) {
+        newSet.delete(category);
+      } else {
+        newSet.add(category);
+      }
+      return newSet;
+    });
+  };
+
+  const clearCategories = () => {
+    setSelectedCategories(new Set());
+  };
+
+  const filteredPosts = posts.filter(post => 
+    selectedCategories.size === 0 || 
+    post.categories.some(category => selectedCategories.has(category))
+  );
 
   return (
     <div className="max-w-5xl mx-auto px-8">
-      <h1 className={`text-5xl mb-12 ${theme === 'dark' ? 'text-white' : ''}`}>Publications</h1>
+      <h1 className={`text-5xl mb-8 ${theme === 'dark' ? 'text-white' : ''}`}>Publications</h1>
+      
+      {/* Category Filters */}
+      <div className="mb-8">
+        <div className="flex flex-wrap gap-2 items-center">
+          {allCategories.map(category => (
+            <button
+              key={category}
+              onClick={() => toggleCategory(category)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                selectedCategories.has(category)
+                  ? theme === 'dark'
+                    ? 'bg-blue-500 text-white'
+                    : 'bg-[#0039D7] text-white'
+                  : theme === 'dark'
+                    ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+          {selectedCategories.size > 0 && (
+            <button
+              onClick={clearCategories}
+              className={`inline-flex items-center px-3 py-2 rounded-full text-sm font-medium transition-colors ${
+                theme === 'dark'
+                  ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              <X size={14} className="mr-1" />
+              Clear
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Posts */}
       <div className="space-y-4">
-        {posts.map((post) => (
+        {filteredPosts.map((post) => (
           <motion.article
             key={post.slug}
             whileHover={{ x: 4 }}
@@ -39,10 +115,24 @@ export default function Blog() {
             className={`blog-card ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-white'}`}
           >
             <Link to={`/blog/${post.slug}`} className="block group">
-              <div className="mb-2">
+              <div className="mb-2 flex items-center gap-2">
                 <span className={`text-sm ${theme === 'dark' ? 'text-blue-300' : 'text-[#0039D7]/70'}`}>
                   {post.date}
                 </span>
+                <div className="flex gap-2">
+                  {post.categories.map(category => (
+                    <span
+                      key={category}
+                      className={`text-xs px-2 py-1 rounded-full ${
+                        theme === 'dark'
+                          ? 'bg-gray-800 text-gray-300'
+                          : 'bg-gray-100 text-gray-600'
+                      }`}
+                    >
+                      {category}
+                    </span>
+                  ))}
+                </div>
               </div>
               <h2 className={`text-2xl mb-2 ${
                 theme === 'dark' 
