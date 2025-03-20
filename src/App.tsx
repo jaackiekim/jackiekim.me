@@ -122,7 +122,7 @@ function App() {
                           </p>
                           <div className="mt-2">
                             <a href="#" className={`inline-flex items-center ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#0039D7] hover:text-[#002BB4]'} text-sm`}>
-                              View Project <ExternalLink size={14} className="ml-1" />
+                              View Project (coming soon) <ExternalLink size={14} className="ml-1" />
                             </a>
                           </div>
                         </motion.div>
@@ -138,7 +138,7 @@ function App() {
                           </p>
                           <div className="mt-2">
                             <a href="#" className={`inline-flex items-center ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#0039D7] hover:text-[#002BB4]'} text-sm`}>
-                              View Project <ExternalLink size={14} className="ml-1" />
+                              View Project (unavailable for NDA) <ExternalLink size={14} className="ml-1" />
                             </a>
                           </div>
                         </motion.div>
@@ -154,7 +154,7 @@ function App() {
                           </p>
                           <div className="mt-2">
                             <a href="#" className={`inline-flex items-center ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#0039D7] hover:text-[#002BB4]'} text-sm`}>
-                              View Project <ExternalLink size={14} className="ml-1" />
+                              View Project (coming soon) <ExternalLink size={14} className="ml-1" />
                             </a>
                           </div>
                         </motion.div>
