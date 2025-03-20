@@ -4,8 +4,7 @@ import { ChevronDown } from 'lucide-react';
 
 const locations = [
   "New York City",
-  "Los Angeles",
-  "elsewhere (traveling)"
+  "Los Angeles"
 ];
 
 export default function LocationFlip() {
