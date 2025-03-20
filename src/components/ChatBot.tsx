@@ -125,7 +125,7 @@ export default function ChatBot() {
               className={`fixed bottom-0 left-0 right-0 mx-4 md:bottom-8 md:right-8 md:left-auto md:w-96 max-h-[80vh] ${theme === 'dark' ? 'bg-gray-900' : 'bg-[#FFFDE7]'} rounded-t-2xl md:rounded-2xl shadow-xl overflow-hidden flex flex-col`}
             >
               <div className={`p-4 border-b ${theme === 'dark' ? 'border-gray-700' : 'border-[#0039D7]/10'} flex justify-between items-center`}>
-                <h3 className={`${theme === 'dark' ? 'text-blue-400' : 'text-[#0039D7]'} font-normal text-lg`}>Research Assistant</h3>
+                <h3 className={`${theme === 'dark' ? 'text-blue-400' : 'text-[#0039D7]'} font-normal text-lg`}>JackieBot v0</h3>
                 <button
                   onClick={() => setIsOpen(false)}
                   className={`${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#0039D7] hover:text-[#002BB4]'} transition-colors`}
