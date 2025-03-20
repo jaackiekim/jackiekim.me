@@ -7,6 +7,7 @@ import Blog from './components/Blog';
 import BlogPost from './components/BlogPost';
 import RoleFlip from './components/RoleFlip';
 import LocationFlip from './components/LocationFlip';
+import LocationFlip2 from './components/LocationFlip2';
 import { useTheme } from './components/ThemeProvider';
 
 function App() {
@@ -95,13 +96,13 @@ function App() {
                   <div className="lg:flex-1">
                     {/* About Me Section */}
                     <div className="mb-16">
-                      <h2 className={`text-5xl mb-6 ${theme === 'dark' ? 'text-white' : ''}`}>Research Approach</h2>
+                      <h2 className={`text-5xl mb-6 ${theme === 'dark' ? 'text-white' : ''}`}>About Me</h2>
                       <div className="space-y-4 text-lg leading-relaxed">
                         <p className={theme === 'dark' ? 'text-gray-300' : ''}>
-                          <RoleFlip /> focused on developing applied AI and human-centric sensing systems. My work involves longitudinal deployment studies, collecting specialized datasets, and human evaluation to create meaningful impact in urban environments.
+                          <RoleFlip /> focused on building a career that blends innovation, data-driven decision-making, and human connection. My work involves analyzing complex datasets, deriving actionable insights, and crafting compelling narratives to drive impactful product decisions. I specialize in data science techniques, statistical modeling, and effective visualization to communicate findings clearly and influence key stakeholders. I'm interested in data, sustainability, and urban planning, amongst other things.
                         </p>
                         <p className={theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/80'}>
-                          Currently based in <LocationFlip />
+                          Currently based in <LocationFlip />, but dream of being in <LocationFlip2 />.
                         </p>
                       </div>
                     </div>
@@ -117,7 +118,7 @@ function App() {
                         >
                           <h3 className={`text-xl mb-2 ${theme === 'dark' ? 'text-white' : ''}`}>NYC Transit Analysis (2024)</h3>
                           <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
-                            A comprehensive analysis of NYC's public transportation patterns using Python and machine learning to optimize bus routes.
+                            A comprehensive analysis of NYC's public transportation patterns using Python and machine learning to increase resilience during heat waves.
                           </p>
                           <div className="mt-2">
                             <a href="#" className={`inline-flex items-center ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#0039D7] hover:text-[#002BB4]'} text-sm`}>
@@ -131,9 +132,9 @@ function App() {
                           transition={{ type: "tween" }}
                           className={`project-card ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-white'}`}
                         >
-                          <h3 className={`text-xl mb-2 ${theme === 'dark' ? 'text-white' : ''}`}>Housing Affordability Study (2023)</h3>
+                          <h3 className={`text-xl mb-2 ${theme === 'dark' ? 'text-white' : ''}`}>Siri Research Project, Data Science Intern (2024)</h3>
                           <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
-                            Developed a predictive model to analyze housing affordability trends across different NYC neighborhoods.
+                            Data science intern for a Siri research project. Reduced operational costs by ~15%.
                           </p>
                           <div className="mt-2">
                             <a href="#" className={`inline-flex items-center ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#0039D7] hover:text-[#002BB4]'} text-sm`}>
@@ -147,9 +148,9 @@ function App() {
                           transition={{ type: "tween" }}
                           className={`project-card ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-white'}`}
                         >
-                          <h3 className={`text-xl mb-2 ${theme === 'dark' ? 'text-white' : ''}`}>Urban Mobility Patterns (2023)</h3>
+                          <h3 className={`text-xl mb-2 ${theme === 'dark' ? 'text-white' : ''}`}>AI-detected Speech Detector (2024)</h3>
                           <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
-                            Analysis of pedestrian and vehicle movement patterns to improve urban planning and safety.
+                            ML model on detecting AI-produced text.
                           </p>
                           <div className="mt-2">
                             <a href="#" className={`inline-flex items-center ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#0039D7] hover:text-[#002BB4]'} text-sm`}>
