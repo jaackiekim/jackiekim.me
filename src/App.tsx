@@ -102,7 +102,7 @@ function App() {
                           <RoleFlip /> focused on building a career that blends innovation, data-driven decision-making, and human connection. My work involves analyzing complex datasets, deriving actionable insights, and crafting compelling narratives to drive impactful product decisions. I specialize in data science techniques, statistical modeling, and effective visualization to communicate findings clearly and influence key stakeholders. I'm interested in data, sustainability, and urban planning, amongst other things.
                         </p>
                         <p className={theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/80'}>
-                          Currently based in <LocationFlip />, but dream of being in <LocationFlip2 />.
+                          Currently based in <LocationFlip />, but dreaming of being in <LocationFlip2 />.
                         </p>
                       </div>
                     </div>
