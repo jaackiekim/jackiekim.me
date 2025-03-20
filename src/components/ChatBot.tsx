@@ -56,7 +56,7 @@ export default function ChatBot() {
   const { theme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { text: "Hi! I'm Jackie's assistant. What would you like to know about my work?", isBot: true }
+    { text: "I'm JackieBot. What would you like to know more about her?", isBot: true }
   ]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredQuestions, setFilteredQuestions] = useState(predefinedQA);
@@ -104,7 +104,7 @@ export default function ChatBot() {
         className={`fixed bottom-8 right-8 ${theme === 'dark' ? 'bg-blue-500 hover:bg-blue-600' : 'bg-[#0039D7] hover:bg-[#002BB4]'} text-white px-6 py-3 rounded-full shadow-lg transition-colors duration-200 flex items-center space-x-3`}
       >
         <MessageCircle size={20} />
-        <span className="font-normal">Let's Chat</span>
+        <span className="font-normal">JackieBot: Learn More!</span>
       </motion.button>
 
       <AnimatePresence>
@@ -167,7 +167,7 @@ export default function ChatBot() {
                       type="text"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="Ask me anything..."
+                      placeholder="Input keywords..."
                       className={`w-full p-3 pr-10 rounded-xl ${
                         theme === 'dark'
                           ? 'bg-gray-800 text-gray-200 placeholder-gray-400 focus:ring-blue-500'
