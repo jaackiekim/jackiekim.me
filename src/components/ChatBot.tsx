@@ -17,28 +17,38 @@ interface QuestionResponse {
 const predefinedQA: QuestionResponse[] = [
   {
     question: "What's your background in data science?",
-    response: "I have a Master's in Data Science from Columbia University, with a focus on urban analytics and machine learning. My research involves using data science to understand city dynamics and social patterns.",
-    keywords: ['background', 'education', 'data science', 'experience', 'columbia', 'university']
+    response: "I have a Bachelor's in Data Science from UC Berkeley and a Master's in Information Science from Cornell Tech, both with concentrations in urban science. My experience spans various industries, including NASA JPL, a small urban analytics startup, and Apple, with a focus on using data science to improve quality of life.",
+    keywords: ['background', 'education', 'data science', 'experience', 'Cornell', 'UC Berkeley', 'urban science', 'NASA', 'Apple']
   },
   {
     question: "What projects are you working on?",
-    response: "Currently, I'm working on a project analyzing NYC's public transportation data to optimize bus routes. I'm also developing machine learning models to predict neighborhood change patterns.",
-    keywords: ['projects', 'current', 'work', 'transportation', 'machine learning']
+    response: "I'm working on a data science project that connects renewable energy centers with data centers to meet energy demand sustainably. This involves using pvlib, an open-source Python library, to forecast energy production from various renewable sources. I'm collaborating with a team with MBA, electrical engineering, and public policy backgrounds to develop a scalable solution.",
+    keywords: ['projects', 'current', 'work', 'renewable energy', 'data science', 'pvlib', 'forecasting', 'team']
   },
   {
     question: "What tools do you use?",
-    response: "I primarily work with Python (scikit-learn, TensorFlow) and R for analysis. I use SQL for data management and occasionally work with GIS tools for spatial analysis. For visualization, I use D3.js and Tableau.",
-    keywords: ['tools', 'python', 'r', 'sql', 'technology', 'software']
+    response: "I primarily work with Python and SQL, using libraries like scikit-learn, matplotlib, and PyTorch. I also use Jupyter and Tableau for analysis and visualization. My work involves A/B testing, hypothesis testing, and forecasting to drive data-driven insights.",
+    keywords: ['tools', 'Python', 'SQL', 'scikit-learn', 'PyTorch', 'Jupyter', 'Tableau', 'A/B testing', 'forecasting']
   },
   {
     question: "What are your research interests?",
-    response: "I'm particularly interested in urban data science, focusing on how we can use data to make cities more equitable and efficient. This includes studying transportation patterns, housing affordability, and social segregation.",
-    keywords: ['research', 'interests', 'focus', 'urban', 'cities']
+    response: "I'm particularly interested in renewable energy, cleantech, and urban planning, focusing on how data can inform public policy and improve infrastructure. My work also explores bike lanes, social dynamics, and sustainable city development.",
+    keywords: ['research', 'interests', 'renewable energy', 'cleantech', 'urban planning', 'public policy', 'bike lanes', 'social dynamics']
   },
   {
-    question: "Tell me about your approach to data ethics",
-    response: "Data ethics is central to my work. I ensure all projects follow privacy guidelines, use unbiased sampling methods, and consider the societal impact of our analyses and recommendations. I believe in responsible data practices that protect individual privacy while serving the public good.",
-    keywords: ['ethics', 'privacy', 'guidelines', 'responsibility', 'values']
+    question: "Tell me about your approach to data ethics.",
+    response: "I believe in considering and consulting diverse perspectives to ensure ethical and responsible data use. My approach focuses on connecting data insights with real-world dynamics to create meaningful and fair outcomes.",
+    keywords: ['ethics', 'perspectives', 'responsibility', 'real-world impact', 'fairness']
+  },
+  {
+    question: "Tell me more about yourself.",
+    response: "I was born in Los Angeles, CA, and have a passion for adventure - I have backpacked the Tour du Mont Blanc, hiking 11 days across France, Italy, and Switzerland! I love bikeable cities that prioritize sustainable and accessible transportation.",
+    keywords: ['background', 'Los Angeles', 'travel', 'Tour du Mont Blanc', 'hiking', 'sparkling water', 'bikeable cities']
+  },
+  {
+    question: "What are your work values?",
+    response: "I value clear and frequent communication, as well as an open feedback culture where ideas can be shared and refined. I thrive in collaborative problem-solving environments, working with others to identify issues early and develop effective solutions.",
+    keywords: ['values', 'communication', 'feedback', 'collaboration', 'problem-solving', 'teamwork']
   }
 ];
 
