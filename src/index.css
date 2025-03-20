@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    font-family: 'League Spartan', sans-serif;
+  }
+  
+  body {
+    @apply antialiased text-[#1a1a1a];
+    font-family: 'League Spartan', sans-serif !important;
+  }
+
+  .dark body {
+    @apply bg-gray-900 text-gray-200;
+  }
+}
+
+.project-card {
+  @apply border-l-4 border-[#0039D7] pl-4 py-2 mb-6 transition-colors;
+}
+
+.dark .project-card {
+  @apply border-blue-500;
+}
+
+.blog-card {
+  @apply border-l-4 border-[#0039D7] pl-4 py-4 transition-colors;
+}
+
+.dark .blog-card {
+  @apply border-blue-500;
+}
+
+.blog-content {
+  @apply leading-relaxed;
+}
