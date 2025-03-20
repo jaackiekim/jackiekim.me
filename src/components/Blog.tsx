@@ -67,7 +67,7 @@ export default function Blog() {
 
   return (
     <div className="max-w-5xl mx-auto px-8">
-      <h1 className={`text-5xl mb-8 ${theme === 'dark' ? 'text-white' : ''}`}>Publications</h1>
+      <h1 className={`text-5xl mb-8 ${theme === 'dark' ? 'text-white' : ''}`}>Posts</h1>
       
       {/* Category Filters */}
       <div className="mb-8">
