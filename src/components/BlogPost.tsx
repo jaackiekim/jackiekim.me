@@ -9,7 +9,7 @@ const posts = {
     content: `
       I'm a data scientist and graduate student based in New York City, passionate about using data to understand and improve urban environments. My journey in data science began during my undergraduate years when I discovered the power of data in revealing patterns and insights about how cities function and how people interact with urban spaces.
 
-      Currently, I'm pursuing my Master's in Data Science at Columbia University, where I focus on urban analytics and machine learning applications in city planning. My research interests lie at the intersection of data science and urban studies, particularly in areas such as:
+      Currently, I'm pursuing my Master's in Data Science at Cornell University, where I focus on urban analytics and machine learning applications in city planning. My research interests lie at the intersection of data science and urban studies, particularly in areas such as:
 
       - Public transportation optimization
       - Housing affordability analysis
