@@ -56,7 +56,7 @@ export default function ChatBot() {
   const { theme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { text: "I'm JackieBot. What would you like to know more about her?", isBot: true }
+    { text: "Pleasure to meet you, I'm JackieBot. What would you like to know more about Jackie?", isBot: true }
   ]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredQuestions, setFilteredQuestions] = useState(predefinedQA);
