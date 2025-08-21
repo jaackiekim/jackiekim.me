@@ -96,7 +96,7 @@ function App() {
                   <div className="lg:flex-1">
                     {/* About Me Section */}
                     <div className="mb-16">
-                      <h2 className={`text-5xl mb-6 ${theme === 'dark' ? 'text-white' : ''}`}>[THIS WEBSITE IS WIP (last updated August 21, 2025)] About Me</h2>
+                      <h2 className={`text-5xl mb-6 ${theme === 'dark' ? 'text-white' : ''}`}>[THIS WEBSITE IS BEING UPDATED (last updated August 21, 2025)] About Me</h2>
                       <div className="space-y-4 text-lg leading-relaxed">
                         <p className={theme === 'dark' ? 'text-gray-300' : ''}>
                           <RoleFlip /> focused on building a career that blends innovation, data-driven decision-making, and human connection. My work involves analyzing complex datasets, deriving actionable insights, and crafting compelling narratives to drive impactful product decisions. I specialize in data science techniques, statistical modeling, and effective visualization to communicate findings clearly and influence key stakeholders. I'm interested in data, sustainability, and urban planning, amongst other things.
