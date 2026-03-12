@@ -84,6 +84,20 @@ export default function DSML() {
 
           <div>
             <div className="flex justify-between items-baseline mb-1">
+              <span className={`font-semibold ${heading}`}>AI Course Assistant</span>
+              <span className={`text-sm ${subtle}`}>2023 – present</span>
+            </div>
+            <a href="https://breakthroughtech.org" target="_blank" rel="noopener noreferrer" className={`text-sm ${accent} hover:underline`}>
+              Break Through Tech AI
+            </a>
+            <ul className={`mt-2 space-y-1 text-sm ${prose} list-disc list-inside`}>
+              <li>Coached cohorts of college women through industry-sponsored AI projects with KPMG, Google, and Geothara, covering the full project lifecycle from data to final presentation.</li>
+              <li>Provided technical mentorship on ML workflows, problem framing, and communicating findings to non-technical stakeholders, with the goal of lowering barriers to entry for women in tech.</li>
+            </ul>
+          </div>
+
+          <div>
+            <div className="flex justify-between items-baseline mb-1">
               <span className={`font-semibold ${heading}`}>Data Science Intern</span>
               <span className={`text-sm ${subtle}`}>Jun – Aug 2024</span>
             </div>
