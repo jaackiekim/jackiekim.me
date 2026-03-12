@@ -90,7 +90,16 @@ function App() {
               <div className="max-w-3xl mx-auto px-8">
                 {/* About */}
                 <div className="mb-16">
-                  <h1 className={`text-5xl mb-8 ${theme === 'dark' ? 'text-white' : ''}`}>Jackie Kim</h1>
+                  <div className="flex flex-col sm:flex-row gap-8 items-start mb-8">
+                    <div className="w-32 h-32 rounded-2xl overflow-hidden flex-shrink-0">
+                      <img
+                        src="/profile.jpg"
+                        alt="Jackie Kim"
+                        className="w-full h-full object-cover object-top"
+                      />
+                    </div>
+                    <h1 className={`text-5xl ${theme === 'dark' ? 'text-white' : ''}`}>Jackie Kim</h1>
+                  </div>
                   <div className="space-y-4 text-lg leading-relaxed">
                     <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
                       <RoleFlip /> based in New York. Cornell MS in Applied Information Science (Data Science & ML),
