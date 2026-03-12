@@ -20,8 +20,8 @@ Clinical medication extraction is a named entity recognition task: given a clini
 
 Two metrics per system, per drug class:
 
-- **Drug F1** — did you find the drug name?
-- **Strength F1** — did you get the dose right?
+- **Drug F1**: did you find the drug name?
+- **Strength F1**: did you get the dose right?
 
 I broke both down by drug class deliberately, because aggregate metrics were exactly what I was skeptical of.
 

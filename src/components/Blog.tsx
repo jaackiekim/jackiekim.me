@@ -19,7 +19,7 @@ const posts: Post[] = [
     slug: 'medication-extraction-llm-evaluation',
     title: 'When Your Medication Extraction Model Gets an A and Still Fails the Patient',
     date: 'January 14, 2026',
-    excerpt: 'Aggregate F1 scores look fine. Stratified results tell a different story. I compared GPT-4o, BioMistral, and a regex baseline on clinical notes and found that all three systems collapse on oncology drug classes — for different reasons.',
+    excerpt: 'Aggregate F1 scores look fine. Stratified results tell a different story. I compared GPT-4o, BioMistral, and a regex baseline on clinical notes and found that all three systems collapse on oncology drug classes, for different reasons.',
     categories: ['Academic', 'Career']
   },
   {

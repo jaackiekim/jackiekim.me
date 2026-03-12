@@ -96,23 +96,15 @@ function App() {
                         className="w-full h-full object-cover object-top"
                       />
                     </div>
-                    <h1 className={`text-5xl ${theme === 'dark' ? 'text-white' : ''}`}>Jackie Kim</h1>
-                  </div>
-                  <div className="space-y-4 text-lg leading-relaxed">
-                    <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
-                      Data scientist based in New York. Cornell MS in Applied Information Science (Data Science & ML),
-                      UC Berkeley B.A. in Data Science.
-                    </p>
-                    <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
-                      I've built dataset-quality systems at Apple (Siri Research) that saved $90K and 5,000 QA hours annually,
-                      co-founded a startup building renewable energy solutions for AI data centers that won a $20K U.S. Department of Energy prize,
-                      and built data pipelines for healthcare programs at the CDC. Currently focused on
-                      clinical NLP: evaluating where LLMs fail on medication extraction from medical text,
-                      and what those failures mean for downstream research cohorts.
-                    </p>
-                    <p className={theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/70'}>
-                      Outside of work: urban planning, photography, language learning, making things with my hands.
-                    </p>
+                    <div>
+                      <h1 className={`text-5xl mb-3 ${theme === 'dark' ? 'text-white' : ''}`}>Jackie Kim</h1>
+                      <p className={`text-lg ${theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}`}>
+                        Data scientist. Cornell, Apple, NASA. Based in New York.
+                      </p>
+                      <p className={`text-base mt-2 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>
+                        Urban planning, photography, language learning, making things.
+                      </p>
+                    </div>
                   </div>
                 </div>
 
@@ -126,11 +118,10 @@ function App() {
                       transition={{ type: "tween" }}
                       className={`project-card ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-white'}`}
                     >
-                      <h3 className={`text-xl mb-2 ${theme === 'dark' ? 'text-white' : ''}`}>Project Solstice, U.S. Dept. of Energy Prize (2025)</h3>
+                      <h3 className={`text-xl mb-1 ${theme === 'dark' ? 'text-white' : ''}`}>Project Solstice</h3>
+                      <p className={`text-sm mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>Co-founder · U.S. Dept. of Energy Prize Winner · 2025</p>
                       <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
-                        Co-founded a startup connecting AI data centers with renewable energy projects stuck in
-                        the grid interconnection queue. Won the Grid Enhancing Technologies Bonus Prize at the
-                        DOE EnergyTech University Prize among 24 national finalist teams.
+                        Introducing the grid's backlog to something more renewable.
                       </p>
                       <div className="mt-2">
                         <a href="https://www.energy.gov/technologycommercialization/articles/energytech-university-prize-2025-student-winners-announced" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#0039D7] hover:text-[#002BB4]'} text-sm`}>
@@ -144,11 +135,10 @@ function App() {
                       transition={{ type: "tween" }}
                       className={`project-card ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-white'}`}
                     >
-                      <h3 className={`text-xl mb-2 ${theme === 'dark' ? 'text-white' : ''}`}>Clinical Medication Extraction: LLM Evaluation (2025)</h3>
+                      <h3 className={`text-xl mb-1 ${theme === 'dark' ? 'text-white' : ''}`}>Clinical Medication Extraction</h3>
+                      <p className={`text-sm mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>LLM evaluation · 2025</p>
                       <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
-                        Stratified evaluation of GPT-4o, BioMistral, and a regex+RxNorm baseline on clinical notes.
-                        Aggregate F1 looks fine. Oncology drug class F1 is 0.14–0.35, a failure mode that matters
-                        for any downstream cohort study.
+                        Where my love of language met my love of data.
                       </p>
                       <div className="mt-2 flex gap-4">
                         <a href="https://github.com/jaackiekim/clinical-med-extraction" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#0039D7] hover:text-[#002BB4]'} text-sm`}>
@@ -165,11 +155,10 @@ function App() {
                       transition={{ type: "tween" }}
                       className={`project-card ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-white'}`}
                     >
-                      <h3 className={`text-xl mb-2 ${theme === 'dark' ? 'text-white' : ''}`}>Siri Annotation Quality Framework, Apple (2024)</h3>
+                      <h3 className={`text-xl mb-1 ${theme === 'dark' ? 'text-white' : ''}`}>Siri Annotation Quality Framework</h3>
+                      <p className={`text-sm mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>Apple · 2024 · NDA</p>
                       <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
-                        Inter-annotator agreement framework for voice assistant evaluation. Identified a bimodal
-                        IAA distribution, set a data-driven quality threshold, reduced annotation costs by ~15%.
-                        NDA, not publicly available.
+                        Saved $90K and 5,000 QA hours by finding the data that wasn't worth labeling.
                       </p>
                     </motion.div>
 
@@ -178,10 +167,10 @@ function App() {
                       transition={{ type: "tween" }}
                       className={`project-card ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-white'}`}
                     >
-                      <h3 className={`text-xl mb-2 ${theme === 'dark' ? 'text-white' : ''}`}>NYC Transit Resilience Analysis (2024)</h3>
+                      <h3 className={`text-xl mb-1 ${theme === 'dark' ? 'text-white' : ''}`}>NYC Transit Resilience Analysis</h3>
+                      <p className={`text-sm mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>2024</p>
                       <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
-                        Analysis of NYC public transportation vulnerability during heat events using MTA ridership,
-                        NOAA temperature, and census data.
+                        Which subway lines fail first when the city overheats.
                       </p>
                     </motion.div>
                   </div>
