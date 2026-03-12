@@ -170,7 +170,7 @@ function App() {
                       <h3 className={`text-xl mb-1 ${theme === 'dark' ? 'text-white' : ''}`}>NYC Transit Resilience Analysis</h3>
                       <p className={`text-sm mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>2024</p>
                       <p className={`mb-2 ${theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}`}>
-                        Which subway lines fail first when the city overheats.
+                        How heat waves change who takes the subway — and who doesn't have a choice.
                       </p>
                       <div className="mt-2 flex gap-4">
                         <a href="/blog/nyc-transit-analysis" className={`inline-flex items-center ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#0039D7] hover:text-[#002BB4]'} text-sm`}>
