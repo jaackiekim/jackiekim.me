@@ -169,9 +169,17 @@ function App() {
                     >
                       <h3 className={`text-xl mb-1 ${theme === 'dark' ? 'text-white' : ''}`}>NYC Transit Resilience Analysis</h3>
                       <p className={`text-sm mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>2024</p>
-                      <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
+                      <p className={`mb-2 ${theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}`}>
                         Which subway lines fail first when the city overheats.
                       </p>
+                      <div className="flex space-x-4">
+                        <Link
+                          to="/blog/nyc-transit-analysis"
+                          className={`${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#0039D7] hover:text-[#002BB4]'} transition-colors text-lg`}
+                        >
+                          Blog post
+                        </Link>
+                      </div>
                     </motion.div>
                   </div>
                 </div>
