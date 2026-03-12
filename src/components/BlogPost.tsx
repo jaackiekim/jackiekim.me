@@ -111,13 +111,53 @@ const posts: Record<string, { title: string; date: string; content: string; useM
   },
   'about-me': {
     title: 'About Me',
-    date: 'October 28, 2024',
-    content: 'Coming soon...'
+    date: 'November 3, 2023',
+    useMarkdown: true,
+    content: `
+I grew up outside Pasadena, where the San Gabriel Mountains are close enough that going up them on weekends just felt like a normal thing to do. I hiked a lot. Still do when I can. Along the way I picked up painting, photography, and a pretty serious scone habit that hasn't let up since college (Sundays, without fail).
+
+I didn't plan on becoming a data scientist. In my first ever data science class, we were handed the screenplay of *Little Women* — the 2019 film, which happened to be my favorite book growing up — and asked to use basic NLP to track how each character developed across chapters. Something about that clicked for me in a way I hadn't expected. The idea that you could look at language analytically, that Jo March's growth could show up in a dataset, made me want to keep going.
+
+Since then I've worked across a few different domains. Urban tech first, then a summer at NASA JPL working with oceanographic data, then healthcare, and now clinical NLP. The domains are different but I keep coming back to the same thing: I like when the data is about people and the stakes of getting it right are real.
+
+I'm based in New York and always up for coffee or a good conversation. Find me on [LinkedIn](https://linkedin.com/in/jaackiekim) or at [jaackiekim@gmail.com](mailto:jaackiekim@gmail.com).
+`
   },
   'nyc-transit-analysis': {
-    title: 'Analyzing NYC Transit Patterns',
+    title: 'Does Heat Change How New Yorkers Take the Subway?',
     date: 'October 25, 2024',
-    content: 'Coming soon...'
+    useMarkdown: true,
+    content: `
+My collaborator Rowan and I started this project on an unseasonably warm November day, which felt fitting. The question was simple enough: do New Yorkers take the subway differently during heat waves? And does it matter who you are or where you live?
+
+We used the MTA's origin-destination ridership data from August 2022 and September 2023, matched against NOAA heat wave dates (three or more consecutive days above 90°F), and layered in neighborhood-level income data from the American Community Survey and Heat Vulnerability Index (HVI) scores from the NYC Department of Health. HVI is a 1-5 score that captures how likely residents in a given neighborhood are to die during extreme heat, based on factors like green space, access to home AC, surface temperature, and income.
+
+**What we found**
+
+Overall ridership drops about 15% on heat wave days, but the effect is stronger in August than in early September. That gap probably has more to do with seasonal patterns than temperature itself: August has more discretionary travel, summer schedules, and people moving around differently in general. When temperatures spiked in early September, the ridership impact was much smaller.
+
+One thing that surprised us: destination patterns barely changed at all. The top origin and destination stations during a heat wave on August 8, 2022 were almost identical to a normal day. Times Square, Fulton Street, Grand Central. People still had to get to work. The subway as escape route during a heat wave turns out to be largely a myth, at least in our data. Ridership to beach stations near Coney Island and the Rockaways was actually slightly *higher* on non-heat wave days, likely because those non-heat wave dates in September happened to fall on Thursdays and Fridays, and people were making pre-weekend beach trips.
+
+**Where it gets more interesting**
+
+The neighborhood-level analysis is where the structural stuff shows up. We split stations into four categories: high income/high HVI, high income/low HVI, low income/high HVI, and low income/low HVI. The correlation between income and HVI is strongly negative (-0.69), which makes sense once you look at what goes into the score: wealthy neighborhoods tend to have more trees, better AC access, lower surface temperatures.
+
+Low-income, high-HVI neighborhoods showed almost no change in ridership between heat wave and non-heat wave days. High-income neighborhoods showed a small but consistent increase in ridership as temperatures rose. The interpretation we landed on: people with discretionary travel options respond to heat by taking the subway more (maybe to air-conditioned offices). People without those options just keep their normal patterns.
+
+We also went looking for wealthy neighborhoods with high heat vulnerability and basically couldn't find any. Not a single neighborhood in the top 20% of earners had the maximum HVI score. When we loosened the threshold to the top 40%, we got a handful of suburban Queens neighborhoods nearly an hour's walk from the nearest subway station, which is its own kind of finding.
+
+**What this doesn't answer**
+
+The dataset has real limits. Not all heat wave dates were available in the MTA data. The O/D data estimates destinations statistically rather than tracking individual rides end-to-end. We had to sample from datasets with hundreds of millions of rows, which means our analysis is representative but not exhaustive. And our heat wave definition is strict: at least three consecutive days above 90°F, per NOAA. Broadening that threshold would probably surface more signal.
+
+The linear regression R-squared scores were weak across the board, which tells you that temperature alone is a poor predictor of ridership regardless of neighborhood type. That's actually a useful finding: the story isn't really about temperature. It's about the other things temperature correlates with.
+
+**The bigger point**
+
+The subway gets described as a great equalizer, the one place in New York where everyone shares the same experience. This research complicates that framing a little. The reasons people take it, and whether heat changes those reasons, are shaped by income and geography in ways that aren't random. As the city plans for more extreme heat, understanding where transit reliance is highest and where cooling infrastructure is thinnest matters for where to direct resources.
+
+Also, air-conditioned subway platforms would help.
+`
   },
   'machine-learning-cities': {
     title: 'Machine Learning for Urban Planning',
