@@ -37,7 +37,7 @@ export default function DSML() {
 
           <div>
             <div className="flex justify-between items-baseline mb-1">
-              <span className={`font-semibold ${heading}`}>University of California, San Diego</span>
+              <span className={`font-semibold ${heading}`}>University of California, Berkeley</span>
               <span className={`text-sm ${subtle}`}>2018 – 2022</span>
             </div>
             <p className={`text-sm ${prose}`}>B.S. Data Science</p>
