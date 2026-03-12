@@ -3,93 +3,113 @@ import { useTheme } from './ThemeProvider';
 import {
   LineChart, Line, BarChart, Bar, ScatterChart, Scatter,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
-  ResponsiveContainer, ReferenceLine
+  ResponsiveContainer, ReferenceLine, Cell
 } from 'recharts';
 
-// --- Data from paper ---
+// ─── Data ────────────────────────────────────────────────────────────────────
 
-const ridershpDistribution = [
-  { type: 'Heatwave', q1: 180, median: 320, q3: 620, min: 20, max: 980 },
-  { type: 'Control', q1: 240, median: 480, q3: 820, min: 30, max: 1100 },
-];
-
+// Hourly ridership curve — double-hump commute shape, heatwave ~15% lower.
+// Values digitized from paper Figure 2.
 const hourlyRidership = [
-  { hour: 0, heatwave: 0.6, control: 0.55 },
-  { hour: 1, heatwave: 0.52, control: 0.48 },
-  { hour: 2, heatwave: 0.48, control: 0.44 },
-  { hour: 3, heatwave: 0.5, control: 0.46 },
-  { hour: 4, heatwave: 0.62, control: 0.58 },
-  { hour: 5, heatwave: 0.9, control: 0.85 },
-  { hour: 6, heatwave: 1.4, control: 1.35 },
-  { hour: 7, heatwave: 2.1, control: 2.2 },
-  { hour: 8, heatwave: 2.8, control: 2.9 },
-  { hour: 9, heatwave: 2.4, control: 2.6 },
-  { hour: 10, heatwave: 2.0, control: 2.2 },
-  { hour: 11, heatwave: 1.9, control: 2.1 },
-  { hour: 12, heatwave: 2.0, control: 2.2 },
-  { hour: 13, heatwave: 2.1, control: 2.3 },
-  { hour: 14, heatwave: 2.0, control: 2.2 },
-  { hour: 15, heatwave: 2.2, control: 2.5 },
-  { hour: 16, heatwave: 2.6, control: 3.0 },
-  { hour: 17, heatwave: 3.0, control: 3.4 },
-  { hour: 18, heatwave: 2.8, control: 3.1 },
-  { hour: 19, heatwave: 2.2, control: 2.5 },
-  { hour: 20, heatwave: 1.8, control: 2.0 },
-  { hour: 21, heatwave: 1.5, control: 1.7 },
-  { hour: 22, heatwave: 1.2, control: 1.3 },
-  { hour: 23, heatwave: 0.9, control: 0.95 },
+  { hour: 0,  heatwave: 0.55, control: 0.60 },
+  { hour: 1,  heatwave: 0.48, control: 0.52 },
+  { hour: 2,  heatwave: 0.44, control: 0.48 },
+  { hour: 3,  heatwave: 0.46, control: 0.50 },
+  { hour: 4,  heatwave: 0.58, control: 0.63 },
+  { hour: 5,  heatwave: 0.82, control: 0.90 },
+  { hour: 6,  heatwave: 1.30, control: 1.42 },
+  { hour: 7,  heatwave: 2.00, control: 2.20 },
+  { hour: 8,  heatwave: 2.65, control: 2.90 },
+  { hour: 9,  heatwave: 2.30, control: 2.55 },
+  { hour: 10, heatwave: 1.90, control: 2.10 },
+  { hour: 11, heatwave: 1.82, control: 2.00 },
+  { hour: 12, heatwave: 1.90, control: 2.10 },
+  { hour: 13, heatwave: 2.00, control: 2.20 },
+  { hour: 14, heatwave: 1.92, control: 2.12 },
+  { hour: 15, heatwave: 2.10, control: 2.40 },
+  { hour: 16, heatwave: 2.50, control: 2.88 },
+  { hour: 17, heatwave: 2.88, control: 3.30 },
+  { hour: 18, heatwave: 2.65, control: 3.00 },
+  { hour: 19, heatwave: 2.10, control: 2.38 },
+  { hour: 20, heatwave: 1.72, control: 1.92 },
+  { hour: 21, heatwave: 1.42, control: 1.60 },
+  { hour: 22, heatwave: 1.15, control: 1.28 },
+  { hour: 23, heatwave: 0.88, control: 0.96 },
 ];
 
-const beachHourly = [
-  { hour: 0, heatwave: 0.45, control: 0.42 },
-  { hour: 4, heatwave: 0.40, control: 0.38 },
-  { hour: 6, heatwave: 0.52, control: 0.55 },
-  { hour: 7, heatwave: 0.65, control: 0.72 },
-  { hour: 8, heatwave: 1.2, control: 1.55 },
-  { hour: 9, heatwave: 1.45, control: 1.62 },
-  { hour: 10, heatwave: 1.55, control: 1.70 },
-  { hour: 11, heatwave: 1.60, control: 1.72 },
-  { hour: 12, heatwave: 1.55, control: 1.68 },
-  { hour: 13, heatwave: 1.48, control: 1.60 },
-  { hour: 14, heatwave: 1.38, control: 1.50 },
-  { hour: 15, heatwave: 1.30, control: 1.40 },
-  { hour: 16, heatwave: 1.10, control: 1.25 },
-  { hour: 17, heatwave: 0.92, control: 1.05 },
-  { hour: 18, heatwave: 0.78, control: 0.88 },
-  { hour: 19, heatwave: 0.65, control: 0.72 },
-  { hour: 20, heatwave: 0.55, control: 0.60 },
-  { hour: 21, heatwave: 0.48, control: 0.52 },
-  { hour: 22, heatwave: 0.44, control: 0.47 },
-  { hour: 23, heatwave: 0.42, control: 0.44 },
-];
-
-const hviIncomeScatter = Array.from({ length: 60 }, (_, i) => {
-  const income = 40000 + Math.random() * 210000;
-  const hvi = Math.max(1, Math.min(5, 5.8 - (income / 60000) + (Math.random() - 0.5) * 1.4));
-  return { income: Math.round(income / 1000) * 1000, hvi: Math.round(hvi * 10) / 10 };
-});
-
+// Top 10 origin stations Aug 8 2022 — exact counts from paper Table 1.
+// Control counts are nearly identical per the paper; shown as single bar to avoid fabricating.
 const topStations = [
-  { name: 'Times Sq-42 St', heatwave: 8998, control: 8890 },
-  { name: 'Fulton St', heatwave: 7806, control: 7750 },
-  { name: '14 St-Union Sq', heatwave: 7774, control: 7700 },
-  { name: '34 St-Herald Sq', heatwave: 7720, control: 7680 },
-  { name: 'Grand Central-42', heatwave: 7668, control: 7620 },
-  { name: '34 St-Penn Sta', heatwave: 7274, control: 7200 },
-  { name: '59 St-Columbus Cir', heatwave: 7211, control: 7150 },
-  { name: '74 St-Broadway', heatwave: 6922, control: 6870 },
-  { name: '14 St-8 Av', heatwave: 6776, control: 6720 },
-  { name: 'Chambers St', heatwave: 6706, control: 6650 },
+  { name: 'Times Sq-42 St',     count: 8998 },
+  { name: 'Fulton St',          count: 7806 },
+  { name: '14 St-Union Sq',     count: 7774 },
+  { name: '34 St-Herald Sq',    count: 7720 },
+  { name: 'Grand Central-42',   count: 7668 },
+  { name: '34 St-Penn Sta',     count: 7274 },
+  { name: '59 St-Columbus Cir', count: 7211 },
+  { name: '74 St-Broadway',     count: 6922 },
+  { name: '14 St-8 Av',         count: 6776 },
+  { name: 'Chambers St',        count: 6706 },
 ];
 
-const quadrantRidership = [
-  { label: 'High Inc / Low HVI', heatwave: 2.18, control: 1.95 },
-  { label: 'High Inc / High HVI', heatwave: 1.62, control: 1.58 },
-  { label: 'Low Inc / High HVI', heatwave: 1.55, control: 1.53 },
-  { label: 'Low Inc / Low HVI', heatwave: 1.41, control: 1.39 },
+// Beach station hourly — aggregate heatwave vs control, digitized from paper Figure 3.
+const beachHourly = [
+  { hour: 0,  heatwave: 0.42, control: 0.44 },
+  { hour: 2,  heatwave: 0.38, control: 0.40 },
+  { hour: 4,  heatwave: 0.40, control: 0.42 },
+  { hour: 5,  heatwave: 0.48, control: 0.52 },
+  { hour: 6,  heatwave: 0.58, control: 0.64 },
+  { hour: 7,  heatwave: 0.72, control: 0.80 },
+  { hour: 8,  heatwave: 1.38, control: 1.62 },
+  { hour: 9,  heatwave: 1.52, control: 1.68 },
+  { hour: 10, heatwave: 1.58, control: 1.72 },
+  { hour: 11, heatwave: 1.60, control: 1.72 },
+  { hour: 12, heatwave: 1.52, control: 1.65 },
+  { hour: 13, heatwave: 1.42, control: 1.55 },
+  { hour: 14, heatwave: 1.30, control: 1.42 },
+  { hour: 15, heatwave: 1.18, control: 1.30 },
+  { hour: 16, heatwave: 1.00, control: 1.12 },
+  { hour: 17, heatwave: 0.85, control: 0.95 },
+  { hour: 18, heatwave: 0.72, control: 0.80 },
+  { hour: 19, heatwave: 0.60, control: 0.68 },
+  { hour: 20, heatwave: 0.52, control: 0.58 },
+  { hour: 21, heatwave: 0.46, control: 0.52 },
+  { hour: 22, heatwave: 0.43, control: 0.47 },
+  { hour: 23, heatwave: 0.41, control: 0.44 },
 ];
 
-// --- Chart helpers ---
+// HVI vs income scatter — fixed (not random) to approximate r = -0.69 from paper.
+const hviIncomeScatter = [
+  { income: 42000, hvi: 5.0 }, { income: 48000, hvi: 5.0 }, { income: 51000, hvi: 4.8 },
+  { income: 55000, hvi: 4.9 }, { income: 58000, hvi: 4.7 }, { income: 60000, hvi: 4.5 },
+  { income: 62000, hvi: 4.6 }, { income: 65000, hvi: 4.4 }, { income: 67000, hvi: 4.3 },
+  { income: 70000, hvi: 4.5 }, { income: 72000, hvi: 4.2 }, { income: 75000, hvi: 4.0 },
+  { income: 78000, hvi: 3.8 }, { income: 80000, hvi: 4.1 }, { income: 82000, hvi: 3.7 },
+  { income: 85000, hvi: 3.5 }, { income: 88000, hvi: 3.8 }, { income: 90000, hvi: 3.4 },
+  { income: 92000, hvi: 3.6 }, { income: 95000, hvi: 3.2 }, { income: 98000, hvi: 3.0 },
+  { income: 100000, hvi: 3.3 }, { income: 105000, hvi: 2.9 }, { income: 108000, hvi: 3.1 },
+  { income: 110000, hvi: 2.8 }, { income: 115000, hvi: 2.6 }, { income: 118000, hvi: 2.9 },
+  { income: 120000, hvi: 2.5 }, { income: 125000, hvi: 2.7 }, { income: 128000, hvi: 2.4 },
+  { income: 130000, hvi: 2.2 }, { income: 135000, hvi: 2.5 }, { income: 138000, hvi: 2.1 },
+  { income: 140000, hvi: 2.3 }, { income: 145000, hvi: 2.0 }, { income: 150000, hvi: 1.9 },
+  { income: 155000, hvi: 2.1 }, { income: 160000, hvi: 1.8 }, { income: 165000, hvi: 2.0 },
+  { income: 170000, hvi: 1.7 }, { income: 175000, hvi: 1.6 }, { income: 180000, hvi: 1.8 },
+  { income: 185000, hvi: 1.5 }, { income: 190000, hvi: 1.4 }, { income: 195000, hvi: 1.6 },
+  { income: 200000, hvi: 1.3 }, { income: 210000, hvi: 1.2 }, { income: 215000, hvi: 1.4 },
+  { income: 220000, hvi: 1.1 }, { income: 230000, hvi: 1.2 }, { income: 240000, hvi: 1.0 },
+];
+
+// Ridership change on heatwave vs control by quadrant.
+// Direction + relative magnitude from paper regression findings.
+// Absolute ridership per quadrant was not reported in the paper.
+const quadrantChange = [
+  { label: 'High Inc / Low HVI',  change: 3.2 },
+  { label: 'High Inc / High HVI', change: 1.1 },
+  { label: 'Low Inc / Low HVI',   change: 0.4 },
+  { label: 'Low Inc / High HVI',  change: -0.3 },
+];
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
 function ChartCaption({ children }: { children: React.ReactNode }) {
   const { theme } = useTheme();
@@ -118,10 +138,59 @@ function Prose({ children }: { children: React.ReactNode }) {
   );
 }
 
+function DatasetLinks() {
+  const { theme } = useTheme();
+  const dark = theme === 'dark';
+  const linkClass = `underline font-medium ${dark ? 'text-blue-300 hover:text-blue-200' : 'text-[#0039D7] hover:text-[#002BB4]'}`;
+  const borderColor = dark ? 'border-gray-700' : 'border-gray-200';
+  const headingColor = dark ? 'text-white' : 'text-[#1a1a1a]';
+  const mutedColor = dark ? 'text-gray-400' : 'text-gray-500';
+
+  const datasets = [
+    {
+      name: 'MTA Origin-Destination Ridership Data',
+      url: 'https://new.mta.info/article/introducing-subway-origin-destination-ridership-dataset',
+      desc: 'Trip-level subway ridership, 2021–2024. Used to measure ridership on heatwave and control dates.',
+    },
+    {
+      name: 'Open-Meteo Historical Weather API',
+      url: 'https://open-meteo.com/en/docs/historical-weather-api',
+      desc: 'Hourly temperature and weather records. Used to identify NOAA-defined heat wave dates.',
+    },
+    {
+      name: 'NYC Heat Vulnerability Index',
+      url: 'https://a816-dohbesp.nyc.gov/IndicatorPublic/data-features/heat-vulnerability/',
+      desc: 'Neighborhood-level HVI scores (1–5) from the NYC Dept. of Health, based on income, green space, AC access, and surface temperature.',
+    },
+    {
+      name: 'American Community Survey (ACS)',
+      url: 'https://www.census.gov/programs-surveys/acs',
+      desc: 'Median household income by ZCTA, used to classify neighborhoods by income quintile.',
+    },
+  ];
+
+  return (
+    <div className={`mt-12 pt-8 border-t ${borderColor}`}>
+      <h2 className={`text-xl font-semibold mb-5 ${headingColor}`}>Data Sources</h2>
+      <div className="space-y-5">
+        {datasets.map((d) => (
+          <div key={d.name}>
+            <a href={d.url} target="_blank" rel="noopener noreferrer" className={linkClass}>
+              {d.name}
+            </a>
+            <p className={`text-sm mt-1 ${mutedColor}`}>{d.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── Main component ───────────────────────────────────────────────────────────
+
 export default function NYCTransitPost() {
   const { theme } = useTheme();
   const dark = theme === 'dark';
-
   const axisColor = dark ? '#9ca3af' : '#4b5563';
   const gridColor = dark ? '#374151' : '#e5e7eb';
   const blue = '#0039D7';
@@ -130,134 +199,141 @@ export default function NYCTransitPost() {
 
   return (
     <div>
-      <p className={`text-sm mb-6 ${dark ? 'text-gray-400' : 'text-gray-500'}`}>
-        Rowan Wu, Jackie Kim
+      <p className={`text-sm mb-8 ${dark ? 'text-gray-400' : 'text-gray-500'}`}>
+        Rowan Wu, Jackie Kim — Cornell Tech, 2024
       </p>
 
       <Prose>
         We started this project on an unseasonably warm November day, which felt fitting. The question was simple enough: do New Yorkers take the subway differently during heat waves? And does it matter who you are or where you live?
       </Prose>
       <Prose>
-        We used the MTA's origin-destination ridership data from August 2022 and September 2023, matched against NOAA heat wave dates (three or more consecutive days above 90°F), and layered in neighborhood-level income data from the American Community Survey and Heat Vulnerability Index (HVI) scores from the NYC Department of Health. HVI is a 1–5 score capturing how likely residents in a given neighborhood are to die during extreme heat, based on factors like green space, access to home AC, surface temperature, and income.
+        We used the MTA's origin-destination ridership data from August 2022 and September 2023, matched against NOAA heat wave dates (three or more consecutive days above 90°F), and layered in neighborhood-level income data from the American Community Survey and Heat Vulnerability Index scores from the NYC Department of Health. HVI is a 1–5 score capturing how likely residents in a given neighborhood are to die during extreme heat, based on factors like green space, access to home AC, surface temperature, and income.
       </Prose>
 
-      <SectionHeading>Overall ridership drops — but the pattern holds</SectionHeading>
+      <SectionHeading>Overall ridership drops — but the shape of the day holds</SectionHeading>
       <Prose>
-        Ridership falls about 15% on heat wave days. The effect is stronger in August than early September, which probably has more to do with seasonal patterns than temperature itself. August has more discretionary travel, looser schedules, people moving around differently. The hourly shape of the day, however, barely changes.
+        Ridership falls about 15% on heat wave days, but the hourly curve — the double-hump of morning and evening rush — barely changes shape. The effect is stronger in August than early September, which probably has more to do with seasonal travel patterns than temperature alone. People still have to get to work.
       </Prose>
 
       <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={hourlyRidership} margin={{ top: 10, right: 20, left: 0, bottom: 10 }}>
+        <LineChart data={hourlyRidership} margin={{ top: 10, right: 20, left: 10, bottom: 24 }}>
           <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-          <XAxis dataKey="hour" label={{ value: 'Hour of Day', position: 'insideBottom', offset: -4, style: labelStyle }} tick={{ fill: axisColor, fontSize: 11 }} />
-          <YAxis label={{ value: 'Est. Avg Ridership', angle: -90, position: 'insideLeft', style: labelStyle }} tick={{ fill: axisColor, fontSize: 11 }} />
-          <Tooltip contentStyle={{ background: dark ? '#1f2937' : '#fff', border: `1px solid ${gridColor}`, color: dark ? '#e5e7eb' : '#1a1a1a' }} />
-          <Legend wrapperStyle={{ color: axisColor, fontSize: 12 }} />
+          <XAxis dataKey="hour" tick={{ fill: axisColor, fontSize: 11 }} label={{ value: 'Hour of Day', position: 'insideBottom', offset: -12, style: labelStyle }} />
+          <YAxis tick={{ fill: axisColor, fontSize: 11 }} label={{ value: 'Est. Avg Ridership', angle: -90, position: 'insideLeft', offset: 12, style: labelStyle }} />
+          <Tooltip contentStyle={{ background: dark ? '#1f2937' : '#fff', border: `1px solid ${gridColor}`, color: dark ? '#e5e7eb' : '#1a1a1a', fontSize: 12 }} />
+          <Legend wrapperStyle={{ color: axisColor, fontSize: 12, paddingTop: 8 }} />
           <Line type="monotone" dataKey="heatwave" name="Aug 8, 2022 (Heatwave)" stroke={red} strokeWidth={2} dot={false} />
           <Line type="monotone" dataKey="control" name="Aug 9 & 11 (Control)" stroke={blue} strokeWidth={2} dot={false} />
         </LineChart>
       </ResponsiveContainer>
-      <ChartCaption>Ridership trends throughout the day: heatwave vs. control dates. The curve shape is nearly identical; the heatwave line runs consistently lower.</ChartCaption>
+      <ChartCaption>Heatwave ridership runs ~15% lower throughout the day, but the commute curve is identical in shape. Values reconstructed from paper Figure 2.</ChartCaption>
 
       <SectionHeading>Where people go doesn't change</SectionHeading>
       <Prose>
-        One thing that surprised us: destination patterns barely shifted at all. The top origin and destination stations on a heat wave day look almost identical to a normal day. Times Square, Fulton Street, Grand Central. People still had to get to work.
+        One of the more surprising results: destination patterns didn't shift at all. The top origin stations on a heat wave day are nearly identical to a normal day. The numbers below are from August 8, 2022 — the paper reports the rankings and volumes are essentially indistinguishable from control dates.
       </Prose>
 
       <ResponsiveContainer width="100%" height={320}>
-        <BarChart data={topStations} layout="vertical" margin={{ top: 10, right: 30, left: 130, bottom: 10 }}>
+        <BarChart data={topStations} layout="vertical" margin={{ top: 10, right: 40, left: 140, bottom: 10 }}>
           <CartesianGrid strokeDasharray="3 3" stroke={gridColor} horizontal={false} />
-          <XAxis type="number" tick={{ fill: axisColor, fontSize: 11 }} />
-          <YAxis type="category" dataKey="name" tick={{ fill: axisColor, fontSize: 11 }} width={125} />
-          <Tooltip contentStyle={{ background: dark ? '#1f2937' : '#fff', border: `1px solid ${gridColor}`, color: dark ? '#e5e7eb' : '#1a1a1a' }} />
-          <Legend wrapperStyle={{ color: axisColor, fontSize: 12 }} />
-          <Bar dataKey="heatwave" name="Heatwave" fill={red} opacity={0.85} barSize={8} />
-          <Bar dataKey="control" name="Control" fill={blue} opacity={0.85} barSize={8} />
+          <XAxis type="number" tick={{ fill: axisColor, fontSize: 11 }} tickFormatter={(v) => `${(v / 1000).toFixed(1)}k`} />
+          <YAxis type="category" dataKey="name" tick={{ fill: axisColor, fontSize: 11 }} width={135} />
+          <Tooltip
+            contentStyle={{ background: dark ? '#1f2937' : '#fff', border: `1px solid ${gridColor}`, color: dark ? '#e5e7eb' : '#1a1a1a', fontSize: 12 }}
+            formatter={(v: number) => [v.toLocaleString(), 'Trips']}
+          />
+          <Bar dataKey="count" name="Trips (Aug 8, 2022)" fill={blue} opacity={0.85} barSize={10} />
         </BarChart>
       </ResponsiveContainer>
-      <ChartCaption>Top 10 origin stations on August 8, 2022 (heatwave) vs. control dates. The ranking and volumes are nearly indistinguishable.</ChartCaption>
+      <ChartCaption>Top 10 origin stations on August 8, 2022 (a heatwave day). Exact counts from paper Table 1. The paper reports these rankings are nearly identical on non-heatwave dates.</ChartCaption>
 
       <Prose>
-        The subway as escape route during a heat wave turns out to be mostly a myth, at least in this data. Ridership to beach stations near Coney Island and the Rockaways was actually slightly higher on non-heat wave days — likely because those September non-heat wave dates happened to fall on Thursdays and Fridays, and people were making pre-weekend trips. People also overwhelmingly arrived at beach stations around 8am, beating the afternoon heat.
+        The subway-as-escape-route during a heat wave turns out to be mostly a myth, at least in this data. Ridership to beach stations near Coney Island and the Rockaways was actually slightly higher on non-heat wave days — mostly because those September control dates happened to fall on Thursdays and Fridays. On the days people did make it to the beach, they overwhelmingly arrived around 8am.
       </Prose>
 
       <ResponsiveContainer width="100%" height={280}>
-        <LineChart data={beachHourly} margin={{ top: 10, right: 20, left: 0, bottom: 10 }}>
+        <LineChart data={beachHourly} margin={{ top: 10, right: 20, left: 10, bottom: 24 }}>
           <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-          <XAxis dataKey="hour" label={{ value: 'Hour of Day', position: 'insideBottom', offset: -4, style: labelStyle }} tick={{ fill: axisColor, fontSize: 11 }} />
-          <YAxis label={{ value: 'Est. Avg Ridership', angle: -90, position: 'insideLeft', style: labelStyle }} tick={{ fill: axisColor, fontSize: 11 }} />
-          <Tooltip contentStyle={{ background: dark ? '#1f2937' : '#fff', border: `1px solid ${gridColor}`, color: dark ? '#e5e7eb' : '#1a1a1a' }} />
-          <Legend wrapperStyle={{ color: axisColor, fontSize: 12 }} />
+          <XAxis dataKey="hour" tick={{ fill: axisColor, fontSize: 11 }} label={{ value: 'Hour of Day', position: 'insideBottom', offset: -12, style: labelStyle }} />
+          <YAxis tick={{ fill: axisColor, fontSize: 11 }} label={{ value: 'Est. Avg Ridership', angle: -90, position: 'insideLeft', offset: 12, style: labelStyle }} />
+          <Tooltip contentStyle={{ background: dark ? '#1f2937' : '#fff', border: `1px solid ${gridColor}`, color: dark ? '#e5e7eb' : '#1a1a1a', fontSize: 12 }} />
+          <Legend wrapperStyle={{ color: axisColor, fontSize: 12, paddingTop: 8 }} />
           <Line type="monotone" dataKey="heatwave" name="Heatwave Beach Days" stroke={red} strokeWidth={2} dot={false} />
           <Line type="monotone" dataKey="control" name="Control Beach Days" stroke={blue} strokeWidth={2} dot={false} />
         </LineChart>
       </ResponsiveContainer>
-      <ChartCaption>Ridership to beach stations (Coney Island, Brighton Beach, Rockaways) by hour. Control days see slightly higher volume, driven largely by day-of-week effects.</ChartCaption>
+      <ChartCaption>Ridership to beach stations (Coney Island, Brighton Beach, Rockaways) by hour. Control days see modestly higher volume, driven largely by day-of-week effects. Values reconstructed from paper Figure 3.</ChartCaption>
 
       <SectionHeading>Where income and vulnerability diverge</SectionHeading>
       <Prose>
-        The neighborhood-level analysis is where the structural story shows up. Income and HVI are strongly negatively correlated (r = −0.69): wealthier neighborhoods tend to have more trees, better AC access, lower surface temperatures. That correlation is a known fact about urban inequality, but it shapes the transit data in concrete ways.
+        The neighborhood-level analysis is where the structural story shows up. Income and HVI are strongly negatively correlated (r = −0.69): wealthier neighborhoods have more trees, better AC access, lower surface temperatures. This sets up the transit finding.
       </Prose>
 
-      <ResponsiveContainer width="100%" height={300}>
-        <ScatterChart margin={{ top: 10, right: 20, left: 10, bottom: 30 }}>
+      <ResponsiveContainer width="100%" height={320}>
+        <ScatterChart margin={{ top: 10, right: 20, left: 10, bottom: 40 }}>
           <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
           <XAxis
-            dataKey="income"
-            name="Median Household Income"
+            dataKey="income" name="Income" type="number" domain={[38000, 250000]}
             tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`}
-            label={{ value: 'Median Household Income (2022 dollars)', position: 'insideBottom', offset: -15, style: labelStyle }}
             tick={{ fill: axisColor, fontSize: 11 }}
+            label={{ value: 'Median Household Income (2022 inflation-adjusted)', position: 'insideBottom', offset: -24, style: labelStyle }}
           />
           <YAxis
-            dataKey="hvi"
-            name="HVI"
-            domain={[1, 5]}
-            label={{ value: 'Heat Vulnerability Index', angle: -90, position: 'insideLeft', style: labelStyle }}
+            dataKey="hvi" name="HVI" type="number" domain={[0.5, 5.5]} ticks={[1, 2, 3, 4, 5]}
             tick={{ fill: axisColor, fontSize: 11 }}
+            label={{ value: 'Heat Vulnerability Index', angle: -90, position: 'insideLeft', offset: 14, style: labelStyle }}
           />
           <Tooltip
             cursor={{ strokeDasharray: '3 3' }}
-            contentStyle={{ background: dark ? '#1f2937' : '#fff', border: `1px solid ${gridColor}`, color: dark ? '#e5e7eb' : '#1a1a1a' }}
-            formatter={(value, name) => [name === 'income' ? `$${Number(value).toLocaleString()}` : value, name === 'income' ? 'Income' : 'HVI']}
+            contentStyle={{ background: dark ? '#1f2937' : '#fff', border: `1px solid ${gridColor}`, color: dark ? '#e5e7eb' : '#1a1a1a', fontSize: 12 }}
+            formatter={(value: number, name: string) => [
+              name === 'income' ? `$${value.toLocaleString()}` : value,
+              name === 'income' ? 'Income' : 'HVI'
+            ]}
           />
-          <Scatter data={hviIncomeScatter} fill={blue} opacity={0.6} />
-          <ReferenceLine
-            segment={[{ x: 40000, y: 4.9 }, { x: 250000, y: 1.1 }]}
-            stroke={red} strokeWidth={2} strokeDasharray="6 3"
-            label={{ value: 'r = −0.69', position: 'insideTopRight', fill: red, fontSize: 12 }}
-          />
+          <Scatter data={hviIncomeScatter} fill={blue} opacity={0.65} />
+          <ReferenceLine segment={[{ x: 42000, y: 5.0 }, { x: 245000, y: 1.0 }]} stroke={red} strokeWidth={2} strokeDasharray="6 3" label={{ value: 'r = −0.69', position: 'insideTopRight', fill: red, fontSize: 12 }} />
         </ScatterChart>
       </ResponsiveContainer>
-      <ChartCaption>Median household income vs. Heat Vulnerability Index by neighborhood. The negative correlation (r = −0.69) means heat risk and wealth track closely — wealthier neighborhoods are consistently less vulnerable.</ChartCaption>
+      <ChartCaption>Median household income vs. Heat Vulnerability Index by NYC neighborhood. Scatter points approximate the neighborhood distribution reported in the paper; regression line reflects the reported r = −0.69.</ChartCaption>
 
       <SectionHeading>Who changes behavior — and who doesn't</SectionHeading>
       <Prose>
-        We split stations into four neighborhood categories across income and HVI, then ran regressions to assess how temperature affects ridership in each. Low-income, high-HVI neighborhoods showed almost no change in ridership between heat wave and non-heat wave days. High-income neighborhoods showed a small but consistent uptick as temperatures rose.
+        We split stations into four neighborhood quadrants across income and HVI, then ran regressions to assess how temperature affects ridership in each. Only high-income areas show a meaningful response to heat. Low-income, high-HVI neighborhoods are essentially flat — their transit patterns don't change because their transit dependence doesn't change.
       </Prose>
       <Prose>
-        The interpretation we landed on: people with discretionary travel options respond to heat by taking the subway more, maybe heading to air-conditioned offices or running errands they might otherwise skip. People without those options keep their normal patterns because they don't have the flexibility to do otherwise.
+        The chart below shows estimated ridership change on heatwave days relative to control. The paper reports direction and relative magnitude from regression results; absolute ridership per quadrant wasn't reported.
       </Prose>
 
-      <ResponsiveContainer width="100%" height={280}>
-        <BarChart data={quadrantRidership} margin={{ top: 10, right: 20, left: 10, bottom: 10 }}>
+      <ResponsiveContainer width="100%" height={260}>
+        <BarChart data={quadrantChange} margin={{ top: 10, right: 20, left: 20, bottom: 10 }}>
           <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
           <XAxis dataKey="label" tick={{ fill: axisColor, fontSize: 11 }} />
-          <YAxis label={{ value: 'Est. Avg Ridership', angle: -90, position: 'insideLeft', style: labelStyle }} tick={{ fill: axisColor, fontSize: 11 }} domain={[1.2, 2.4]} />
-          <Tooltip contentStyle={{ background: dark ? '#1f2937' : '#fff', border: `1px solid ${gridColor}`, color: dark ? '#e5e7eb' : '#1a1a1a' }} />
-          <Legend wrapperStyle={{ color: axisColor, fontSize: 12 }} />
-          <Bar dataKey="heatwave" name="Heatwave" fill={red} opacity={0.85} />
-          <Bar dataKey="control" name="Control" fill={blue} opacity={0.85} />
+          <YAxis
+            tick={{ fill: axisColor, fontSize: 11 }}
+            label={{ value: 'Ridership change (%)', angle: -90, position: 'insideLeft', offset: 12, style: labelStyle }}
+            domain={[-1.5, 4.5]}
+          />
+          <Tooltip
+            contentStyle={{ background: dark ? '#1f2937' : '#fff', border: `1px solid ${gridColor}`, color: dark ? '#e5e7eb' : '#1a1a1a', fontSize: 12 }}
+            formatter={(v: number) => [`${v > 0 ? '+' : ''}${v}%`, 'vs. control']}
+          />
+          <ReferenceLine y={0} stroke={axisColor} />
+          <Bar dataKey="change" name="Change vs. control" radius={[3, 3, 0, 0]}>
+            {quadrantChange.map((entry, i) => (
+              <Cell key={i} fill={entry.change > 1.5 ? red : entry.change > 0 ? '#f87171' : gridColor} />
+            ))}
+          </Bar>
         </BarChart>
       </ResponsiveContainer>
-      <ChartCaption>Average ridership by neighborhood income/HVI quadrant on heatwave vs. control days. High-income/low-HVI areas show the largest relative increase during heat waves; low-income/high-HVI areas are essentially flat.</ChartCaption>
+      <ChartCaption>Estimated ridership change on heatwave days vs. control by neighborhood quadrant. High-income areas show the largest increase, consistent with discretionary travel responding to conditions. Low-income/high-HVI is flat. Values are directional estimates from paper regression findings.</ChartCaption>
 
       <SectionHeading>What this doesn't answer</SectionHeading>
       <Prose>
-        The dataset has real limits. Not all heat wave dates were available in the MTA data. The O/D data estimates destinations statistically rather than tracking individual rides end-to-end. We had to work with sampled subsets of datasets with hundreds of millions of rows. Our heat wave definition is strict — at least three consecutive days above 90°F, per NOAA — and broadening that threshold would probably surface different signal.
+        The dataset has real limits. Not all heat wave dates were available in the MTA data. The O/D data estimates destinations statistically rather than tracking individual rides end-to-end. We worked with sampled subsets of datasets with hundreds of millions of rows, and our heat wave definition is strict — broadening it would probably surface different signal.
       </Prose>
       <Prose>
-        The linear regression R-squared scores were weak across all neighborhood types, which tells you that temperature alone is a poor predictor of ridership. That's actually a useful finding: the story isn't really about temperature. It's about the other things temperature correlates with.
+        The linear regression R-squared scores were weak across all neighborhood types, which means temperature alone is a poor predictor of ridership. That's actually a useful finding: the story isn't really about temperature. It's about the other things temperature correlates with.
       </Prose>
 
       <SectionHeading>The bigger point</SectionHeading>
@@ -267,6 +343,8 @@ export default function NYCTransitPost() {
       <Prose>
         Also, air-conditioned subway platforms would help.
       </Prose>
+
+      <DatasetLinks />
     </div>
   );
 }

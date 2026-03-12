@@ -110,20 +110,6 @@ const posts: Record<string, { title: string; date: string; content?: string; use
     content: medicationExtractionPost,
     useMarkdown: true,
   },
-  'about-me': {
-    title: 'About Me',
-    date: 'November 3, 2023',
-    useMarkdown: true,
-    content: `
-I grew up outside Pasadena, where the San Gabriel Mountains are close enough that going up them on weekends just felt like a normal thing to do. I hiked a lot. Still do when I can. Along the way I picked up painting, photography, and a pretty serious scone habit that hasn't let up since college (Sundays, without fail).
-
-I didn't plan on becoming a data scientist. In my first ever data science class, we were handed the screenplay of *Little Women* — the 2019 film, which happened to be my favorite book growing up — and asked to use basic NLP to track how each character developed across chapters. Something about that clicked for me in a way I hadn't expected. The idea that you could look at language analytically, that Jo March's growth could show up in a dataset, made me want to keep going.
-
-Since then I've worked across a few different domains. Urban tech first, then a summer at NASA JPL working with oceanographic data, then healthcare, and now clinical NLP. The domains are different but I keep coming back to the same thing: I like when the data is about people and the stakes of getting it right are real.
-
-I'm based in New York and always up for coffee or a good conversation. Find me on [LinkedIn](https://linkedin.com/in/jaackiekim) or at [jaackiekim@gmail.com](mailto:jaackiekim@gmail.com).
-`
-  },
   'nyc-transit-analysis': {
     title: 'Does Heat Change How New Yorkers Take the Subway?',
     date: 'October 25, 2024',

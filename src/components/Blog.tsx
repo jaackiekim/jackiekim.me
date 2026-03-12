@@ -35,13 +35,6 @@ const posts: Post[] = [
     date: 'October 20, 2024',
     excerpt: 'Exploring how machine learning can help us better understand and plan our cities.',
     categories: ['Academic', 'Career']
-  },
-  {
-    slug: 'about-me',
-    title: 'About Me',
-    date: 'November 3, 2023',
-    excerpt: 'I grew up outside Pasadena chasing mountains and making scones. Here is how I ended up here.',
-    categories: ['Personal']
   }
 ];
 
