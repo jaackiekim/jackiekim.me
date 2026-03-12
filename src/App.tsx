@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Github, ExternalLink, Linkedin, Mail, Moon, Sun } from 'lucide-react';
 import { motion } from 'framer-motion';
-import ChatBot from './components/ChatBot';
 import Blog from './components/Blog';
 import BlogPost from './components/BlogPost';
 import DSML from './components/DSML';
@@ -106,13 +105,13 @@ function App() {
                     </p>
                     <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
                       I've built dataset-quality systems at Apple (Siri Research) that saved $90K and 5,000 QA hours annually,
-                      won a $20K U.S. Department of Energy prize for stochastic optimization modeling,
+                      co-founded a startup building renewable energy solutions for AI data centers that won a $20K U.S. Department of Energy prize,
                       and built data pipelines for healthcare programs at the CDC. Currently focused on
                       clinical NLP: evaluating where LLMs fail on medication extraction from medical text,
                       and what those failures mean for downstream research cohorts.
                     </p>
                     <p className={theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/70'}>
-                      Outside of work: urban planning, photography, making things with my hands.
+                      Outside of work: urban planning, photography, language learning, making things with my hands.
                     </p>
                   </div>
                 </div>
@@ -129,9 +128,9 @@ function App() {
                     >
                       <h3 className={`text-xl mb-2 ${theme === 'dark' ? 'text-white' : ''}`}>Project Solstice, U.S. Dept. of Energy Prize (2025)</h3>
                       <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
-                        Won the Grid Enhancing Technologies Bonus Prize at the EnergyTech University Prize.
-                        Built stochastic optimization models for renewable energy dispatch; presented to DOE judges
-                        among 24 national finalist teams.
+                        Co-founded a startup connecting AI data centers with renewable energy projects stuck in
+                        the grid interconnection queue. Won the Grid Enhancing Technologies Bonus Prize at the
+                        DOE EnergyTech University Prize among 24 national finalist teams.
                       </p>
                       <div className="mt-2">
                         <a href="https://www.energy.gov/technologycommercialization/articles/energytech-university-prize-2025-student-winners-announced" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#0039D7] hover:text-[#002BB4]'} text-sm`}>
@@ -198,7 +197,6 @@ function App() {
           </Routes>
         </div>
 
-        <ChatBot />
       </div>
     </Router>
   );
