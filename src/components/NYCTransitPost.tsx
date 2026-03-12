@@ -78,26 +78,28 @@ const beachHourly = [
   { hour: 23, heatwave: 0.41, control: 0.44 },
 ];
 
-// HVI vs income scatter — fixed points approximating r = −0.69 from paper.
-// Regression line is computed from these points, not drawn as a fixed segment.
+// HVI vs income scatter — generated via bivariate normal (seed 42) to approximate
+// r = −0.69 from the paper, with realistic spread and outliers.
 const hviIncomeScatter = [
-  { income: 42000, hvi: 5.0 }, { income: 48000, hvi: 5.0 }, { income: 51000, hvi: 4.8 },
-  { income: 55000, hvi: 4.9 }, { income: 58000, hvi: 4.7 }, { income: 60000, hvi: 4.5 },
-  { income: 62000, hvi: 4.6 }, { income: 65000, hvi: 4.4 }, { income: 67000, hvi: 4.3 },
-  { income: 70000, hvi: 4.5 }, { income: 72000, hvi: 4.2 }, { income: 75000, hvi: 4.0 },
-  { income: 78000, hvi: 3.8 }, { income: 80000, hvi: 4.1 }, { income: 82000, hvi: 3.7 },
-  { income: 85000, hvi: 3.5 }, { income: 88000, hvi: 3.8 }, { income: 90000, hvi: 3.4 },
-  { income: 92000, hvi: 3.6 }, { income: 95000, hvi: 3.2 }, { income: 98000, hvi: 3.0 },
-  { income: 100000, hvi: 3.3 }, { income: 105000, hvi: 2.9 }, { income: 108000, hvi: 3.1 },
-  { income: 110000, hvi: 2.8 }, { income: 115000, hvi: 2.6 }, { income: 118000, hvi: 2.9 },
-  { income: 120000, hvi: 2.5 }, { income: 125000, hvi: 2.7 }, { income: 128000, hvi: 2.4 },
-  { income: 130000, hvi: 2.2 }, { income: 135000, hvi: 2.5 }, { income: 138000, hvi: 2.1 },
-  { income: 140000, hvi: 2.3 }, { income: 145000, hvi: 2.0 }, { income: 150000, hvi: 1.9 },
-  { income: 155000, hvi: 2.1 }, { income: 160000, hvi: 1.8 }, { income: 165000, hvi: 2.0 },
-  { income: 170000, hvi: 1.7 }, { income: 175000, hvi: 1.6 }, { income: 180000, hvi: 1.8 },
-  { income: 185000, hvi: 1.5 }, { income: 190000, hvi: 1.4 }, { income: 195000, hvi: 1.6 },
-  { income: 200000, hvi: 1.3 }, { income: 210000, hvi: 1.2 }, { income: 215000, hvi: 1.4 },
-  { income: 220000, hvi: 1.1 }, { income: 230000, hvi: 1.2 }, { income: 240000, hvi: 1.0 },
+  { income: 40000, hvi: 4.2 }, { income: 49000, hvi: 4.8 }, { income: 70000, hvi: 3.4 },
+  { income: 85000, hvi: 3.5 }, { income: 105000, hvi: 4.1 }, { income: 108000, hvi: 2.8 },
+  { income: 111000, hvi: 2.8 }, { income: 112000, hvi: 3.2 }, { income: 116000, hvi: 2.9 },
+  { income: 118000, hvi: 2.8 }, { income: 118000, hvi: 3.6 }, { income: 120000, hvi: 2.6 },
+  { income: 122000, hvi: 3.6 }, { income: 128000, hvi: 3.5 }, { income: 128000, hvi: 3.6 },
+  { income: 130000, hvi: 4.6 }, { income: 131000, hvi: 3.2 }, { income: 134000, hvi: 3.0 },
+  { income: 134000, hvi: 4.0 }, { income: 135000, hvi: 3.5 }, { income: 135000, hvi: 2.2 },
+  { income: 136000, hvi: 2.9 }, { income: 137000, hvi: 3.5 }, { income: 141000, hvi: 2.9 },
+  { income: 141000, hvi: 3.1 }, { income: 144000, hvi: 3.4 }, { income: 148000, hvi: 3.6 },
+  { income: 149000, hvi: 3.7 }, { income: 149000, hvi: 3.0 }, { income: 150000, hvi: 2.2 },
+  { income: 152000, hvi: 2.6 }, { income: 154000, hvi: 2.9 }, { income: 159000, hvi: 3.2 },
+  { income: 160000, hvi: 1.8 }, { income: 161000, hvi: 1.7 }, { income: 162000, hvi: 4.1 },
+  { income: 163000, hvi: 2.3 }, { income: 164000, hvi: 2.7 }, { income: 164000, hvi: 2.8 },
+  { income: 164000, hvi: 2.9 }, { income: 165000, hvi: 1.9 }, { income: 169000, hvi: 1.9 },
+  { income: 169000, hvi: 3.4 }, { income: 171000, hvi: 2.9 }, { income: 172000, hvi: 1.9 },
+  { income: 173000, hvi: 2.3 }, { income: 174000, hvi: 2.7 }, { income: 176000, hvi: 1.6 },
+  { income: 176000, hvi: 2.1 }, { income: 181000, hvi: 2.9 }, { income: 185000, hvi: 2.3 },
+  { income: 186000, hvi: 2.3 }, { income: 194000, hvi: 2.1 }, { income: 200000, hvi: 2.1 },
+  { income: 214000, hvi: 1.6 },
 ];
 
 // Compute OLS regression line from scatter data so it actually fits the points.
