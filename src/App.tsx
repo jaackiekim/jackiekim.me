@@ -172,13 +172,10 @@ function App() {
                       <p className={`mb-2 ${theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}`}>
                         Which subway lines fail first when the city overheats.
                       </p>
-                      <div className="flex space-x-4">
-                        <Link
-                          to="/blog/nyc-transit-analysis"
-                          className={`${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#0039D7] hover:text-[#002BB4]'} transition-colors text-lg`}
-                        >
-                          Blog post
-                        </Link>
+                      <div className="mt-2 flex gap-4">
+                        <a href="/blog/nyc-transit-analysis" className={`inline-flex items-center ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#0039D7] hover:text-[#002BB4]'} text-sm`}>
+                          Blog post <ExternalLink size={12} className="ml-1" />
+                        </a>
                       </div>
                     </motion.div>
                   </div>
