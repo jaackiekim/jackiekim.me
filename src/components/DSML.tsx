@@ -149,11 +149,10 @@ export default function DSML() {
               <span className={`text-sm ${subtle}`}>2025</span>
             </div>
             <p className={`text-sm ${prose} mt-1`}>
-              Won the Grid Enhancing Technologies Bonus Prize at the EnergyTech University Prize, organized
-              by the DOE Office of Technology Commercialization. Built stochastic optimization models for
-              renewable energy dispatch; presented to DOE judges among 24 national finalist teams. Project
-              Solstice is a data intelligence platform connecting AI data centers with renewable energy
-              projects stuck in the grid interconnection queue.
+              Co-founded a startup connecting AI data centers with renewable energy projects stuck in the
+              grid interconnection queue. Won the Grid Enhancing Technologies Bonus Prize at the DOE
+              EnergyTech University Prize, organized by the Office of Technology Commercialization, among
+              24 national finalist teams.
             </p>
             <a
               href="https://www.energy.gov/technologycommercialization/articles/energytech-university-prize-2025-student-winners-announced"
