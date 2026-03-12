@@ -88,7 +88,7 @@ export default function DSML() {
               <span className={`text-sm ${subtle}`}>2023 – present</span>
             </div>
             <a href="https://breakthroughtech.org" target="_blank" rel="noopener noreferrer" className={`text-sm ${accent} hover:underline`}>
-              Break Through Tech AI
+              Break Through Tech
             </a>
             <ul className={`mt-2 space-y-1 text-sm ${prose} list-disc list-inside`}>
               <li>Coached cohorts of college women through industry-sponsored AI projects with KPMG, Google, and Geothara, covering the full project lifecycle from data to final presentation.</li>

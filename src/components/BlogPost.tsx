@@ -38,8 +38,6 @@ Aggregate Drug F1 across the three systems:
 
 GPT-4o zero-shot comes out on top, few-shot underperforms (more on why in a minute), regex holds its own. Read this table and you might conclude these systems are roughly comparable.
 
-Keep reading.
-
 ## What the Breakdown Actually Shows
 
 Drug F1 by drug class:

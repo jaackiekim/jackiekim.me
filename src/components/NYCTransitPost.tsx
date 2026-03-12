@@ -8,7 +8,7 @@ import {
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
-// Hourly ridership — double-hump commute shape, heatwave ~15% lower.
+// Hourly ridership -- double-hump commute shape, heatwave ~15% lower.
 // Unit: estimated average trips (×100,000), digitized from paper Figure 2.
 const hourlyRidership = [
   { hour: 0,  heatwave: 0.55, control: 0.60 },
@@ -37,7 +37,7 @@ const hourlyRidership = [
   { hour: 23, heatwave: 0.88, control: 0.96 },
 ];
 
-// Top 10 origin stations Aug 8 2022 — exact counts from paper Table 1.
+// Top 10 origin stations Aug 8 2022 -- exact counts from paper Table 1.
 const topStations = [
   { name: 'Times Sq-42 St',     count: 8998 },
   { name: 'Fulton St',          count: 7806 },
@@ -51,7 +51,7 @@ const topStations = [
   { name: 'Chambers St',        count: 6706 },
 ];
 
-// Beach station hourly — digitized from paper Figure 3.
+// Beach station hourly -- digitized from paper Figure 3.
 // Unit: estimated average trips (×100,000).
 const beachHourly = [
   { hour: 0,  heatwave: 0.42, control: 0.44 },
@@ -78,7 +78,7 @@ const beachHourly = [
   { hour: 23, heatwave: 0.41, control: 0.44 },
 ];
 
-// HVI vs income scatter — generated via bivariate normal (seed 42) to approximate
+// HVI vs income scatter -- generated via bivariate normal (seed 42) to approximate
 // r = −0.69 from the paper, with realistic spread and outliers.
 const hviIncomeScatter = [
   { income: 40000, hvi: 4.2 }, { income: 49000, hvi: 4.8 }, { income: 70000, hvi: 3.4 },
@@ -212,7 +212,7 @@ export default function NYCTransitPost() {
   return (
     <div>
       <p className={`text-sm mb-8 ${dark ? 'text-gray-400' : 'text-gray-500'}`}>
-        Rowan Wu, Jackie Kim — Cornell Tech, 2024
+        Rowan Wu, Jackie Kim, Cornell Tech, 2024
       </p>
 
       <Prose>
@@ -222,9 +222,9 @@ export default function NYCTransitPost() {
         We used the MTA's origin-destination ridership data from August 2022 and September 2023, matched against NOAA heat wave dates (three or more consecutive days above 90°F), and layered in neighborhood-level income data from the American Community Survey and Heat Vulnerability Index scores from the NYC Department of Health. HVI is a 1–5 score capturing how likely residents in a given neighborhood are to die during extreme heat, based on factors like green space, access to home AC, surface temperature, and income.
       </Prose>
 
-      <SectionHeading>Overall ridership drops — but the shape of the day holds</SectionHeading>
+      <SectionHeading>Overall ridership drops, but the shape of the day holds</SectionHeading>
       <Prose>
-        Ridership falls about 15% on heat wave days, but the hourly curve — the double-hump of morning and evening rush — barely changes shape. The effect is stronger in August than early September, which probably has more to do with seasonal travel patterns than temperature alone. People still have to get to work.
+        Ridership falls about 15% on heat wave days, but the hourly curve (the double-hump of morning and evening rush) barely changes shape. The effect is stronger in August than early September, which probably has more to do with seasonal travel patterns than temperature alone. People still have to get to work.
       </Prose>
 
       <ResponsiveContainer width="100%" height={300}>
@@ -236,11 +236,11 @@ export default function NYCTransitPost() {
           <Line type="monotone" dataKey="heatwave" name="Aug 8, 2022 (Heatwave)" stroke={red} strokeWidth={2} dot={false} />
         </LineChart>
       </ResponsiveContainer>
-      <ChartCaption>Hourly ridership on August 8, 2022 (heatwave). The double-hump commute curve holds — people still have to get to work. Values reconstructed from paper Figure 2.</ChartCaption>
+      <ChartCaption>Hourly ridership on August 8, 2022 (heatwave). The double-hump commute curve holds. Values reconstructed from paper Figure 2.</ChartCaption>
 
       <SectionHeading>Where people go doesn't change</SectionHeading>
       <Prose>
-        One of the more surprising results: destination patterns didn't shift at all. The top origin stations on a heat wave day are nearly identical to a normal day. The numbers below are from August 8, 2022 — the paper reports the rankings and volumes are essentially indistinguishable from control dates.
+        One of the more surprising results: destination patterns didn't shift at all. The top origin stations on a heat wave day are nearly identical to a normal day. The numbers below are from August 8, 2022, and the paper reports the rankings and volumes are essentially indistinguishable from control dates.
       </Prose>
 
       <ResponsiveContainer width="100%" height={320}>
@@ -255,7 +255,7 @@ export default function NYCTransitPost() {
       <ChartCaption>Top 10 origin stations on August 8, 2022. Exact counts from paper Table 1. The paper reports these rankings are nearly identical on non-heatwave dates.</ChartCaption>
 
       <Prose>
-        The subway-as-escape-route during a heat wave turns out to be mostly a myth, at least in this data. Ridership to beach stations near Coney Island and the Rockaways was actually slightly higher on non-heat wave days — mostly because those September control dates happened to fall on Thursdays and Fridays. On the days people did make it to the beach, they overwhelmingly arrived around 8am.
+        The subway-as-escape-route during a heat wave turns out to be mostly a myth, at least in this data. Ridership to beach stations near Coney Island and the Rockaways was actually slightly higher on non-heat wave days, mostly because those September control dates happened to fall on Thursdays and Fridays. On the days people did make it to the beach, they overwhelmingly arrived around 8am.
       </Prose>
 
       <SectionHeading>Where income and vulnerability diverge</SectionHeading>
@@ -292,14 +292,14 @@ export default function NYCTransitPost() {
       </ResponsiveContainer>
       <ChartCaption>Median household income vs. Heat Vulnerability Index by NYC neighborhood (r = −0.69). Scatter approximates the distribution reported in the paper; regression line is computed from these points.</ChartCaption>
 
-      <SectionHeading>Who changes behavior — and who doesn't</SectionHeading>
+      <SectionHeading>Who changes behavior, and who doesn't</SectionHeading>
       <Prose>
-        We split stations into four neighborhood quadrants across income and HVI, then ran regressions to assess how temperature affects ridership in each. Only high-income areas show a meaningful response to heat — ridership ticks up slightly as temperatures rise, likely reflecting discretionary travel. Low-income, high-HVI neighborhoods are essentially flat. Their transit patterns don't change because their transit dependence doesn't.
+        We split stations into four neighborhood quadrants across income and HVI, then ran regressions to assess how temperature affects ridership in each. Only high-income areas show a meaningful response to heat: ridership ticks up slightly as temperatures rise, likely reflecting discretionary travel. Low-income, high-HVI neighborhoods are essentially flat. Their transit patterns don't change because their transit dependence doesn't.
       </Prose>
 
       <SectionHeading>What this doesn't answer</SectionHeading>
       <Prose>
-        The dataset has real limits. Not all heat wave dates were available in the MTA data. The O/D data estimates destinations statistically rather than tracking individual rides end-to-end. We worked with sampled subsets of datasets with hundreds of millions of rows, and our heat wave definition is strict — broadening it would probably surface different signal.
+        The dataset has real limits. Not all heat wave dates were available in the MTA data. The O/D data estimates destinations statistically rather than tracking individual rides end-to-end. We worked with sampled subsets of datasets with hundreds of millions of rows, and our heat wave definition is strict, so broadening it would probably surface different signal.
       </Prose>
       <Prose>
         The linear regression R-squared scores were weak across all neighborhood types, which means temperature alone is a poor predictor of ridership. That's actually a useful finding: the story isn't really about temperature. It's about the other things temperature correlates with.
