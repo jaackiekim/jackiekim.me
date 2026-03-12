@@ -233,12 +233,10 @@ export default function NYCTransitPost() {
           <XAxis dataKey="hour" tick={{ fill: axisColor, fontSize: 11 }} label={{ value: 'Hour of Day', position: 'insideBottom', offset: -12, style: labelStyle }} />
           <YAxis tick={{ fill: axisColor, fontSize: 11 }} label={{ value: 'Avg trips (×100k)', angle: -90, position: 'insideLeft', offset: 14, style: labelStyle }} />
           <Tooltip contentStyle={tooltipStyle} formatter={(v: number) => [`${v}×100k trips`, '']} />
-          <Legend wrapperStyle={{ color: axisColor, fontSize: 12, paddingTop: 8 }} />
           <Line type="monotone" dataKey="heatwave" name="Aug 8, 2022 (Heatwave)" stroke={red} strokeWidth={2} dot={false} />
-          <Line type="monotone" dataKey="control" name="Aug 9 & 11 (Control)" stroke={blue} strokeWidth={2} dot={false} />
         </LineChart>
       </ResponsiveContainer>
-      <ChartCaption>Heatwave ridership runs ~15% lower throughout the day, but the commute curve is identical in shape. Values reconstructed from paper Figure 2.</ChartCaption>
+      <ChartCaption>Hourly ridership on August 8, 2022 (heatwave). The double-hump commute curve holds — people still have to get to work. Values reconstructed from paper Figure 2.</ChartCaption>
 
       <SectionHeading>Where people go doesn't change</SectionHeading>
       <Prose>
@@ -259,19 +257,6 @@ export default function NYCTransitPost() {
       <Prose>
         The subway-as-escape-route during a heat wave turns out to be mostly a myth, at least in this data. Ridership to beach stations near Coney Island and the Rockaways was actually slightly higher on non-heat wave days — mostly because those September control dates happened to fall on Thursdays and Fridays. On the days people did make it to the beach, they overwhelmingly arrived around 8am.
       </Prose>
-
-      <ResponsiveContainer width="100%" height={280}>
-        <LineChart data={beachHourly} margin={{ top: 10, right: 20, left: 20, bottom: 24 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-          <XAxis dataKey="hour" tick={{ fill: axisColor, fontSize: 11 }} label={{ value: 'Hour of Day', position: 'insideBottom', offset: -12, style: labelStyle }} />
-          <YAxis tick={{ fill: axisColor, fontSize: 11 }} label={{ value: 'Avg trips (×100k)', angle: -90, position: 'insideLeft', offset: 14, style: labelStyle }} />
-          <Tooltip contentStyle={tooltipStyle} formatter={(v: number) => [`${v}×100k trips`, '']} />
-          <Legend wrapperStyle={{ color: axisColor, fontSize: 12, paddingTop: 8 }} />
-          <Line type="monotone" dataKey="heatwave" name="Heatwave Beach Days" stroke={red} strokeWidth={2} dot={false} />
-          <Line type="monotone" dataKey="control" name="Control Beach Days" stroke={blue} strokeWidth={2} dot={false} />
-        </LineChart>
-      </ResponsiveContainer>
-      <ChartCaption>Ridership to beach stations (Coney Island, Brighton Beach, Rockaways) by hour. Control days see modestly higher volume, driven largely by day-of-week effects. Values reconstructed from paper Figure 3.</ChartCaption>
 
       <SectionHeading>Where income and vulnerability diverge</SectionHeading>
       <Prose>
