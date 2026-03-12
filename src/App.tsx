@@ -18,7 +18,7 @@ function App() {
           <div className="max-w-7xl mx-auto py-4 px-8 flex justify-between items-center">
             <div className="flex space-x-4">
               <a 
-                href="https://github.com" 
+                href="https://github.com/jaackiekim" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className={`${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#0039D7] hover:text-[#002BB4]'} transition-colors`}
@@ -26,7 +26,7 @@ function App() {
                 <Github size={16} />
               </a>
               <a 
-                href="https://linkedin.com" 
+                href="https://linkedin.com/in/jaackiekim" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className={`${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#0039D7] hover:text-[#002BB4]'} transition-colors`}
@@ -34,7 +34,7 @@ function App() {
                 <Linkedin size={16} />
               </a>
               <a 
-                href="mailto:contact@example.com" 
+                href="mailto:jaackiekim@gmail.com" 
                 className={`${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#0039D7] hover:text-[#002BB4]'} transition-colors`}
               >
                 <Mail size={16} />
