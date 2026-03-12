@@ -93,13 +93,15 @@ function App() {
                   <h1 className={`text-5xl mb-8 ${theme === 'dark' ? 'text-white' : ''}`}>Jackie Kim</h1>
                   <div className="space-y-4 text-lg leading-relaxed">
                     <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
-                      <RoleFlip /> based in New York. I build ML systems and care about the gap between
-                      benchmark performance and whether a model is actually fit for purpose.
+                      <RoleFlip /> based in New York. Cornell MS in Applied Information Science (Data Science & ML),
+                      UC Berkeley B.A. in Data Science.
                     </p>
                     <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
-                      Most recently: data science at Apple (Siri Research) and NASA JPL. Cornell MS in Information Science.
-                      Currently building a clinical NLP evaluation framework comparing LLMs on medication extraction
-                      from medical text, focused on where and why they fail on oncology drug classes.
+                      I've built dataset-quality systems at Apple (Siri Research) that saved $90K and 5,000 QA hours annually,
+                      won a $20K U.S. Department of Energy prize for stochastic optimization modeling,
+                      and built data pipelines for healthcare programs at the CDC. Currently focused on
+                      clinical NLP: evaluating where LLMs fail on medication extraction from medical text,
+                      and what those failures mean for downstream research cohorts.
                     </p>
                     <p className={theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/70'}>
                       Outside of work: urban planning, photography, making things with my hands.
@@ -111,6 +113,25 @@ function App() {
                 <div>
                   <h2 className={`text-3xl mb-8 ${theme === 'dark' ? 'text-white' : ''}`}>Projects</h2>
                   <div className="grid gap-6">
+
+                    <motion.div
+                      whileHover={{ x: 4 }}
+                      transition={{ type: "tween" }}
+                      className={`project-card ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-white'}`}
+                    >
+                      <h3 className={`text-xl mb-2 ${theme === 'dark' ? 'text-white' : ''}`}>Project Solstice — U.S. Dept. of Energy Prize (2025)</h3>
+                      <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
+                        Won the Grid Enhancing Technologies Bonus Prize at the EnergyTech University Prize.
+                        Built stochastic optimization models for renewable energy dispatch; presented to DOE judges
+                        among 24 national finalist teams.
+                      </p>
+                      <div className="mt-2">
+                        <a href="https://www.energy.gov/technologycommercialization/articles/energytech-university-prize-2025-student-winners-announced" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#0039D7] hover:text-[#002BB4]'} text-sm`}>
+                          DOE announcement <ExternalLink size={12} className="ml-1" />
+                        </a>
+                      </div>
+                    </motion.div>
+
                     <motion.div
                       whileHover={{ x: 4 }}
                       transition={{ type: "tween" }}
