@@ -3,13 +3,13 @@ import { useTheme } from './ThemeProvider';
 import {
   LineChart, Line, BarChart, Bar, ScatterChart, Scatter,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
-  ResponsiveContainer, ReferenceLine, Cell
+  ResponsiveContainer, ReferenceLine,
 } from 'recharts';
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
-// Hourly ridership curve — double-hump commute shape, heatwave ~15% lower.
-// Values digitized from paper Figure 2.
+// Hourly ridership — double-hump commute shape, heatwave ~15% lower.
+// Unit: estimated average trips (×100,000), digitized from paper Figure 2.
 const hourlyRidership = [
   { hour: 0,  heatwave: 0.55, control: 0.60 },
   { hour: 1,  heatwave: 0.48, control: 0.52 },
@@ -38,7 +38,6 @@ const hourlyRidership = [
 ];
 
 // Top 10 origin stations Aug 8 2022 — exact counts from paper Table 1.
-// Control counts are nearly identical per the paper; shown as single bar to avoid fabricating.
 const topStations = [
   { name: 'Times Sq-42 St',     count: 8998 },
   { name: 'Fulton St',          count: 7806 },
@@ -52,7 +51,8 @@ const topStations = [
   { name: 'Chambers St',        count: 6706 },
 ];
 
-// Beach station hourly — aggregate heatwave vs control, digitized from paper Figure 3.
+// Beach station hourly — digitized from paper Figure 3.
+// Unit: estimated average trips (×100,000).
 const beachHourly = [
   { hour: 0,  heatwave: 0.42, control: 0.44 },
   { hour: 2,  heatwave: 0.38, control: 0.40 },
@@ -78,7 +78,8 @@ const beachHourly = [
   { hour: 23, heatwave: 0.41, control: 0.44 },
 ];
 
-// HVI vs income scatter — fixed (not random) to approximate r = -0.69 from paper.
+// HVI vs income scatter — fixed points approximating r = −0.69 from paper.
+// Regression line is computed from these points, not drawn as a fixed segment.
 const hviIncomeScatter = [
   { income: 42000, hvi: 5.0 }, { income: 48000, hvi: 5.0 }, { income: 51000, hvi: 4.8 },
   { income: 55000, hvi: 4.9 }, { income: 58000, hvi: 4.7 }, { income: 60000, hvi: 4.5 },
@@ -99,14 +100,22 @@ const hviIncomeScatter = [
   { income: 220000, hvi: 1.1 }, { income: 230000, hvi: 1.2 }, { income: 240000, hvi: 1.0 },
 ];
 
-// Ridership change on heatwave vs control by quadrant.
-// Direction + relative magnitude from paper regression findings.
-// Absolute ridership per quadrant was not reported in the paper.
-const quadrantChange = [
-  { label: 'High Inc / Low HVI',  change: 3.2 },
-  { label: 'High Inc / High HVI', change: 1.1 },
-  { label: 'Low Inc / Low HVI',   change: 0.4 },
-  { label: 'Low Inc / High HVI',  change: -0.3 },
+// Compute OLS regression line from scatter data so it actually fits the points.
+function computeRegression(data: { income: number; hvi: number }[]) {
+  const n = data.length;
+  const meanX = data.reduce((s, d) => s + d.income, 0) / n;
+  const meanY = data.reduce((s, d) => s + d.hvi, 0) / n;
+  const slope = data.reduce((s, d) => s + (d.income - meanX) * (d.hvi - meanY), 0) /
+                data.reduce((s, d) => s + (d.income - meanX) ** 2, 0);
+  const intercept = meanY - slope * meanX;
+  return { slope, intercept };
+}
+const { slope, intercept } = computeRegression(hviIncomeScatter);
+const xMin = 38000;
+const xMax = 250000;
+const regressionLine = [
+  { income: xMin, hvi: Math.min(5.5, slope * xMin + intercept) },
+  { income: xMax, hvi: Math.max(0.5, slope * xMax + intercept) },
 ];
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -196,6 +205,7 @@ export default function NYCTransitPost() {
   const blue = '#0039D7';
   const red = '#dc2626';
   const labelStyle = { fill: axisColor, fontSize: 12 };
+  const tooltipStyle = { background: dark ? '#1f2937' : '#fff', border: `1px solid ${gridColor}`, color: dark ? '#e5e7eb' : '#1a1a1a', fontSize: 12 };
 
   return (
     <div>
@@ -216,11 +226,11 @@ export default function NYCTransitPost() {
       </Prose>
 
       <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={hourlyRidership} margin={{ top: 10, right: 20, left: 10, bottom: 24 }}>
+        <LineChart data={hourlyRidership} margin={{ top: 10, right: 20, left: 20, bottom: 24 }}>
           <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
           <XAxis dataKey="hour" tick={{ fill: axisColor, fontSize: 11 }} label={{ value: 'Hour of Day', position: 'insideBottom', offset: -12, style: labelStyle }} />
-          <YAxis tick={{ fill: axisColor, fontSize: 11 }} label={{ value: 'Est. Avg Ridership', angle: -90, position: 'insideLeft', offset: 12, style: labelStyle }} />
-          <Tooltip contentStyle={{ background: dark ? '#1f2937' : '#fff', border: `1px solid ${gridColor}`, color: dark ? '#e5e7eb' : '#1a1a1a', fontSize: 12 }} />
+          <YAxis tick={{ fill: axisColor, fontSize: 11 }} label={{ value: 'Avg trips (×100k)', angle: -90, position: 'insideLeft', offset: 14, style: labelStyle }} />
+          <Tooltip contentStyle={tooltipStyle} formatter={(v: number) => [`${v}×100k trips`, '']} />
           <Legend wrapperStyle={{ color: axisColor, fontSize: 12, paddingTop: 8 }} />
           <Line type="monotone" dataKey="heatwave" name="Aug 8, 2022 (Heatwave)" stroke={red} strokeWidth={2} dot={false} />
           <Line type="monotone" dataKey="control" name="Aug 9 & 11 (Control)" stroke={blue} strokeWidth={2} dot={false} />
@@ -238,25 +248,22 @@ export default function NYCTransitPost() {
           <CartesianGrid strokeDasharray="3 3" stroke={gridColor} horizontal={false} />
           <XAxis type="number" tick={{ fill: axisColor, fontSize: 11 }} tickFormatter={(v) => `${(v / 1000).toFixed(1)}k`} />
           <YAxis type="category" dataKey="name" tick={{ fill: axisColor, fontSize: 11 }} width={135} />
-          <Tooltip
-            contentStyle={{ background: dark ? '#1f2937' : '#fff', border: `1px solid ${gridColor}`, color: dark ? '#e5e7eb' : '#1a1a1a', fontSize: 12 }}
-            formatter={(v: number) => [v.toLocaleString(), 'Trips']}
-          />
+          <Tooltip contentStyle={tooltipStyle} formatter={(v: number) => [v.toLocaleString(), 'Trips']} />
           <Bar dataKey="count" name="Trips (Aug 8, 2022)" fill={blue} opacity={0.85} barSize={10} />
         </BarChart>
       </ResponsiveContainer>
-      <ChartCaption>Top 10 origin stations on August 8, 2022 (a heatwave day). Exact counts from paper Table 1. The paper reports these rankings are nearly identical on non-heatwave dates.</ChartCaption>
+      <ChartCaption>Top 10 origin stations on August 8, 2022. Exact counts from paper Table 1. The paper reports these rankings are nearly identical on non-heatwave dates.</ChartCaption>
 
       <Prose>
         The subway-as-escape-route during a heat wave turns out to be mostly a myth, at least in this data. Ridership to beach stations near Coney Island and the Rockaways was actually slightly higher on non-heat wave days — mostly because those September control dates happened to fall on Thursdays and Fridays. On the days people did make it to the beach, they overwhelmingly arrived around 8am.
       </Prose>
 
       <ResponsiveContainer width="100%" height={280}>
-        <LineChart data={beachHourly} margin={{ top: 10, right: 20, left: 10, bottom: 24 }}>
+        <LineChart data={beachHourly} margin={{ top: 10, right: 20, left: 20, bottom: 24 }}>
           <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
           <XAxis dataKey="hour" tick={{ fill: axisColor, fontSize: 11 }} label={{ value: 'Hour of Day', position: 'insideBottom', offset: -12, style: labelStyle }} />
-          <YAxis tick={{ fill: axisColor, fontSize: 11 }} label={{ value: 'Est. Avg Ridership', angle: -90, position: 'insideLeft', offset: 12, style: labelStyle }} />
-          <Tooltip contentStyle={{ background: dark ? '#1f2937' : '#fff', border: `1px solid ${gridColor}`, color: dark ? '#e5e7eb' : '#1a1a1a', fontSize: 12 }} />
+          <YAxis tick={{ fill: axisColor, fontSize: 11 }} label={{ value: 'Avg trips (×100k)', angle: -90, position: 'insideLeft', offset: 14, style: labelStyle }} />
+          <Tooltip contentStyle={tooltipStyle} formatter={(v: number) => [`${v}×100k trips`, '']} />
           <Legend wrapperStyle={{ color: axisColor, fontSize: 12, paddingTop: 8 }} />
           <Line type="monotone" dataKey="heatwave" name="Heatwave Beach Days" stroke={red} strokeWidth={2} dot={false} />
           <Line type="monotone" dataKey="control" name="Control Beach Days" stroke={blue} strokeWidth={2} dot={false} />
@@ -270,10 +277,10 @@ export default function NYCTransitPost() {
       </Prose>
 
       <ResponsiveContainer width="100%" height={320}>
-        <ScatterChart margin={{ top: 10, right: 20, left: 10, bottom: 40 }}>
+        <ScatterChart margin={{ top: 10, right: 20, left: 20, bottom: 40 }}>
           <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
           <XAxis
-            dataKey="income" name="Income" type="number" domain={[38000, 250000]}
+            dataKey="income" name="Income" type="number" domain={[xMin, xMax]}
             tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`}
             tick={{ fill: axisColor, fontSize: 11 }}
             label={{ value: 'Median Household Income (2022 inflation-adjusted)', position: 'insideBottom', offset: -24, style: labelStyle }}
@@ -281,52 +288,27 @@ export default function NYCTransitPost() {
           <YAxis
             dataKey="hvi" name="HVI" type="number" domain={[0.5, 5.5]} ticks={[1, 2, 3, 4, 5]}
             tick={{ fill: axisColor, fontSize: 11 }}
-            label={{ value: 'Heat Vulnerability Index', angle: -90, position: 'insideLeft', offset: 14, style: labelStyle }}
+            label={{ value: 'Heat Vulnerability Index (1–5)', angle: -90, position: 'insideLeft', offset: 16, style: labelStyle }}
           />
           <Tooltip
             cursor={{ strokeDasharray: '3 3' }}
-            contentStyle={{ background: dark ? '#1f2937' : '#fff', border: `1px solid ${gridColor}`, color: dark ? '#e5e7eb' : '#1a1a1a', fontSize: 12 }}
+            contentStyle={tooltipStyle}
             formatter={(value: number, name: string) => [
               name === 'income' ? `$${value.toLocaleString()}` : value,
               name === 'income' ? 'Income' : 'HVI'
             ]}
           />
-          <Scatter data={hviIncomeScatter} fill={blue} opacity={0.65} />
-          <ReferenceLine segment={[{ x: 42000, y: 5.0 }, { x: 245000, y: 1.0 }]} stroke={red} strokeWidth={2} strokeDasharray="6 3" label={{ value: 'r = −0.69', position: 'insideTopRight', fill: red, fontSize: 12 }} />
+          {/* Regression line computed from actual data points */}
+          <Scatter data={regressionLine} line={{ stroke: red, strokeWidth: 2, strokeDasharray: '6 3' }} shape={() => null} legendType="none" />
+          <Scatter data={hviIncomeScatter} fill={blue} opacity={0.65} name="Neighborhood" />
         </ScatterChart>
       </ResponsiveContainer>
-      <ChartCaption>Median household income vs. Heat Vulnerability Index by NYC neighborhood. Scatter points approximate the neighborhood distribution reported in the paper; regression line reflects the reported r = −0.69.</ChartCaption>
+      <ChartCaption>Median household income vs. Heat Vulnerability Index by NYC neighborhood (r = −0.69). Scatter approximates the distribution reported in the paper; regression line is computed from these points.</ChartCaption>
 
       <SectionHeading>Who changes behavior — and who doesn't</SectionHeading>
       <Prose>
-        We split stations into four neighborhood quadrants across income and HVI, then ran regressions to assess how temperature affects ridership in each. Only high-income areas show a meaningful response to heat. Low-income, high-HVI neighborhoods are essentially flat — their transit patterns don't change because their transit dependence doesn't change.
+        We split stations into four neighborhood quadrants across income and HVI, then ran regressions to assess how temperature affects ridership in each. Only high-income areas show a meaningful response to heat — ridership ticks up slightly as temperatures rise, likely reflecting discretionary travel. Low-income, high-HVI neighborhoods are essentially flat. Their transit patterns don't change because their transit dependence doesn't.
       </Prose>
-      <Prose>
-        The chart below shows estimated ridership change on heatwave days relative to control. The paper reports direction and relative magnitude from regression results; absolute ridership per quadrant wasn't reported.
-      </Prose>
-
-      <ResponsiveContainer width="100%" height={260}>
-        <BarChart data={quadrantChange} margin={{ top: 10, right: 20, left: 20, bottom: 10 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-          <XAxis dataKey="label" tick={{ fill: axisColor, fontSize: 11 }} />
-          <YAxis
-            tick={{ fill: axisColor, fontSize: 11 }}
-            label={{ value: 'Ridership change (%)', angle: -90, position: 'insideLeft', offset: 12, style: labelStyle }}
-            domain={[-1.5, 4.5]}
-          />
-          <Tooltip
-            contentStyle={{ background: dark ? '#1f2937' : '#fff', border: `1px solid ${gridColor}`, color: dark ? '#e5e7eb' : '#1a1a1a', fontSize: 12 }}
-            formatter={(v: number) => [`${v > 0 ? '+' : ''}${v}%`, 'vs. control']}
-          />
-          <ReferenceLine y={0} stroke={axisColor} />
-          <Bar dataKey="change" name="Change vs. control" radius={[3, 3, 0, 0]}>
-            {quadrantChange.map((entry, i) => (
-              <Cell key={i} fill={entry.change > 1.5 ? red : entry.change > 0 ? '#f87171' : gridColor} />
-            ))}
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
-      <ChartCaption>Estimated ridership change on heatwave days vs. control by neighborhood quadrant. High-income areas show the largest increase, consistent with discretionary travel responding to conditions. Low-income/high-HVI is flat. Values are directional estimates from paper regression findings.</ChartCaption>
 
       <SectionHeading>What this doesn't answer</SectionHeading>
       <Prose>
@@ -348,3 +330,4 @@ export default function NYCTransitPost() {
     </div>
   );
 }
+
