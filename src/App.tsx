@@ -102,7 +102,7 @@ function App() {
                         Data scientist. Cornell, Apple, NASA. Based in New York.
                       </p>
                       <p className={`text-base mt-2 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>
-                        I work on problems where better measurement leads to more equitable outcomes — in health, cities, and infrastructure.
+                        I work on problems where better measurement leads to more humane outcomes, in health, cities, and infrastructure.
                       </p>
                     </div>
                   </div>
@@ -138,7 +138,7 @@ function App() {
                       <h3 className={`text-xl mb-1 ${theme === 'dark' ? 'text-white' : ''}`}>Clinical Medication Extraction</h3>
                       <p className={`text-sm mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>LLM evaluation · 2025</p>
                       <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
-                        Aggregate F1 looked fine. Oncology drugs were nearly invisible. A stratified evaluation of GPT-4o, BioMistral, and a regex baseline on clinical medication extraction.
+                        A stratified evaluation of GPT-4o, BioMistral, and a regex baseline on clinical medication extraction.
                       </p>
                       <div className="mt-2 flex gap-4">
                         <a href="https://github.com/jaackiekim/clinical-med-extraction" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#0039D7] hover:text-[#002BB4]'} text-sm`}>
