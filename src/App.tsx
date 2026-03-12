@@ -128,7 +128,7 @@ function App() {
                       transition={{ type: "tween" }}
                       className={`project-card ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-white'}`}
                     >
-                      <h3 className={`text-xl mb-2 ${theme === 'dark' ? 'text-white' : ''}`}>Project Solstice — U.S. Dept. of Energy Prize (2025)</h3>
+                      <h3 className={`text-xl mb-2 ${theme === 'dark' ? 'text-white' : ''}`}>Project Solstice, U.S. Dept. of Energy Prize (2025)</h3>
                       <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
                         Won the Grid Enhancing Technologies Bonus Prize at the EnergyTech University Prize.
                         Built stochastic optimization models for renewable energy dispatch; presented to DOE judges
@@ -149,7 +149,7 @@ function App() {
                       <h3 className={`text-xl mb-2 ${theme === 'dark' ? 'text-white' : ''}`}>Clinical Medication Extraction: LLM Evaluation (2025)</h3>
                       <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
                         Stratified evaluation of GPT-4o, BioMistral, and a regex+RxNorm baseline on clinical notes.
-                        Aggregate F1 looks fine. Oncology drug class F1 is 0.14–0.35 — a failure mode that matters
+                        Aggregate F1 looks fine. Oncology drug class F1 is 0.14–0.35, a failure mode that matters
                         for any downstream cohort study.
                       </p>
                       <div className="mt-2 flex gap-4">
@@ -171,7 +171,7 @@ function App() {
                       <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
                         Inter-annotator agreement framework for voice assistant evaluation. Identified a bimodal
                         IAA distribution, set a data-driven quality threshold, reduced annotation costs by ~15%.
-                        NDA — not publicly available.
+                        NDA, not publicly available.
                       </p>
                     </motion.div>
 

@@ -13,12 +13,6 @@ export default function DSML() {
   return (
     <div className="max-w-3xl mx-auto px-8 py-12">
 
-      <p className={`text-lg mb-10 leading-relaxed ${prose}`}>
-        Data scientist with a track record across Apple, Cornell, and NASA JPL. I build ML systems
-        that hold up under scrutiny — evaluation frameworks that surface where models actually fail,
-        pipelines that translate messy real-world data into decisions people can act on.
-      </p>
-
       <hr className={`border-t ${divider} mb-10`} />
 
       <section className="mb-10">
@@ -94,11 +88,11 @@ export default function DSML() {
               <span className={`text-sm ${subtle}`}>Jun – Aug 2024</span>
             </div>
             <a href="https://www.apple.com" target="_blank" rel="noopener noreferrer" className={`text-sm ${accent} hover:underline`}>
-              Apple — Siri Research
+              Apple, Siri Research
             </a>
             <ul className={`mt-2 space-y-1 text-sm ${prose} list-disc list-inside`}>
               <li>Designed dataset-quality metrics over 10K+ labeled Siri examples, identifying low-value data that enabled reallocation of QA effort, saving $90K and 5,000 QA hours annually.</li>
-              <li>Built monitoring dashboards surfacing label drift and production model degradation, giving PMs and engineers actionable signals for data collection and experimentation prioritization.</li>
+              <li>Built monitoring dashboards that surfaced label drift and production model degradation, giving PMs and engineers concrete signals for data collection and experimentation prioritization.</li>
               <li>Partnered with Product and Ops to define success metrics and experimentation strategy aligned with Siri performance goals.</li>
             </ul>
           </div>
@@ -151,7 +145,7 @@ export default function DSML() {
 
           <div>
             <div className="flex justify-between items-baseline mb-1">
-              <span className={`font-semibold ${heading}`}>Project Solstice — U.S. Dept. of Energy Prize Winner</span>
+              <span className={`font-semibold ${heading}`}>Project Solstice, U.S. Dept. of Energy Prize Winner</span>
               <span className={`text-sm ${subtle}`}>2025</span>
             </div>
             <p className={`text-sm ${prose} mt-1`}>
@@ -179,8 +173,8 @@ export default function DSML() {
             <p className={`text-sm ${prose} mt-1`}>
               Stratified evaluation of GPT-4o, BioMistral, and a regex+RxNorm baseline on medication NER
               from clinical notes. Aggregate F1 (0.63–0.76) conceals near-complete failure on oncology drug
-              classes (Drug F1: 0.14–0.35; Strength F1: 0.00–0.28). Demonstrates that structured missingness
-              in extraction outputs biases downstream cohort selection in real-world evidence studies.
+              classes (Drug F1: 0.14–0.35; Strength F1: 0.00–0.28). Structured missingness in extraction
+              outputs biases downstream cohort selection in real-world evidence studies.
             </p>
             <div className="flex gap-4 mt-2">
               <a href="https://github.com/jaackiekim/clinical-med-extraction" target="_blank" rel="noopener noreferrer" className={`text-sm ${accent} hover:underline`}>GitHub</a>
