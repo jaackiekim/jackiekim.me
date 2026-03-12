@@ -6,7 +6,6 @@ import ChatBot from './components/ChatBot';
 import Blog from './components/Blog';
 import BlogPost from './components/BlogPost';
 import DSML from './components/DSML';
-import RoleFlip from './components/RoleFlip';
 import { useTheme } from './components/ThemeProvider';
 
 function App() {
@@ -102,7 +101,7 @@ function App() {
                   </div>
                   <div className="space-y-4 text-lg leading-relaxed">
                     <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
-                      <RoleFlip /> based in New York. Cornell MS in Applied Information Science (Data Science & ML),
+                      Data scientist based in New York. Cornell MS in Applied Information Science (Data Science & ML),
                       UC Berkeley B.A. in Data Science.
                     </p>
                     <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>

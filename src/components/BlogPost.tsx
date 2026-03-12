@@ -105,7 +105,7 @@ Code, evaluation framework, and full results: [github.com/jaackiekim/clinical-me
 const posts: Record<string, { title: string; date: string; content: string; useMarkdown?: boolean }> = {
   'medication-extraction-llm-evaluation': {
     title: 'When Your Medication Extraction Model Gets an A and Still Fails the Patient',
-    date: 'March 11, 2025',
+    date: 'January 14, 2026',
     content: medicationExtractionPost,
     useMarkdown: true,
   },
