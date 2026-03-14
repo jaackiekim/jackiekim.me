@@ -117,6 +117,74 @@ const posts: Record<string, { title: string; date: string; content?: string; use
     title: 'Machine Learning for Urban Planning',
     date: 'October 20, 2024',
     content: 'Coming soon...'
+  },
+  'popecast-2025': {
+    title: 'Popecast: Predicting the Papal Conclave',
+    date: 'April 2025',
+    content: `Pope Francis died on April 21, 2025. A new pope had to be elected. The process is opaque by design — no cameras, no leaks, smoke signals only — which made it an interesting modeling problem.
+
+I built a simulation of the conclave voting process. The new pope is Leo XIV.
+
+## How a conclave actually works
+
+Only cardinals under 80 are eligible to vote. They gather in the Sistine Chapel, cut off from the outside world, and vote in rounds. Each ballot requires a two-thirds supermajority to elect a pope. If no one reaches that threshold, the ballots are burned to produce black smoke. White smoke means a new pope has been chosen.
+
+The schedule: up to four ballots per day, two in the morning and two in the afternoon, with a break for prayer and reflection between sessions. There is no formal debate, no floor speeches. Cardinals talk informally in the corridors. Coalitions form, frontrunners emerge, and votes consolidate — or don't.
+
+The historical average is about three days. The longest modern conclave ran to five days.
+
+## The data pipeline
+
+**Step 1: Scrape.** I scraped the list of living cardinals from Wikipedia using BeautifulSoup, pulling name, country, age, and current role for every eligible elector.
+
+**Step 2: Enrich.** Raw biographical data doesn't tell you much. I ran an enrichment pipeline that estimated several latent attributes for each cardinal:
+
+- *Theological position* (1–10, conservative to progressive), inferred from the appointing pope (John Paul II: 3.5, Benedict XVI: 3.0, Francis: 6.5) and adjusted by keywords in their role descriptions
+- *Language abilities*, estimated from country and Vatican role
+- *Diplomatic and pastoral experience*, scored from role keywords
+- *Vatican/Curia experience*, scored from role titles
+- *Coalition membership*, assigned probabilistically based on nationality and theological position: European bloc, Global South bloc, Italian bloc, conservative/moderate/progressive blocs, Vatican insiders, outsiders
+
+**Step 3: Score.** Each cardinal gets two scores.
+
+The *Enhanced Pope Potential Index (PPI)* is a weighted composite of seven components:
+
+| Component | Weight |
+|---|---|
+| Theological alignment with current College | 20% |
+| Coalition bridging ability | 20% |
+| Vatican/Curia experience | 15% |
+| Age (optimal range: 65–78) | 15% |
+| Regional representation | 10% |
+| Language ability | 10% |
+| Media visibility | 10% |
+
+The *Papal Vibes Score (PVS)* is a softer score covering name precedent (John has been used 23 times, Leo 13 times), estimated charisma, and regional symbolism. The final papabile score combines PPI at 70% and PVS at 30%.
+
+## The simulation
+
+The conclave simulation runs round by round and models the dynamics that actually drive papal elections.
+
+**Ballot dynamics** change across the conclave. Early ballots are intentionally scattered — cardinals cast courtesy votes for respected peers, signaling without committing. The scatter factor starts at 0.8 on the first ballot and decays each day. Strategic voting increases in parallel, from 0.1 on day one to up to 0.9 by day five.
+
+**Momentum** accumulates for frontrunners. Each ballot, the top three candidates receive a weight boost proportional to their position and the number of ballots elapsed. But there is also a **frontrunner resistance** mechanism: if the same cardinal leads two consecutive ballots without reaching two-thirds, resistance grows. Real conclaves have collapsed frontrunners this way.
+
+**Overnight reflection** partially resets the weights. After each day's final ballot, the model blends current weights back toward the original base weights (70/30), adds a small random perturbation, and with 30% probability after ballot five, elevates a low-vote cardinal as a surprise candidate. This captures the historical phenomenon of the dark horse — a compromise candidate who emerges when the leading factions deadlock.
+
+The full simulation runs as a Monte Carlo over 1,000 conclaves. Each run produces a winner, a ballot count, and a duration in days. The output is a probability distribution over candidates.
+
+## What actually happened
+
+Leo XIV was elected. He is Robert Francis Prevost, an American cardinal and the first pope from the United States. The conclave lasted four days.
+
+The model was not built to predict him specifically, but the PPI framework weights theological alignment and coalition bridging — which in hindsight describes exactly what happened. Prevost led the Dicastery for Bishops, overseeing episcopal appointments worldwide, giving him Vatican insider credibility while remaining outside the Italian and European blocs. Whether the simulation would have surfaced him as a frontrunner is an open question I didn't get to answer before the white smoke went up.
+
+## Sources
+
+- [Wikipedia: List of living cardinals](https://en.wikipedia.org/wiki/List_of_living_cardinals)
+- [Vatican News](https://www.vaticannews.va)
+- [GitHub repo](https://github.com/jaackiekim/popecast-2025)`,
+    useMarkdown: true,
   }
 };
 

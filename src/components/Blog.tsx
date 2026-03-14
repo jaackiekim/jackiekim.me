@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 
-type Category = 'Personal' | 'Career' | 'Academic' | 'Misc';
+type Category = 'Personal' | 'Career' | 'Academic' | 'Misc' | 'Fun';
 
 interface Post {
   slug: string;
@@ -35,10 +35,17 @@ const posts: Post[] = [
     date: 'October 20, 2024',
     excerpt: 'Exploring how machine learning can help us better understand and plan our cities.',
     categories: ['Academic', 'Career']
+  },
+  {
+    slug: 'popecast-2025',
+    title: 'Popecast: Predicting the Papal Conclave',
+    date: 'April 2025',
+    excerpt: 'Pope Francis died in April 2025. I built a Monte Carlo simulation of the conclave voting process to predict who comes out wearing white. The new pope is Leo XIV.',
+    categories: ['Fun']
   }
 ];
 
-const allCategories: Category[] = ['Personal', 'Career', 'Academic', 'Misc'];
+const allCategories: Category[] = ['Personal', 'Career', 'Academic', 'Misc', 'Fun'];
 
 export default function Blog() {
   const { theme } = useTheme();
@@ -79,7 +86,7 @@ export default function Blog() {
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                 selectedCategories.has(category)
                   ? theme === 'dark'
-                    ? 'bg-blue-500 text-white'
+                    ? 'bg-[#cc2222] text-white'
                     : 'bg-[#cc2222] text-white'
                   : theme === 'dark'
                     ? 'bg-gray-800 text-gray-300 hover:bg-[#2a1a1c]'
@@ -136,7 +143,7 @@ export default function Blog() {
               </div>
               <h2 className={`text-2xl mb-2 ${
                 theme === 'dark' 
-                  ? 'text-[#e05555] group-hover:text-blue-200' 
+                  ? 'text-[#e05555] group-hover:text-[#cc2222]' 
                   : 'group-hover:text-[#aa1111]'
               } transition-colors`}>
                 {post.title}
