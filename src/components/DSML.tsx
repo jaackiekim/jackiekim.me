@@ -6,9 +6,9 @@ export default function DSML() {
 
   const prose = theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]';
   const heading = theme === 'dark' ? 'text-white' : 'text-[#1a1a1a]';
-  const accent = theme === 'dark' ? 'text-blue-400' : 'text-[#cc2222]';
+  const accent = theme === 'dark' ? 'text-[#e05555]' : 'text-[#cc2222]';
   const subtle = theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60';
-  const divider = theme === 'dark' ? 'border-gray-700' : 'border-[#cc2222]/10';
+  const divider = theme === 'dark' ? 'border-[#3a2022]' : 'border-[#cc2222]/10';
 
   return (
     <div className="max-w-3xl mx-auto px-8 py-12">
@@ -74,7 +74,7 @@ export default function DSML() {
           <div>
             <div className="flex justify-between items-baseline mb-1">
               <span className={`font-semibold ${heading}`}>Data Scientist</span>
-              <span className={`text-sm ${subtle}`}>Jul – Oct 2025</span>
+              <span className={`text-sm ${subtle}`}>Jul 2025 – Oct 2025</span>
             </div>
             <span className={`text-sm ${prose}`}>Surge AI</span>
             <ul className={`mt-2 space-y-1 text-sm ${prose} list-disc list-inside`}>
@@ -85,7 +85,7 @@ export default function DSML() {
           <div>
             <div className="flex justify-between items-baseline mb-1">
               <span className={`font-semibold ${heading}`}>AI Course Assistant</span>
-              <span className={`text-sm ${subtle}`}>2023 – 2025</span>
+              <span className={`text-sm ${subtle}`}>Sep 2023 – Jan 2025</span>
             </div>
             <a href="https://breakthroughtech.org" target="_blank" rel="noopener noreferrer" className={`text-sm ${accent} hover:underline`}>
               Break Through Tech
@@ -99,7 +99,7 @@ export default function DSML() {
           <div>
             <div className="flex justify-between items-baseline mb-1">
               <span className={`font-semibold ${heading}`}>Data Science Intern</span>
-              <span className={`text-sm ${subtle}`}>Jun – Aug 2024</span>
+              <span className={`text-sm ${subtle}`}>Jun 2024 – Aug 2024</span>
             </div>
             <a href="https://www.apple.com" target="_blank" rel="noopener noreferrer" className={`text-sm ${accent} hover:underline`}>
               Apple, Siri Research
@@ -138,7 +138,7 @@ export default function DSML() {
           <div>
             <div className="flex justify-between items-baseline mb-1">
               <span className={`font-semibold ${heading}`}>Data Analyst Intern</span>
-              <span className={`text-sm ${subtle}`}>Jun – Sep 2019</span>
+              <span className={`text-sm ${subtle}`}>Jun 2019 – Sep 2019</span>
             </div>
             <a href="https://www.jpl.nasa.gov" target="_blank" rel="noopener noreferrer" className={`text-sm ${accent} hover:underline`}>
               NASA Jet Propulsion Laboratory

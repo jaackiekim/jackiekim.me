@@ -82,7 +82,7 @@ export default function Blog() {
                     ? 'bg-blue-500 text-white'
                     : 'bg-[#cc2222] text-white'
                   : theme === 'dark'
-                    ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                    ? 'bg-gray-800 text-gray-300 hover:bg-[#2a1a1c]'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -94,7 +94,7 @@ export default function Blog() {
               onClick={clearCategories}
               className={`inline-flex items-center px-3 py-2 rounded-full text-sm font-medium transition-colors ${
                 theme === 'dark'
-                  ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                  ? 'bg-gray-800 text-gray-300 hover:bg-[#2a1a1c]'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -112,11 +112,11 @@ export default function Blog() {
             key={post.slug}
             whileHover={{ x: 4 }}
             transition={{ type: "tween" }}
-            className={`blog-card ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-white'}`}
+            className={`blog-card ${theme === 'dark' ? 'hover:bg-[#2a1a1c]' : 'hover:bg-white'}`}
           >
             <Link to={`/blog/${post.slug}`} className="block group">
               <div className="mb-2 flex items-center gap-2">
-                <span className={`text-sm ${theme === 'dark' ? 'text-blue-300' : 'text-[#cc2222]/70'}`}>
+                <span className={`text-sm ${theme === 'dark' ? 'text-[#e05555]' : 'text-[#cc2222]/70'}`}>
                   {post.date}
                 </span>
                 <div className="flex gap-2">
@@ -136,7 +136,7 @@ export default function Blog() {
               </div>
               <h2 className={`text-2xl mb-2 ${
                 theme === 'dark' 
-                  ? 'text-blue-300 group-hover:text-blue-200' 
+                  ? 'text-[#e05555] group-hover:text-blue-200' 
                   : 'group-hover:text-[#aa1111]'
               } transition-colors`}>
                 {post.title}

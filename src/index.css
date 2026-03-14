@@ -15,7 +15,7 @@
   }
 
   .dark body {
-    @apply bg-gray-900 text-gray-200;
+    @apply bg-[#1a1012] text-gray-200;
   }
 }
 

@@ -12,16 +12,16 @@ function App() {
 
   return (
     <Router>
-      <div className={`min-h-screen relative ${theme === 'dark' ? 'dark bg-gray-900' : 'bg-[#FFFDE7]'}`}>
+      <div className={`min-h-screen relative ${theme === 'dark' ? 'dark bg-[#1a1012]' : 'bg-[#fdf6f6]'}`}>
         {/* Fixed Header */}
-        <header className={`fixed top-0 left-0 right-0 ${theme === 'dark' ? 'bg-gray-900' : 'bg-[#FFFDE7]'} z-50 border-b ${theme === 'dark' ? 'border-gray-700' : 'border-[#cc2222]/10'}`}>
+        <header className={`fixed top-0 left-0 right-0 ${theme === 'dark' ? 'bg-[#1a1012]' : 'bg-[#fdf6f6]'} z-50 border-b ${theme === 'dark' ? 'border-[#3a2022]' : 'border-[#cc2222]/10'}`}>
           <div className="max-w-7xl mx-auto py-4 px-8 flex justify-between items-center">
             <div className="flex space-x-4">
               <a 
                 href="https://github.com/jaackiekim" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className={`${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#cc2222] hover:text-[#aa1111]'} transition-colors`}
+                className={`${theme === 'dark' ? 'text-[#e05555] hover:text-[#cc2222]' : 'text-[#cc2222] hover:text-[#aa1111]'} transition-colors`}
               >
                 <Github size={16} />
               </a>
@@ -29,13 +29,13 @@ function App() {
                 href="https://linkedin.com/in/jaackiekim" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className={`${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#cc2222] hover:text-[#aa1111]'} transition-colors`}
+                className={`${theme === 'dark' ? 'text-[#e05555] hover:text-[#cc2222]' : 'text-[#cc2222] hover:text-[#aa1111]'} transition-colors`}
               >
                 <Linkedin size={16} />
               </a>
               <a 
                 href="mailto:jaackiekim@gmail.com" 
-                className={`${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#cc2222] hover:text-[#aa1111]'} transition-colors`}
+                className={`${theme === 'dark' ? 'text-[#e05555] hover:text-[#cc2222]' : 'text-[#cc2222] hover:text-[#aa1111]'} transition-colors`}
               >
                 <Mail size={16} />
               </a>
@@ -45,7 +45,7 @@ function App() {
                 <li>
                   <button
                     onClick={toggleTheme}
-                    className={`${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#cc2222] hover:text-[#aa1111]'} transition-colors text-lg flex items-center`}
+                    className={`${theme === 'dark' ? 'text-[#e05555] hover:text-[#cc2222]' : 'text-[#cc2222] hover:text-[#aa1111]'} transition-colors text-lg flex items-center`}
                   >
                     {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
                   </button>
@@ -53,7 +53,7 @@ function App() {
                 <li>
                   <Link 
                     to="/" 
-                    className={`${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#cc2222] hover:text-[#aa1111]'} transition-colors text-lg`}
+                    className={`${theme === 'dark' ? 'text-[#e05555] hover:text-[#cc2222]' : 'text-[#cc2222] hover:text-[#aa1111]'} transition-colors text-lg`}
                   >
                     home
                   </Link>
@@ -61,7 +61,7 @@ function App() {
                 <li>
                   <Link 
                     to="/dsml" 
-                    className={`${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#cc2222] hover:text-[#aa1111]'} transition-colors text-lg`}
+                    className={`${theme === 'dark' ? 'text-[#e05555] hover:text-[#cc2222]' : 'text-[#cc2222] hover:text-[#aa1111]'} transition-colors text-lg`}
                   >
                     ds/ml
                   </Link>
@@ -69,7 +69,7 @@ function App() {
                 <li>
                   <Link 
                     to="/blog" 
-                    className={`${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#cc2222] hover:text-[#aa1111]'} transition-colors text-lg`}
+                    className={`${theme === 'dark' ? 'text-[#e05555] hover:text-[#cc2222]' : 'text-[#cc2222] hover:text-[#aa1111]'} transition-colors text-lg`}
                   >
                     blog
                   </Link>
@@ -116,7 +116,7 @@ function App() {
                     <motion.div
                       whileHover={{ x: 4 }}
                       transition={{ type: "tween" }}
-                      className={`project-card ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-white'}`}
+                      className={`project-card ${theme === 'dark' ? 'hover:bg-[#2a1a1c]' : 'hover:bg-white'}`}
                     >
                       <h3 className={`text-xl mb-1 ${theme === 'dark' ? 'text-white' : ''}`}>Project Solstice</h3>
                       <p className={`text-sm mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>Co-founder · U.S. Dept. of Energy Prize Winner · 2025</p>
@@ -124,7 +124,7 @@ function App() {
                         Introducing the grid's backlog to something more renewable.
                       </p>
                       <div className="mt-2">
-                        <a href="https://www.energy.gov/technologycommercialization/articles/energytech-university-prize-2025-student-winners-announced" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#cc2222] hover:text-[#aa1111]'} text-sm`}>
+                        <a href="https://www.energy.gov/technologycommercialization/articles/energytech-university-prize-2025-student-winners-announced" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center ${theme === 'dark' ? 'text-[#e05555] hover:text-[#cc2222]' : 'text-[#cc2222] hover:text-[#aa1111]'} text-sm`}>
                           DOE announcement <ExternalLink size={12} className="ml-1" />
                         </a>
                       </div>
@@ -133,7 +133,7 @@ function App() {
                     <motion.div
                       whileHover={{ x: 4 }}
                       transition={{ type: "tween" }}
-                      className={`project-card ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-white'}`}
+                      className={`project-card ${theme === 'dark' ? 'hover:bg-[#2a1a1c]' : 'hover:bg-white'}`}
                     >
                       <h3 className={`text-xl mb-1 ${theme === 'dark' ? 'text-white' : ''}`}>Clinical Medication Extraction</h3>
                       <p className={`text-sm mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>LLM evaluation · 2025</p>
@@ -141,10 +141,10 @@ function App() {
                         A stratified evaluation of GPT-4o, BioMistral, and a regex baseline on clinical medication extraction.
                       </p>
                       <div className="mt-2 flex gap-4">
-                        <a href="https://github.com/jaackiekim/clinical-med-extraction" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#cc2222] hover:text-[#aa1111]'} text-sm`}>
+                        <a href="https://github.com/jaackiekim/clinical-med-extraction" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center ${theme === 'dark' ? 'text-[#e05555] hover:text-[#cc2222]' : 'text-[#cc2222] hover:text-[#aa1111]'} text-sm`}>
                           GitHub <ExternalLink size={12} className="ml-1" />
                         </a>
-                        <a href="/blog/medication-extraction-llm-evaluation" className={`inline-flex items-center ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#cc2222] hover:text-[#aa1111]'} text-sm`}>
+                        <a href="/blog/medication-extraction-llm-evaluation" className={`inline-flex items-center ${theme === 'dark' ? 'text-[#e05555] hover:text-[#cc2222]' : 'text-[#cc2222] hover:text-[#aa1111]'} text-sm`}>
                           Blog post <ExternalLink size={12} className="ml-1" />
                         </a>
                       </div>
@@ -153,7 +153,7 @@ function App() {
                     <motion.div
                       whileHover={{ x: 4 }}
                       transition={{ type: "tween" }}
-                      className={`project-card ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-white'}`}
+                      className={`project-card ${theme === 'dark' ? 'hover:bg-[#2a1a1c]' : 'hover:bg-white'}`}
                     >
                       <h3 className={`text-xl mb-1 ${theme === 'dark' ? 'text-white' : ''}`}>Siri Annotation Quality Framework</h3>
                       <p className={`text-sm mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>Apple · 2024 · NDA</p>
@@ -165,7 +165,7 @@ function App() {
                     <motion.div
                       whileHover={{ x: 4 }}
                       transition={{ type: "tween" }}
-                      className={`project-card ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-white'}`}
+                      className={`project-card ${theme === 'dark' ? 'hover:bg-[#2a1a1c]' : 'hover:bg-white'}`}
                     >
                       <h3 className={`text-xl mb-1 ${theme === 'dark' ? 'text-white' : ''}`}>NYC Transit Resilience Analysis</h3>
                       <p className={`text-sm mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>2024</p>
@@ -173,7 +173,7 @@ function App() {
                         How heat waves change who takes the subway, and who doesn't have a choice.
                       </p>
                       <div className="mt-2 flex gap-4">
-                        <a href="/blog/nyc-transit-analysis" className={`inline-flex items-center ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#cc2222] hover:text-[#aa1111]'} text-sm`}>
+                        <a href="/blog/nyc-transit-analysis" className={`inline-flex items-center ${theme === 'dark' ? 'text-[#e05555] hover:text-[#cc2222]' : 'text-[#cc2222] hover:text-[#aa1111]'} text-sm`}>
                           Blog post <ExternalLink size={12} className="ml-1" />
                         </a>
                       </div>
@@ -183,7 +183,7 @@ function App() {
 
                 <div className="mt-16 mb-6">
                   <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'} text-center`}>
-                    made with <span className={theme === 'dark' ? 'text-blue-400' : 'text-[#cc2222]'}>❤</span> in nyc
+                    made with <span className={theme === 'dark' ? 'text-[#e05555]' : 'text-[#cc2222]'}>❤</span> in nyc
                   </p>
                 </div>
               </div>

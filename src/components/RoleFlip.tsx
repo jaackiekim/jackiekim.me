@@ -42,7 +42,7 @@ export default function RoleFlip() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`inline-flex items-center space-x-1 ${
-          theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-[#0039D7] hover:text-[#002BB4]'
+          theme === 'dark' ? 'text-[#e05555] hover:text-[#cc2222]' : 'text-[#cc2222] hover:text-[#aa1111]'
         } transition-colors`}
       >
         <span>{selectedRole}</span>
@@ -57,8 +57,8 @@ export default function RoleFlip() {
             exit={{ opacity: 0, y: -10 }}
             className={`absolute left-0 mt-1 rounded-lg shadow-lg border py-1 min-w-[160px] z-50 ${
               theme === 'dark'
-                ? 'bg-gray-800 border-gray-700'
-                : 'bg-white border-[#0039D7]/10'
+                ? 'bg-gray-800 border-[#3a2022]'
+                : 'bg-white border-[#cc2222]/10'
             }`}
           >
             {roles.map((role) => (
@@ -70,8 +70,8 @@ export default function RoleFlip() {
                 }}
                 className={`block w-full text-left px-4 py-2 text-sm ${
                   theme === 'dark'
-                    ? `${role === selectedRole ? 'text-blue-400' : 'text-gray-300'} hover:bg-gray-700 hover:text-white`
-                    : `${role === selectedRole ? 'text-[#0039D7]' : 'text-[#1a1a1a]'} hover:bg-[#0039D7] hover:text-white`
+                    ? `${role === selectedRole ? 'text-[#e05555]' : 'text-gray-300'} hover:bg-[#2a1a1c] hover:text-white`
+                    : `${role === selectedRole ? 'text-[#cc2222]' : 'text-[#1a1a1a]'} hover:bg-[#cc2222] hover:text-white`
                 } transition-colors`}
               >
                 {role}

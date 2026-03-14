@@ -152,8 +152,8 @@ function Prose({ children }: { children: React.ReactNode }) {
 function DatasetLinks() {
   const { theme } = useTheme();
   const dark = theme === 'dark';
-  const linkClass = `underline font-medium ${dark ? 'text-blue-300 hover:text-blue-200' : 'text-[#cc2222] hover:text-[#aa1111]'}`;
-  const borderColor = dark ? 'border-gray-700' : 'border-gray-200';
+  const linkClass = `underline font-medium ${dark ? 'text-[#e05555] hover:text-[#cc2222]' : 'text-[#cc2222] hover:text-[#aa1111]'}`;
+  const borderColor = dark ? 'border-[#3a2022]' : 'border-gray-200';
   const headingColor = dark ? 'text-white' : 'text-[#1a1a1a]';
   const mutedColor = dark ? 'text-gray-400' : 'text-gray-500';
 
