@@ -24,7 +24,7 @@
 }
 
 .dark .project-card {
-  @apply border-blue-500;
+  @apply border-[#e05555];
 }
 
 .blog-card {
@@ -32,7 +32,7 @@
 }
 
 .dark .blog-card {
-  @apply border-blue-500;
+  @apply border-[#e05555];
 }
 
 .blog-content {
