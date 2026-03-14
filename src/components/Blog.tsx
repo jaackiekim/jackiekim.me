@@ -80,7 +80,7 @@ export default function Blog() {
                 selectedCategories.has(category)
                   ? theme === 'dark'
                     ? 'bg-blue-500 text-white'
-                    : 'bg-[#0039D7] text-white'
+                    : 'bg-[#cc2222] text-white'
                   : theme === 'dark'
                     ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -116,7 +116,7 @@ export default function Blog() {
           >
             <Link to={`/blog/${post.slug}`} className="block group">
               <div className="mb-2 flex items-center gap-2">
-                <span className={`text-sm ${theme === 'dark' ? 'text-blue-300' : 'text-[#0039D7]/70'}`}>
+                <span className={`text-sm ${theme === 'dark' ? 'text-blue-300' : 'text-[#cc2222]/70'}`}>
                   {post.date}
                 </span>
                 <div className="flex gap-2">
@@ -137,7 +137,7 @@ export default function Blog() {
               <h2 className={`text-2xl mb-2 ${
                 theme === 'dark' 
                   ? 'text-blue-300 group-hover:text-blue-200' 
-                  : 'group-hover:text-[#002BB4]'
+                  : 'group-hover:text-[#aa1111]'
               } transition-colors`}>
                 {post.title}
               </h2>

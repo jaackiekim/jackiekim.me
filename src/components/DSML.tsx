@@ -6,9 +6,9 @@ export default function DSML() {
 
   const prose = theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]';
   const heading = theme === 'dark' ? 'text-white' : 'text-[#1a1a1a]';
-  const accent = theme === 'dark' ? 'text-blue-400' : 'text-[#0039D7]';
+  const accent = theme === 'dark' ? 'text-blue-400' : 'text-[#cc2222]';
   const subtle = theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60';
-  const divider = theme === 'dark' ? 'border-gray-700' : 'border-[#0039D7]/10';
+  const divider = theme === 'dark' ? 'border-gray-700' : 'border-[#cc2222]/10';
 
   return (
     <div className="max-w-3xl mx-auto px-8 py-12">
@@ -29,7 +29,7 @@ export default function DSML() {
           <div>
             <div className="flex justify-between items-baseline mb-1">
               <span className={`font-semibold ${heading}`}>University of California, Berkeley</span>
-              <span className={`text-sm ${subtle}`}>2018 – 2022</span>
+              <span className={`text-sm ${subtle}`}>2022</span>
             </div>
             <p className={`text-sm ${prose}`}>B.A. Data Science, Urban Science concentration</p>
             <p className={`text-sm ${subtle} mt-1`}>Data Structures and Algorithms, Probability Theory, Linear Algebra, Environmental Econometrics</p>
@@ -85,7 +85,7 @@ export default function DSML() {
           <div>
             <div className="flex justify-between items-baseline mb-1">
               <span className={`font-semibold ${heading}`}>AI Course Assistant</span>
-              <span className={`text-sm ${subtle}`}>2023 – present</span>
+              <span className={`text-sm ${subtle}`}>2023 – 2025</span>
             </div>
             <a href="https://breakthroughtech.org" target="_blank" rel="noopener noreferrer" className={`text-sm ${accent} hover:underline`}>
               Break Through Tech

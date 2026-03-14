@@ -20,7 +20,7 @@
 }
 
 .project-card {
-  @apply border-l-4 border-[#0039D7] pl-4 py-2 mb-6 transition-colors;
+  @apply border-l-4 border-[#cc2222] pl-4 py-2 mb-6 transition-colors;
 }
 
 .dark .project-card {
@@ -28,7 +28,7 @@
 }
 
 .blog-card {
-  @apply border-l-4 border-[#0039D7] pl-4 py-4 transition-colors;
+  @apply border-l-4 border-[#cc2222] pl-4 py-4 transition-colors;
 }
 
 .dark .blog-card {

@@ -129,7 +129,7 @@ export default function BlogPost() {
     return (
       <div className="max-w-3xl mx-auto">
         <h1 className={`text-4xl mb-8 ${theme === 'dark' ? 'text-white' : ''}`}>Post not found</h1>
-        <Link to="/blog" className={`${theme === 'dark' ? 'text-blue-300 hover:text-blue-200' : 'text-[#0039D7] hover:text-[#002BB4]'}`}>
+        <Link to="/blog" className={`${theme === 'dark' ? 'text-blue-300 hover:text-blue-200' : 'text-[#cc2222] hover:text-[#aa1111]'}`}>
           Back to blog
         </Link>
       </div>
@@ -138,7 +138,7 @@ export default function BlogPost() {
 
   const proseColor = theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]';
   const headingColor = theme === 'dark' ? 'text-white' : 'text-[#1a1a1a]';
-  const linkColor = theme === 'dark' ? 'text-blue-300 hover:text-blue-200' : 'text-[#0039D7] hover:text-[#002BB4]';
+  const linkColor = theme === 'dark' ? 'text-blue-300 hover:text-blue-200' : 'text-[#cc2222] hover:text-[#aa1111]';
   const tableStyle = theme === 'dark'
     ? 'border-gray-600 text-gray-300'
     : 'border-gray-300 text-[#1a1a1a]';
@@ -158,7 +158,7 @@ export default function BlogPost() {
 
       <article>
         <div className="mb-2">
-          <span className={`text-sm ${theme === 'dark' ? 'text-blue-300' : 'text-[#0039D7]'}`}>
+          <span className={`text-sm ${theme === 'dark' ? 'text-blue-300' : 'text-[#cc2222]'}`}>
             {post.date}
           </span>
         </div>
@@ -203,7 +203,7 @@ export default function BlogPost() {
                 <hr className={`my-8 ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`} />
               ),
               blockquote: ({ children }) => (
-                <blockquote className={`border-l-4 pl-4 my-4 italic ${theme === 'dark' ? 'border-blue-400 text-gray-400' : 'border-[#0039D7] text-gray-600'}`}>{children}</blockquote>
+                <blockquote className={`border-l-4 pl-4 my-4 italic ${theme === 'dark' ? 'border-blue-400 text-gray-400' : 'border-[#cc2222] text-gray-600'}`}>{children}</blockquote>
               ),
               code: ({ inline, children }: { inline?: boolean; children?: React.ReactNode }) =>
                 inline ? (

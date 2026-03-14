@@ -152,7 +152,7 @@ function Prose({ children }: { children: React.ReactNode }) {
 function DatasetLinks() {
   const { theme } = useTheme();
   const dark = theme === 'dark';
-  const linkClass = `underline font-medium ${dark ? 'text-blue-300 hover:text-blue-200' : 'text-[#0039D7] hover:text-[#002BB4]'}`;
+  const linkClass = `underline font-medium ${dark ? 'text-blue-300 hover:text-blue-200' : 'text-[#cc2222] hover:text-[#aa1111]'}`;
   const borderColor = dark ? 'border-gray-700' : 'border-gray-200';
   const headingColor = dark ? 'text-white' : 'text-[#1a1a1a]';
   const mutedColor = dark ? 'text-gray-400' : 'text-gray-500';
@@ -204,7 +204,7 @@ export default function NYCTransitPost() {
   const dark = theme === 'dark';
   const axisColor = dark ? '#9ca3af' : '#4b5563';
   const gridColor = dark ? '#374151' : '#e5e7eb';
-  const blue = '#0039D7';
+  const blue = '#cc2222';
   const red = '#dc2626';
   const labelStyle = { fill: axisColor, fontSize: 12 };
   const tooltipStyle = { background: dark ? '#1f2937' : '#fff', border: `1px solid ${gridColor}`, color: dark ? '#e5e7eb' : '#1a1a1a', fontSize: 12 };
