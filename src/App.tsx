@@ -33,12 +33,16 @@ function App() {
               >
                 <Linkedin size={16} />
               </a>
-              <a 
-                href="mailto:jaackiekim@gmail.com" 
-                className={`${theme === 'dark' ? 'text-[#e05555] hover:text-[#cc2222]' : 'text-[#cc2222] hover:text-[#aa1111]'} transition-colors`}
-              >
-                <Mail size={16} />
-              </a>
+              <div className="relative group">
+                <button
+                  className={`${theme === 'dark' ? 'text-[#e05555] hover:text-[#cc2222]' : 'text-[#cc2222] hover:text-[#aa1111]'} transition-colors`}
+                >
+                  <Mail size={16} />
+                </button>
+                <div className={`absolute right-0 top-6 px-3 py-1.5 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 ${theme === 'dark' ? 'bg-[#2a1a1c] text-gray-200 border border-[#3a2022]' : 'bg-white text-[#1a1a1a] border border-gray-200'} shadow-md`}>
+                  jaackiekim@gmail.com
+                </div>
+              </div>
             </div>
             <nav>
               <ul className="flex space-x-8 items-center">
