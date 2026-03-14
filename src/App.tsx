@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Github, ExternalLink, Linkedin, Mail, Moon, Sun } from 'lucide-react';
+import { Github, ExternalLink, Linkedin, Copy, Check, Moon, Sun } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Blog from './components/Blog';
 import BlogPost from './components/BlogPost';
@@ -9,6 +9,13 @@ import { useTheme } from './components/ThemeProvider';
 
 function App() {
   const { theme, toggleTheme } = useTheme();
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText('jaackiekim@gmail.com');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <Router>
@@ -35,12 +42,29 @@ function App() {
               </a>
               <div className="relative group">
                 <button
+                  onClick={copyEmail}
                   className={`${theme === 'dark' ? 'text-[#e05555] hover:text-[#cc2222]' : 'text-[#cc2222] hover:text-[#aa1111]'} transition-colors`}
                 >
-                  <Mail size={16} />
+                  <svg width="18" height="18" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="7" cy="22" r="5.5" stroke="currentColor" strokeWidth="2"/>
+                    <circle cx="25" cy="22" r="5.5" stroke="currentColor" strokeWidth="2"/>
+                    <line x1="7" y1="22" x2="16" y2="22" stroke="currentColor" strokeWidth="2"/>
+                    <line x1="16" y1="22" x2="14" y2="13" stroke="currentColor" strokeWidth="2"/>
+                    <line x1="14" y1="13" x2="22" y2="22" stroke="currentColor" strokeWidth="2"/>
+                    <line x1="14" y1="13" x2="20" y2="13" stroke="currentColor" strokeWidth="2"/>
+                    <line x1="20" y1="13" x2="25" y2="22" stroke="currentColor" strokeWidth="2"/>
+                    <line x1="12" y1="12" x2="17" y2="12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <line x1="20" y1="13" x2="20" y2="10" stroke="currentColor" strokeWidth="2"/>
+                    <line x1="18" y1="10" x2="22" y2="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <circle cx="16" cy="22" r="1.5" fill="currentColor"/>
+                  </svg>
                 </button>
-                <div className={`absolute right-0 top-6 px-3 py-1.5 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 ${theme === 'dark' ? 'bg-[#2a1a1c] text-gray-200 border border-[#3a2022]' : 'bg-white text-[#1a1a1a] border border-gray-200'} shadow-md`}>
-                  jaackiekim@gmail.com
+                <div className={`absolute right-0 top-7 flex items-center gap-2 px-3 py-1.5 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity z-50 ${theme === 'dark' ? 'bg-[#2a1a1c] text-gray-200 border border-[#3a2022]' : 'bg-white text-[#1a1a1a] border border-gray-200'} shadow-md`}>
+                  {copied ? "copied! let's chat." : 'jaackiekim@gmail.com'}
+                  {copied
+                    ? <Check size={13} className="text-green-500 shrink-0" />
+                    : <Copy size={13} className="text-gray-400 shrink-0" />
+                  }
                 </div>
               </div>
             </div>
