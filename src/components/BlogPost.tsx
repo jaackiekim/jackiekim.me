@@ -118,7 +118,6 @@ const posts: Record<string, { title: string; date: string; content?: string; use
     date: 'October 20, 2024',
     content: 'Coming soon...'
   },
-  }
 };
 
 export default function BlogPost() {
