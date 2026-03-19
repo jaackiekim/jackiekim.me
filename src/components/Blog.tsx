@@ -36,7 +36,6 @@ const posts: Post[] = [
     excerpt: 'Exploring how machine learning can help us better understand and plan our cities.',
     categories: ['Academic', 'Career']
   },
-  {
 ];
 
 const allCategories: Category[] = ['Personal', 'Career', 'Academic', 'Misc', 'Fun'];
