@@ -29,13 +29,6 @@ const posts: Post[] = [
     excerpt: 'An in-depth look at New York City\'s public transportation data and what it reveals about urban mobility.',
     categories: ['Academic', 'Career']
   },
-  {
-    slug: 'machine-learning-cities',
-    title: 'Machine Learning for Urban Planning',
-    date: 'October 20, 2024',
-    excerpt: 'Exploring how machine learning can help us better understand and plan our cities.',
-    categories: ['Academic', 'Career']
-  },
 ];
 
 const allCategories: Category[] = ['Personal', 'Career', 'Academic', 'Misc', 'Fun'];

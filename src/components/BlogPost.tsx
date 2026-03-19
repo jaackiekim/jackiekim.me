@@ -113,11 +113,6 @@ const posts: Record<string, { title: string; date: string; content?: string; use
     date: 'October 25, 2024',
     component: NYCTransitPost,
   },
-  'machine-learning-cities': {
-    title: 'Machine Learning for Urban Planning',
-    date: 'October 20, 2024',
-    content: 'Coming soon...'
-  },
 };
 
 export default function BlogPost() {
