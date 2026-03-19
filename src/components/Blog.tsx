@@ -37,12 +37,6 @@ const posts: Post[] = [
     categories: ['Academic', 'Career']
   },
   {
-    slug: 'popecast-2025',
-    title: 'Popecast: Predicting the Papal Conclave',
-    date: 'April 2025',
-    excerpt: 'Pope Francis died in April 2025. I built a Monte Carlo simulation of the conclave voting process to predict who comes out wearing white. The new pope is Leo XIV.',
-    categories: ['Fun']
-  }
 ];
 
 const allCategories: Category[] = ['Personal', 'Career', 'Academic', 'Misc', 'Fun'];
