@@ -126,11 +126,14 @@ function App() {
                     </div>
                     <div>
                       <h1 className={`text-5xl mb-3 ${theme === 'dark' ? 'text-white' : ''}`}>Jackie Kim</h1>
-                      <p className={`text-lg ${theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}`}>
-                        Data scientist. Cornell, Apple, NASA. Based in New York.
+                      <p className={`text-base mt-2 ${theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}`}>
+                        I'm a data scientist who thinks a lot about what the numbers are actually for. I've worked on public health infrastructure, urban data systems, and ML for energy. Most recently at Apple and NASA JPL.
                       </p>
                       <p className={`text-base mt-2 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>
-                        I work on problems where better measurement leads to more humane outcomes, in health, cities, and infrastructure.
+                        Co-founded Solstice, which won a $20K prize at the DOE's 2025 national pitch competition for student energy entrepreneurs.
+                      </p>
+                      <p className={`text-sm mt-3 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>
+                        Open to applied DS and AI engineering roles in health-tech and fintech.
                       </p>
                     </div>
                   </div>
