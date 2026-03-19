@@ -24,6 +24,7 @@ export default function DSML() {
               <span className={`text-sm ${subtle}`}>2023 – 2025</span>
             </div>
             <p className={`text-sm ${prose}`}>M.S. Applied Information Science (Data Science & ML)</p>
+            <p className={`text-sm ${prose} mt-0.5`}>Certificate in Computer Science</p>
             <p className={`text-sm ${subtle} mt-1`}>Applied Machine Learning, Natural Language Processing, Causal Inference, Advanced Strategic Analysis</p>
           </div>
           <div>
