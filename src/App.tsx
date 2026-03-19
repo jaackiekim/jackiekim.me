@@ -127,7 +127,7 @@ function App() {
                     <div>
                       <h1 className={`text-5xl mb-3 ${theme === 'dark' ? 'text-white' : ''}`}>Jackie Kim</h1>
                       <p className={`text-base mt-2 ${theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}`}>
-                        I'm a I am a data scientist. I'm interested in health tech, urban data, and energy solutions. Most recently at Apple and Cornell.
+                        I am a data scientist. I'm interested in health tech, urban data, and energy solutions. Most recently at Apple and Cornell.
                       </p>
                       <p className={`text-base mt-2 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>
                         Co-founded Solstice, which won a $20K prize at the DOE's 2025 national pitch competition for student energy entrepreneurs.
