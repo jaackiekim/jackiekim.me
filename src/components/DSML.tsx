@@ -78,7 +78,7 @@ export default function DSML() {
             </div>
             <span className={`text-sm ${prose}`}>Surge AI</span>
             <ul className={`mt-2 space-y-1 text-sm ${prose} list-disc list-inside`}>
-              <li>Built data quality pipelines for 10,000+ expert annotators, supporting two major model lines, a research model and a general purpose model, used by top AI labs.</li>
+              <li>Built data quality pipelines for 10,000+ expert annotators, supporting research and general-purpose model lines used by top AI labs. Role was affected by company-wide restructuring.</li>
             </ul>
           </div>
 
