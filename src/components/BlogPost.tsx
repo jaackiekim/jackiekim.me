@@ -9,7 +9,7 @@ import NYCTransitPost from './NYCTransitPost';
 const medicationExtractionPost = `
 Aggregate F1 scores are comfortable. They give you one number, you compare it to another number, and you make a decision. The problem is they can hide failures that matter a lot while averaging in successes that don't.
 
-I ran an experiment to see how bad that hiding can get. I compared three medication extraction systems on clinical notes: a regex + RxNorm rule-based baseline, GPT-4o (zero-shot and few-shot), and BioMistral, a 7B biomedical language model. Three drug classes: standard oral medications (metformin, lisinopril, that whole crowd), oncology/chemotherapy agents, and PRN (as-needed) medications.
+I ran an experiment to see how bad that hiding can get. I compared five medication extraction configurations on clinical notes: a regex + RxNorm rule-based baseline, GPT-4o (zero-shot and few-shot), and BioMistral-7B-DARE (zero-shot and few-shot), a domain-adapted open biomedical language model. Three drug classes: standard oral medications (metformin, lisinopril, that whole crowd), oncology/chemotherapy agents, and PRN (as-needed) medications.
 
 The aggregate numbers looked reasonable. The stratified results were a different situation entirely.
 
@@ -35,30 +35,26 @@ Aggregate Drug F1 across the three systems:
 | Regex + RxNorm | 0.739 |
 | GPT-4o zero-shot | 0.755 |
 | GPT-4o few-shot | 0.627 |
+| BioMistral zero-shot | 0.343† |
+| BioMistral few-shot | 0.342† |
 
-GPT-4o zero-shot comes out on top, few-shot underperforms (more on why in a minute), regex holds its own. Read this table and you might conclude these systems are roughly comparable.
+*† BioMistral recall is underestimated due to output truncation — see below.*
+
+GPT-4o zero-shot leads overall. Read this table and you might conclude the interesting story is the GPT-4o vs BioMistral gap. It isn't.
 
 ## What the Breakdown Actually Shows
 
 Drug F1 by drug class:
 
-| Drug Class | Regex | GPT-4o Zero-Shot | GPT-4o Few-Shot |
-|---|---|---|---|
-| Standard | 0.723 | 0.737 | 0.592 |
-| **Oncology** | **0.141** | **0.354** | **0.223** |
-| PRN | 0.648 | 0.846 | 0.786 |
+| Drug Class | Regex | GPT-4o ZS | GPT-4o FS | BioMistral ZS | BioMistral FS |
+|---|---|---|---|---|---|
+| Standard | 0.948 | 0.904 | 0.834 | 0.516 | 0.511 |
+| **Oncology** | **0.643** | **0.463** | **0.278** | **0.197** | **0.092** |
+| PRN | 0.828 | 0.846 | 0.789 | 0.409 | 0.381 |
 
-The regex baseline scores **0.141** on oncology drugs. GPT-4o zero-shot, the best overall, scores **0.354**. That's the range where a system is wrong more often than it's right.
+The oncology row is the finding. Every system collapses on oncology relative to its performance everywhere else. The best oncology F1 in the entire comparison is the regex baseline at 0.643 — and that still means the system fails to extract more than a third of oncology drug mentions. Standard and PRN performance, which runs 0.511 to 0.948, is what pulls the oncology failure back up into the aggregate average.
 
-Strength extraction on oncology is worse:
-
-| Drug Class | Regex | GPT-4o Zero-Shot | GPT-4o Few-Shot |
-|---|---|---|---|
-| **Oncology** | **0.000** | **0.276** | **0.213** |
-
-Zero. The regex baseline extracts essentially no chemotherapy doses correctly. GPT-4o gets to 0.276, which is not a number you'd want underpinning a study.
-
-Standard and PRN medications are doing fine, with F1 in the 0.6–0.86 range. That performance is what pulls the oncology collapse back up into the aggregate average.
+Standard and PRN medications are doing fine across the board. That performance is exactly what obscures the oncology problem in aggregate numbers.
 
 ## Why Each System Fails, and Why the Reasons Matter
 
@@ -88,17 +84,61 @@ Epidemiologists call this differential misclassification. The bias doesn't avera
 
 The question to ask before using any extraction system isn't "what's the F1 score." It's "for this drug class and this specific analysis, is this system's error rate acceptable?" A system with Oncology Strength F1 = 0.276 might be workable for rough cohort size estimates. It is not workable for dosing-dependent analyses. Aggregate F1 can't tell you which situation you're in.
 
-## What's Next
+## Precision and Recall Tell Different Stories
 
-The BioMistral evaluation is still running. A 7B local model on n2c2 2018 is slower than an API call, and I want the numbers right before publishing them. The working hypothesis is that it fails on oncology too, but through output formatting and relation extraction failures rather than the unit normalization problems that trip up GPT-4o.
+The aggregate F1 numbers obscure the most important pattern. Looking at oncology precision and recall separately across all five configurations:
 
-The more tractable fix is the few-shot example set. The current design is known to be bad. All five examples are structured medication lists. A better version samples from narrative sections, includes at least one oncology example with AUC dosing in prose context, and checks that the example distribution matches the note types in the target corpus. That alone should close a real portion of the recall gap.
+| Model | Oncology Precision | Oncology Recall |
+|---|---|---|
+| Regex | 1.000 | 0.474 |
+| GPT-4o zero-shot | 1.000 | 0.301 |
+| GPT-4o few-shot | 0.547 | 0.186 |
+| BioMistral zero-shot | 1.000 | 0.109 |
+| BioMistral few-shot | 0.444 | 0.051 |
+
+Three of five configurations achieve perfect oncology precision — when they extract an oncology drug, they're always right. The failure is entirely on the recall side. Regex finds fewer than half. GPT-4o zero-shot finds fewer than a third. BioMistral zero-shot finds roughly one in ten.
+
+This asymmetry matters for downstream use. Precision failures are visible — a reviewer sees the wrong extraction. Recall failures are invisible — no one sees the drug that was never extracted. In a cohort construction pipeline, invisible failures are the dangerous ones.
+
+## Adding BioMistral to the Picture
+
+BioMistral-7B-DARE is a Mistral-7B base model further pretrained on PubMed biomedical literature, then fine-tuned for instruction following. The hypothesis going in was that domain-specific pretraining would help on clinical text — that a model shaped by biomedical literature would recognize clinical drug patterns better than a general-purpose model.
+
+The overall F1 numbers (0.343 zero-shot, 0.342 few-shot) look much worse than GPT-4o. But the raw comparison isn't fair. BioMistral was run with a 512-token output limit due to compute constraints on a free-tier GPU. Discharge summaries with many medications generate JSON output that hits this limit mid-response, producing truncated output that can't be parsed. Approximately 11% of notes produced empty extractions for this reason. The underlying recall is higher than the numbers show.
+
+The precision numbers tell the real story: BioMistral zero-shot achieves 1.000 oncology precision — identical to GPT-4o zero-shot. When it extracts an oncology drug, it's always right. The model recognizes clinical drug names correctly. The failure is generation budget, not model capability. The BioMistral numbers are a lower bound on actual performance.
+
+What BioMistral does reveal is an instruction-following gap. The base BioMistral-7B model failed entirely on real clinical notes — it continued the clinical narrative rather than producing JSON. DARE, the instruction-tuned variant, followed the JSON format reliably on notes within the token budget. This is itself a finding: domain pretraining without instruction tuning is insufficient for structured extraction tasks. You need both.
+
+## The Full Picture
+
+Five configurations, all evaluated on the same 202 n2c2 test notes:
+
+| Model | Overall F1 | Oncology F1 | Oncology Recall |
+|---|---|---|---|
+| Regex + RxNorm | 0.739 | 0.643 | 0.474 |
+| GPT-4o zero-shot | 0.755 | 0.463 | 0.301 |
+| GPT-4o few-shot | 0.627 | 0.278 | 0.186 |
+| BioMistral zero-shot | 0.343† | 0.197† | 0.109† |
+| BioMistral few-shot | 0.342† | 0.092† | 0.051† |
+
+*† BioMistral recall is underestimated due to output truncation. These are lower bounds.*
+
+The best oncology recall in the entire comparison is the regex baseline at 0.474. No configuration achieves acceptable performance on oncology drug detection. That's the finding. The aggregate numbers, which span 0.342 to 0.755, suggest a wide performance gap between systems. The oncology recall numbers, which span 0.051 to 0.474, tell a different story: every system fails on the drug class where failure matters most.
+
+## The More Tractable Fixes
+
+The few-shot example selection problem is fixable. All five current examples are structured medication lists. A better set samples from narrative prose sections, includes at least one oncology note with AUC dosing in running text, and checks that the example distribution matches the note types in the target corpus.
+
+The BioMistral truncation problem is fixable — increasing the output token budget to 1024 would recover most of the truncated extractions.
+
+Neither fix addresses the structural finding: oncology recall is limited across all current approaches because chemotherapy documentation is systematically harder — denser, more narrative, with non-standard dosing notation — than the general medication documentation these systems were designed around. Aggregate F1 hides that entirely.
 
 Code, evaluation framework, and full results: [github.com/jaackiekim/clinical-med-extraction](https://github.com/jaackiekim/clinical-med-extraction)
 
 ---
 
-*Dataset note: All three models — regex, GPT-4o, and BioMistral — were evaluated on n2c2 2018 Track 2. BioMistral results are pending and will be added when complete.*
+*All five configurations were evaluated on n2c2 2018 Track 2 (202 test notes, 10,575 drug mentions). BioMistral-7B-DARE was run in 4-bit NF4 quantization on a T4 GPU with max_new_tokens=512.*
 `;
 
 const posts: Record<string, { title: string; date: string; content?: string; useMarkdown?: boolean; component?: React.ComponentType }> = {
