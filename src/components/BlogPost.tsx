@@ -5,6 +5,7 @@ import { useTheme } from './ThemeProvider';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import NYCTransitPost from './NYCTransitPost';
+import MedicationExtractionPost from './MedicationExtractionPost';
 
 const medicationExtractionPost = `
 Aggregate F1 scores are comfortable. They give you one number, you compare it to another number, and you make a decision. The problem is they can hide failures that matter a lot while averaging in successes that don't.
@@ -147,8 +148,7 @@ const posts: Record<string, { title: string; date: string; content?: string; use
   'medication-extraction-llm-evaluation': {
     title: 'Structured missingness in medication extraction and its implications for cohort construction',
     date: 'January 14, 2026',
-    content: medicationExtractionPost,
-    useMarkdown: true,
+    component: MedicationExtractionPost,
   },
   'nyc-transit-analysis': {
     title: 'Does Heat Change How New Yorkers Take the Subway?',
