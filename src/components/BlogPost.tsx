@@ -143,7 +143,7 @@ Code, evaluation framework, and full results: [github.com/jaackiekim/clinical-me
 
 const posts: Record<string, { title: string; date: string; content?: string; useMarkdown?: boolean; component?: React.ComponentType }> = {
   'medication-extraction-llm-evaluation': {
-    title: 'When Your Medication Extraction Model Gets an A and Still Fails the Patient',
+    title: 'Structured missingness in medication extraction and its implications for cohort construction',
     date: 'January 14, 2026',
     content: medicationExtractionPost,
     useMarkdown: true,
