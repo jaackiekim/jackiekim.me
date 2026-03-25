@@ -98,7 +98,7 @@ Code, evaluation framework, and full results: [github.com/jaackiekim/clinical-me
 
 ---
 
-*Dataset note: GPT-4o was evaluated on MTSamples due to data governance constraints on DUA-restricted corpora. Regex and BioMistral were evaluated on n2c2 2018 Track 2. Cross-model absolute F1 comparisons should be read with that difference in mind.*
+*Dataset note: All three models — regex, GPT-4o, and BioMistral — were evaluated on n2c2 2018 Track 2. BioMistral results are pending and will be added when complete.*
 `;
 
 const posts: Record<string, { title: string; date: string; content?: string; useMarkdown?: boolean; component?: React.ComponentType }> = {
