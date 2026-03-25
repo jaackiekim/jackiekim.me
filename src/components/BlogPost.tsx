@@ -134,6 +134,8 @@ The BioMistral truncation problem is fixable — increasing the output token bud
 
 Neither fix addresses the structural finding: oncology recall is limited across all current approaches because chemotherapy documentation is systematically harder — denser, more narrative, with non-standard dosing notation — than the general medication documentation these systems were designed around. Aggregate F1 hides that entirely.
 
+![Five-model comparison: Drug F1 and Recall by subgroup](/fig_full_comparison.png)
+
 Code, evaluation framework, and full results: [github.com/jaackiekim/clinical-med-extraction](https://github.com/jaackiekim/clinical-med-extraction)
 
 ---
