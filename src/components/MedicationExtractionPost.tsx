@@ -265,7 +265,7 @@ export default function MedicationExtractionPost() {
         A system with oncology recall of 0.30 isn't adding noise to your cohort. It's systematically undercounting it. The patients most likely to be missed are those whose documentation is most complex. Complex documentation tracks with complex disease. Complex disease tracks with worse outcomes. You've introduced selection bias at the data layer, and it won't appear anywhere in your aggregate extraction metrics.
       </p>
       <p className="mb-8">
-        Epidemiologists call this differential misclassification. It doesn't average out with more data. The question to ask before using any extraction system isn't "what's the F1 score." It's "for this drug class and this specific analysis, is this system's recall acceptable?"
+        Epidemiologists call this differential misclassification — when missingness is correlated with the outcome of interest, bias compounds rather than cancels. It doesn't average out with more data. The question to ask before using any extraction system isn't "what's the F1 score." It's "for this drug class and this specific analysis, is this system's recall acceptable?"
       </p>
 
       <h2 className={`text-2xl font-semibold mt-10 mb-4 ${heading}`}>The more tractable fixes</h2>
@@ -275,6 +275,37 @@ export default function MedicationExtractionPost() {
       <p className="mb-8">
         The BioMistral truncation problem is also fixable — increasing the output token budget to 1024 would recover most of the truncated extractions. Neither fix addresses the structural finding: oncology recall is limited across all current approaches because chemotherapy documentation is systematically harder than the general medication documentation these systems were designed around.
       </p>
+
+
+      <hr style={{ borderColor, margin: '2rem 0' }} />
+
+      <h2 className={`text-xl font-semibold mb-4 ${heading}`}>References</h2>
+      <ol className={`text-sm space-y-3 ${muted}`} style={{ listStyleType: 'decimal', paddingLeft: '1.25rem' }}>
+        <li>
+          Henry S, Buchan K, Filannino M, Stubbs A, Uzuner O. 2018 n2c2 shared task on adverse drug events and medication extraction in electronic health records.{' '}
+          <em>J Am Med Inform Assoc.</em> 2020;27(1):3–12.{' '}
+          <a href="https://doi.org/10.1093/jamia/ocz166" className={`underline ${link}`} target="_blank" rel="noopener noreferrer">
+            doi:10.1093/jamia/ocz166
+          </a>
+        </li>
+        <li>
+          Labrak Y, Bazoge A, Morin E, et al. BioMistral: A Collection of Open-Source Pretrained Large Language Models for Medical Domains. arXiv preprint. 2024.{' '}
+          <a href="https://arxiv.org/abs/2402.10373" className={`underline ${link}`} target="_blank" rel="noopener noreferrer">
+            arXiv:2402.10373
+          </a>
+        </li>
+        <li>
+          Nelson SJ, Zeng K, Kilbourne J, Powell T, Moore R. Normalized names for clinical drugs: RxNorm at 6 years.{' '}
+          <em>J Am Med Inform Assoc.</em> 2011;18(4):441–445.{' '}
+          <a href="https://doi.org/10.1136/amiajnl-2011-000116" className={`underline ${link}`} target="_blank" rel="noopener noreferrer">
+            doi:10.1136/amiajnl-2011-000116
+          </a>
+        </li>
+        <li>
+          Rothman KJ, Greenland S, Lash TL.{' '}
+          <em>Modern Epidemiology.</em> 3rd ed. Philadelphia: Lippincott Williams & Wilkins; 2008. (Differential misclassification, Ch. 9.)
+        </li>
+      </ol>
 
       <hr style={{ borderColor, margin: '2rem 0' }} />
 
