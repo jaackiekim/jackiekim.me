@@ -152,7 +152,7 @@ function App() {
                       <h3 className={`text-xl mb-1 ${theme === 'dark' ? 'text-white' : ''}`}>Project Solstice</h3>
                       <p className={`text-sm mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>Co-founder · U.S. Dept. of Energy Prize Winner · 2025</p>
                       <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
-                        Won $20K DOE prize. Selected from hundreds of US teams to pitch to federal judges in Colorado. There's a backlog of energy waiting to be connected to the grid — we built a company around fixing it.
+                        Won $20K DOE prize. Selected from hundreds of US teams to pitch to federal judges in Colorado. There's a backlog of energy waiting to be connected to the grid, and we built a company around fixing it.
                       </p>
                       <div className="mt-2">
                         <a href="https://www.energy.gov/technologycommercialization/articles/energytech-university-prize-2025-student-winners-announced" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center ${theme === 'dark' ? 'text-[#e05555] hover:text-[#cc2222]' : 'text-[#cc2222] hover:text-[#aa1111]'} text-sm`}>
@@ -169,7 +169,7 @@ function App() {
                       <h3 className={`text-xl mb-1 ${theme === 'dark' ? 'text-white' : ''}`}>Clinical Medication Extraction</h3>
                       <p className={`text-sm mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>LLM evaluation · 2025</p>
                       <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
-                        A stratified evaluation of GPT-4o, BioMistral, and a regex baseline on 4,000+ clinical notes — demonstrating 23%+ accuracy improvement over the regex baseline.
+                        A stratified evaluation of GPT-4o, BioMistral, and a regex baseline on 4,000+ clinical notes, with GPT-4o showing 23%+ accuracy improvement over the regex baseline.
                       </p>
                       <div className="mt-2 flex gap-4">
                         <a href="https://github.com/jaackiekim/clinical-med-extraction" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center ${theme === 'dark' ? 'text-[#e05555] hover:text-[#cc2222]' : 'text-[#cc2222] hover:text-[#aa1111]'} text-sm`}>
