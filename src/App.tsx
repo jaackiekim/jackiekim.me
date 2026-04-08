@@ -132,8 +132,8 @@ function App() {
                       <p className={`text-base mt-2 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>
                         Co-founded Solstice, which won a $20K prize at the DOE's 2025 national pitch competition for student energy entrepreneurs.
                       </p>
-                      <p className={`text-sm mt-3 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>
-                        Open to applied DS and AI engineering roles in health-tech and fintech.
+                      <p className={`text-sm mt-3 font-semibold ${theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}`}>
+                        Open to Data Scientist, Analytics Engineer, and Data Analyst roles in NYC or remote.
                       </p>
                     </div>
                   </div>
@@ -152,7 +152,7 @@ function App() {
                       <h3 className={`text-xl mb-1 ${theme === 'dark' ? 'text-white' : ''}`}>Project Solstice</h3>
                       <p className={`text-sm mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>Co-founder · U.S. Dept. of Energy Prize Winner · 2025</p>
                       <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
-                        there's a backlog of energy waiting to be connected to the grid. we worked to improve that process.
+                        Won $20K DOE prize. Selected from hundreds of US teams to pitch to federal judges in Colorado. There's a backlog of energy waiting to be connected to the grid — we built a company around fixing it.
                       </p>
                       <div className="mt-2">
                         <a href="https://www.energy.gov/technologycommercialization/articles/energytech-university-prize-2025-student-winners-announced" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center ${theme === 'dark' ? 'text-[#e05555] hover:text-[#cc2222]' : 'text-[#cc2222] hover:text-[#aa1111]'} text-sm`}>
@@ -169,7 +169,7 @@ function App() {
                       <h3 className={`text-xl mb-1 ${theme === 'dark' ? 'text-white' : ''}`}>Clinical Medication Extraction</h3>
                       <p className={`text-sm mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-[#1a1a1a]/60'}`}>LLM evaluation · 2025</p>
                       <p className={theme === 'dark' ? 'text-gray-300' : 'text-[#1a1a1a]'}>
-                        A stratified evaluation of GPT-4o, BioMistral, and a regex baseline on clinical medication extraction.
+                        A stratified evaluation of GPT-4o, BioMistral, and a regex baseline on 4,000+ clinical notes — demonstrating 23%+ accuracy improvement over the regex baseline.
                       </p>
                       <div className="mt-2 flex gap-4">
                         <a href="https://github.com/jaackiekim/clinical-med-extraction" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center ${theme === 'dark' ? 'text-[#e05555] hover:text-[#cc2222]' : 'text-[#cc2222] hover:text-[#aa1111]'} text-sm`}>

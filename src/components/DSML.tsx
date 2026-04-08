@@ -72,16 +72,6 @@ export default function DSML() {
         <h2 className={`text-xs uppercase tracking-widest font-semibold mb-6 ${subtle}`}>Experience</h2>
         <div className="space-y-8">
 
-          <div>
-            <div className="flex justify-between items-baseline mb-1">
-              <span className={`font-semibold ${heading}`}>Data Scientist</span>
-              <span className={`text-sm ${subtle}`}>Jul 2025 – Oct 2025</span>
-            </div>
-            <span className={`text-sm ${prose}`}>Surge AI</span>
-            <ul className={`mt-2 space-y-1 text-sm ${prose} list-disc list-inside`}>
-              <li>Built data quality pipelines for 10,000+ expert annotators, supporting research and general-purpose model lines used by top AI labs.</li>
-            </ul>
-          </div>
 
           <div>
             <div className="flex justify-between items-baseline mb-1">
@@ -138,6 +128,17 @@ export default function DSML() {
 
           <div>
             <div className="flex justify-between items-baseline mb-1">
+              <span className={`font-semibold ${heading}`}>Engineering Intern</span>
+              <span className={`text-sm ${subtle}`}>Jun 2020 – Aug 2020</span>
+            </div>
+            <span className={`text-sm ${prose}`}>Goldman Sachs</span>
+            <ul className={`mt-2 space-y-1 text-sm ${prose} list-disc list-inside`}>
+              <li>Contributed to engineering projects supporting internal data and analytics infrastructure.</li>
+            </ul>
+          </div>
+
+          <div>
+            <div className="flex justify-between items-baseline mb-1">
               <span className={`font-semibold ${heading}`}>Data Analyst Intern</span>
               <span className={`text-sm ${subtle}`}>Jun 2019 – Sep 2019</span>
             </div>
@@ -165,9 +166,8 @@ export default function DSML() {
             </div>
             <p className={`text-sm ${prose} mt-1`}>
               Co-founded a startup connecting AI data centers with renewable energy projects stuck in the
-              grid interconnection queue. Won the Grid Enhancing Technologies Bonus Prize at the DOE
-              EnergyTech University Prize, organized by the Office of Technology Commercialization, among
-              24 national finalist teams.
+              grid interconnection queue. Won the $20K Grid Enhancing Technologies Bonus Prize at the DOE EnergyTech University Prize.
+              Selected from hundreds of US student teams to pitch to federal judges in Colorado.
             </p>
             <a
               href="https://www.energy.gov/technologycommercialization/articles/energytech-university-prize-2025-student-winners-announced"
@@ -185,8 +185,8 @@ export default function DSML() {
               <span className={`text-sm ${subtle}`}>2025</span>
             </div>
             <p className={`text-sm ${prose} mt-1`}>
-              Stratified evaluation of GPT-4o, BioMistral, and a regex+RxNorm baseline on medication NER
-              from clinical notes. Aggregate F1 (0.63–0.76) conceals near-complete failure on oncology drug
+              Demonstrated 23%+ accuracy improvement over the regex+RxNorm baseline. Stratified evaluation of GPT-4o, BioMistral, and regex on medication NER
+              from 4,000+ clinical notes. Aggregate F1 (0.63–0.76) conceals near-complete failure on oncology drug
               classes (Drug F1: 0.14–0.35; Strength F1: 0.00–0.28). Structured missingness in extraction
               outputs biases downstream cohort selection in real-world evidence studies.
             </p>
