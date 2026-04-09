@@ -39,7 +39,7 @@ Aggregate Drug F1 across the three systems:
 | BioMistral zero-shot | 0.343† |
 | BioMistral few-shot | 0.342† |
 
-*† BioMistral recall is underestimated due to output truncation — see below.*
+*† BioMistral recall is underestimated due to output truncation - see below.*
 
 GPT-4o zero-shot leads overall. Read this table and you might conclude the interesting story is the GPT-4o vs BioMistral gap. It isn't.
 
@@ -53,7 +53,7 @@ Drug F1 by drug class:
 | **Oncology** | **0.643** | **0.463** | **0.278** | **0.197** | **0.092** |
 | PRN | 0.828 | 0.846 | 0.789 | 0.409 | 0.381 |
 
-The oncology row is the finding. Every system collapses on oncology relative to its performance everywhere else. The best oncology F1 in the entire comparison is the regex baseline at 0.643 — and that still means the system fails to extract more than a third of oncology drug mentions. Standard and PRN performance, which runs 0.511 to 0.948, is what pulls the oncology failure back up into the aggregate average.
+The oncology row is the finding. Every system collapses on oncology relative to its performance everywhere else. The best oncology F1 in the entire comparison is the regex baseline at 0.643 - and that still means the system fails to extract more than a third of oncology drug mentions. Standard and PRN performance, which runs 0.511 to 0.948, is what pulls the oncology failure back up into the aggregate average.
 
 Standard and PRN medications are doing fine across the board. That performance is exactly what obscures the oncology problem in aggregate numbers.
 
@@ -97,19 +97,19 @@ The aggregate F1 numbers obscure the most important pattern. Looking at oncology
 | BioMistral zero-shot | 1.000 | 0.109 |
 | BioMistral few-shot | 0.444 | 0.051 |
 
-Three of five configurations achieve perfect oncology precision — when they extract an oncology drug, they're always right. The failure is entirely on the recall side. Regex finds fewer than half. GPT-4o zero-shot finds fewer than a third. BioMistral zero-shot finds roughly one in ten.
+Three of five configurations achieve perfect oncology precision - when they extract an oncology drug, they're always right. The failure is entirely on the recall side. Regex finds fewer than half. GPT-4o zero-shot finds fewer than a third. BioMistral zero-shot finds roughly one in ten.
 
-This asymmetry matters for downstream use. Precision failures are visible — a reviewer sees the wrong extraction. Recall failures are invisible — no one sees the drug that was never extracted. In a cohort construction pipeline, invisible failures are the dangerous ones.
+This asymmetry matters for downstream use. Precision failures are visible - a reviewer sees the wrong extraction. Recall failures are invisible - no one sees the drug that was never extracted. In a cohort construction pipeline, invisible failures are the dangerous ones.
 
 ## Adding BioMistral to the Picture
 
-BioMistral-7B-DARE is a Mistral-7B base model further pretrained on PubMed biomedical literature, then fine-tuned for instruction following. The hypothesis going in was that domain-specific pretraining would help on clinical text — that a model shaped by biomedical literature would recognize clinical drug patterns better than a general-purpose model.
+BioMistral-7B-DARE is a Mistral-7B base model further pretrained on PubMed biomedical literature, then fine-tuned for instruction following. The hypothesis going in was that domain-specific pretraining would help on clinical text - that a model shaped by biomedical literature would recognize clinical drug patterns better than a general-purpose model.
 
 The overall F1 numbers (0.343 zero-shot, 0.342 few-shot) look much worse than GPT-4o. But the raw comparison isn't fair. BioMistral was run with a 512-token output limit due to compute constraints on a free-tier GPU. Discharge summaries with many medications generate JSON output that hits this limit mid-response, producing truncated output that can't be parsed. Approximately 11% of notes produced empty extractions for this reason. The underlying recall is higher than the numbers show.
 
-The precision numbers tell the real story: BioMistral zero-shot achieves 1.000 oncology precision — identical to GPT-4o zero-shot. When it extracts an oncology drug, it's always right. The model recognizes clinical drug names correctly. The failure is generation budget, not model capability. The BioMistral numbers are a lower bound on actual performance.
+The precision numbers tell the real story: BioMistral zero-shot achieves 1.000 oncology precision - identical to GPT-4o zero-shot. When it extracts an oncology drug, it's always right. The model recognizes clinical drug names correctly. The failure is generation budget, not model capability. The BioMistral numbers are a lower bound on actual performance.
 
-What BioMistral does reveal is an instruction-following gap. The base BioMistral-7B model failed entirely on real clinical notes — it continued the clinical narrative rather than producing JSON. DARE, the instruction-tuned variant, followed the JSON format reliably on notes within the token budget. This is itself a finding: domain pretraining without instruction tuning is insufficient for structured extraction tasks. You need both.
+What BioMistral does reveal is an instruction-following gap. The base BioMistral-7B model failed entirely on real clinical notes - it continued the clinical narrative rather than producing JSON. DARE, the instruction-tuned variant, followed the JSON format reliably on notes within the token budget. This is itself a finding: domain pretraining without instruction tuning is insufficient for structured extraction tasks. You need both.
 
 ## The Full Picture
 
@@ -131,9 +131,9 @@ The best oncology recall in the entire comparison is the regex baseline at 0.474
 
 The few-shot example selection problem is fixable. All five current examples are structured medication lists. A better set samples from narrative prose sections, includes at least one oncology note with AUC dosing in running text, and checks that the example distribution matches the note types in the target corpus.
 
-The BioMistral truncation problem is fixable — increasing the output token budget to 1024 would recover most of the truncated extractions.
+The BioMistral truncation problem is fixable - increasing the output token budget to 1024 would recover most of the truncated extractions.
 
-Neither fix addresses the structural finding: oncology recall is limited across all current approaches because chemotherapy documentation is systematically harder — denser, more narrative, with non-standard dosing notation — than the general medication documentation these systems were designed around. Aggregate F1 hides that entirely.
+Neither fix addresses the structural finding: oncology recall is limited across all current approaches because chemotherapy documentation is systematically harder - denser, more narrative, with non-standard dosing notation - than the general medication documentation these systems were designed around. Aggregate F1 hides that entirely.
 
 ![Five-model comparison: Drug F1 and Recall by subgroup](/fig_full_comparison.png)
 
@@ -308,13 +308,13 @@ export default function BlogPost() {
               blockquote: ({ children }) => (
                 <blockquote className={`border-l-4 pl-4 my-4 italic ${theme === 'dark' ? 'border-[#e05555] text-gray-400' : 'border-[#cc2222] text-gray-600'}`}>{children}</blockquote>
               ),
-              code: ({ inline, children }: { inline?: boolean; children?: React.ReactNode }) =>
-                inline ? (
-                  <code className={`px-1 py-0.5 rounded text-sm font-mono ${codeStyle}`}>{children}</code>
-                ) : (
+              code: ({ className, children }: { className?: string; children?: React.ReactNode }) =>
+                className?.startsWith('language-') ? (
                   <pre className={`rounded-lg p-4 mb-4 overflow-x-auto text-sm font-mono ${codeStyle}`}>
                     <code>{children}</code>
                   </pre>
+                ) : (
+                  <code className={`px-1 py-0.5 rounded text-sm font-mono ${codeStyle}`}>{children}</code>
                 ),
               table: ({ children }) => (
                 <div className="overflow-x-auto mb-6">
