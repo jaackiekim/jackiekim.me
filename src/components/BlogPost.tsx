@@ -145,6 +145,72 @@ Code, evaluation framework, and full results: [github.com/jaackiekim/clinical-me
 `;
 
 const posts: Record<string, { title: string; date: string; content?: string; useMarkdown?: boolean; component?: React.ComponentType }> = {
+  'minitorch-pytorch-from-scratch': {
+    title: 'What I Learned Building PyTorch from Scratch',
+    date: 'March 12, 2026',
+    useMarkdown: true,
+    content: `*Machine Learning Engineering, Cornell Tech, taught by Sasha Rush (Hugging Face)*
+
+Before I took this class, \`loss.backward()\` was magic. I knew, abstractly, that PyTorch walked backward through some kind of graph and computed gradients. I could not have told you what that graph looked like, how it got built, or what happened when it had cycles or shared nodes. I used it every day. I had no idea what it was doing.
+
+The course is called MiniTorch. Over five modules, you rebuild the core of PyTorch in pure Python. Automatic differentiation, tensors with broadcasting, GPU-style parallel operators, and convolutional neural networks. You do not read a textbook. You fill in function signatures and make the unit tests pass. The first time a test goes green is the first time you actually understand what you were doing.
+
+This is a post about the parts that stuck with me.
+
+## Autodiff is a graph, not a derivative
+
+The thing that surprised me most in the entire course was the autodiff module. I started it expecting to implement the chain rule. The chain rule is the easy part. Writing the formula for the derivative of a composed function is a line of math. The hard part is the bookkeeping around it.
+
+When you compute a function like \`loss = (a * b) + (a * c)\`, the variable \`a\` appears twice. Backpropagation has to accumulate the gradient flowing back through both paths. If you just walk the graph and assign, you overwrite. If you walk it in the wrong order, you compute with stale values. And if you recurse naively on a graph with shared nodes, you do exponential work.
+
+What actually clicked for me was writing the topological sort. You walk from the output backward through parents, marking what you have already visited. You insert each node at the front of a list, so by the end the list is in the right order for gradients to flow through. Then you walk that list once, keep a dictionary of accumulated derivatives keyed by each variable, and add to it whenever a new path arrives at that variable. One dictionary and one sorted list. That is the whole trick.
+
+I drew the whole thing out on paper before the code started making sense. The moment I stopped thinking about "derivatives" and started thinking about "how do I visit each node exactly once in the right order while remembering what I have seen," the problem stopped being a calculus problem and became a data structures problem that happens to compute math.
+
+That reframing is the single most useful thing I took from the course. Autodiff is not about derivatives. It is about graphs. PyTorch is a very efficient graph walker with a really nice API on top.
+
+## Broadcasting is where elegance lives
+
+The tensor module felt deceptively simple at first. Implement add. Implement multiply. Reshape. Transpose. How hard could it be?
+
+Broadcasting is where it gets hard. When you add a \`(3, 4)\` tensor to a \`(4,)\` tensor, PyTorch silently stretches the smaller one along the missing dimension. This is convenient. It is also a carefully designed abstraction that I had never thought about until I had to write it.
+
+The elegant move is that you do not actually copy data when you broadcast. You lie to the indexing function about the shape. If the input tensor is size \`(4,)\` and the output is size \`(3, 4)\`, every "row" of the output reads from the same underlying row of the input. The broadcast rule becomes a set of stride and shape rules that tell the indexing function which input position to read for each output position.
+
+Writing this was the first time I thought of a tensor as something different from a NumPy array. A tensor is a view into a flat block of memory, plus a set of rules for how to walk through that memory. Shape, stride, and position translation are the whole operation. Everything else is built on top.
+
+## The log-sum-exp trick is not optional
+
+In the deep learning module, you implement softmax. The naive version is three lines. Exponentiate the inputs, sum them, divide. It works on a tiny test input. Then you run it on a real batch and start seeing \`inf\` and \`nan\` and wonder what you did wrong.
+
+The issue is that softmax involves \`exp(x)\`. If any \`x\` in your input is large, say 800, then \`exp(800)\` overflows to infinity. Divide infinity by infinity and you get \`nan\`. Your whole model breaks on one bad input.
+
+The fix is that you subtract the max value from the input before you exponentiate. Mathematically this is a no-op. \`softmax(x)\` equals \`softmax(x - c)\` for any constant \`c\`. Numerically, it rescues you. Subtract the max, and now the largest input is zero, which exponentiates to one. Nothing overflows. The output is identical.
+
+I had seen this trick mentioned in papers. I had never understood why it was such a big deal. After an hour of watching my own softmax produce \`nan\` on a perfectly reasonable input, I understood. Numerical stability is not a polish you add at the end. It is a correctness property.
+
+## Pooling is the easiest hard thing
+
+The last module implements convolutional neural networks, including 2D max pooling. My expectation was that pooling would be hard because convolution is hard. I was wrong about which part was hard.
+
+2D max pooling is conceptually simple. Take non-overlapping squares of your input, return the max of each one. The hard part is implementing it without writing a loop. You want it to run on the parallel tensor operators you built earlier, which means you need to reshape the input so that the pooling dimension becomes a reducible axis.
+
+The reshape goes through a sequence of view, permute, view operations. You reinterpret the input as a tensor with an extra dimension per kernel cell, you swap axes so the kernel cells land in the right place, you reinterpret again. By the end, max pooling becomes a one-line reduction over the new axis.
+
+The first time I got it working, I wrote the permute in the wrong order and the output looked scrambled but not obviously wrong. It took me twenty minutes of printing shapes to find the bug. The lesson I took from it was that when your tensor operation compiles and runs and produces the wrong answer, the bug is almost always in the shape choreography, not in the math.
+
+## What I can do now that I could not do before
+
+I can read a PyTorch error message and know which part of the stack it came from. Before, \`RuntimeError: one of the variables needed for gradient computation has been modified by an inplace operation\` was a wall of text. Now I know it means I wrote to a tensor that is on the autograd tape, which means the saved value for backward is gone, which means the chain rule has nothing to chain. I can fix it in two seconds.
+
+I can look at a model training run that is producing \`nan\` and guess, within a few tries, where the numerical instability lives. I can read a paper that mentions "we use the log-sum-exp trick" without having to look up what that means.
+
+More than any of that, I learned that the gap between "I use this" and "I understand this" is much wider than I thought. The second one takes real work. The first time I watched my own backprop propagate a gradient through a graph I built by hand, I finally understood what PyTorch had been doing for me every day for two years. That is the kind of understanding you cannot get from reading documentation.
+
+---
+
+*Built with Sasha Rush's [MiniTorch](https://minitorch.github.io/) as part of Cornell Tech's Machine Learning Engineering course. Code is in a private repo. Happy to share with interviewers on request.*`,
+  },
   'medication-extraction-llm-evaluation': {
     title: 'Structured missingness in medication extraction and its implications for cohort construction',
     date: 'January 14, 2026',
