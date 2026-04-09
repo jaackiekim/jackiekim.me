@@ -19,7 +19,7 @@ const posts: Post[] = [
     slug: 'minitorch-pytorch-from-scratch',
     title: 'What I Learned Building PyTorch from Scratch',
     date: 'March 12, 2026',
-    excerpt: 'Before this class, loss.backward() was magic. Over five modules I rebuilt the core of PyTorch in pure Python — autodiff, tensors, broadcasting, and CNNs. These are the parts that actually stuck.',
+    excerpt: 'Before this class, loss.backward() was magic. Over five modules I rebuilt the core of PyTorch in pure Python: autodiff, tensors, broadcasting, and CNNs. These are the parts that actually stuck.',
     categories: ['Academic']
   },
   {
