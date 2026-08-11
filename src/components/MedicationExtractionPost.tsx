@@ -228,19 +228,19 @@ export default function MedicationExtractionPost() {
       ))}
 
       <p className={`text-sm italic mb-8 ${muted}`} style={{ borderLeft: `2px solid ${ONCOLOGY_WARN}`, paddingLeft: 10 }}>
-        † BioMistral recall is a lower bound - output truncation at 512 tokens produced empty extractions on ~11% of notes. The dashed red line marks F1 = 0.50 on oncology.
+        † BioMistral recall is a lower bound — output truncation at 512 tokens produced empty extractions on ~11% of notes. The dashed red line marks F1 = 0.50 on oncology.
       </p>
 
       <p className="mb-4">
-        The oncology row is the finding. Every system collapses on oncology relative to its performance everywhere else. The best oncology F1 in the entire comparison is the regex baseline at 0.643 - and that still means the system fails to extract more than a third of oncology drug mentions. Standard and PRN performance, which runs 0.511 to 0.948, is what pulls the oncology failure back up into the aggregate average.
+        The oncology row is the finding. Every system collapses on oncology relative to its performance everywhere else. The best oncology F1 in the entire comparison is the regex baseline at 0.643 — and that still means the system fails to extract more than a third of oncology drug mentions. Standard and PRN performance, which runs 0.511 to 0.948, is what pulls the oncology failure back up into the aggregate average.
       </p>
 
       <h2 className={`text-2xl font-semibold mt-10 mb-4 ${heading}`}>Precision and recall tell different stories</h2>
       <p className="mb-4">
-        Switch to the Recall tab above. Three of five configurations achieve perfect oncology precision - when they extract an oncology drug, they're always right. The failure is entirely on the recall side. Regex finds fewer than half. GPT-4o zero-shot finds fewer than a third. BioMistral zero-shot finds roughly one in ten.
+        Switch to the Recall tab above. Three of five configurations achieve perfect oncology precision — when they extract an oncology drug, they're always right. The failure is entirely on the recall side. Regex finds fewer than half. GPT-4o zero-shot finds fewer than a third. BioMistral zero-shot finds roughly one in ten.
       </p>
       <p className="mb-8">
-        This asymmetry matters for downstream use. Precision failures are visible - a reviewer sees the wrong extraction. Recall failures are invisible - no one sees the drug that was never extracted. In a cohort construction pipeline, invisible failures are the dangerous ones.
+        This asymmetry matters for downstream use. Precision failures are visible — a reviewer sees the wrong extraction. Recall failures are invisible — no one sees the drug that was never extracted. In a cohort construction pipeline, invisible failures are the dangerous ones.
       </p>
 
       <h2 className={`text-2xl font-semibold mt-10 mb-4 ${heading}`}>Why each system fails</h2>
@@ -251,10 +251,10 @@ export default function MedicationExtractionPost() {
         <strong className={`font-semibold ${heading}`}>GPT-4o zero-shot</strong> does better on recall than regex, but the gap is smaller than you'd expect. AUC-based and BSA-based dosing notation is specific to a small set of drugs and rarely appears in general pretraining data. The model recognizes "carboplatin" but struggles with "carboplatin AUC 5" as a structured entity.
       </p>
       <p className="mb-4">
-        <strong className={`font-semibold ${heading}`}>GPT-4o few-shot</strong> is the most counterintuitive result. Adding five examples makes recall worse across every subgroup - overall recall drops from 0.610 to 0.460. All five in-context examples came from structured medication list sections of notes. The model latched onto that format and became less likely to extract drugs mentioned in running prose. This isn't few-shot prompting failing as a technique. It's an example selection problem.
+        <strong className={`font-semibold ${heading}`}>GPT-4o few-shot</strong> is the most counterintuitive result. Adding five examples makes recall worse across every subgroup — overall recall drops from 0.610 to 0.460. All five in-context examples came from structured medication list sections of notes. The model latched onto that format and became less likely to extract drugs mentioned in running prose. This isn't few-shot prompting failing as a technique. It's an example selection problem.
       </p>
       <p className="mb-8">
-        <strong className={`font-semibold ${heading}`}>BioMistral</strong> shows a different failure mode. The base BioMistral-7B model failed entirely - it continued the clinical narrative rather than producing JSON. DARE, the instruction-tuned variant, followed the JSON format reliably on notes within the token budget. When it extracts, it extracts correctly (oncology precision: 1.000). The recall floor is a generation budget problem, not a model capability problem.
+        <strong className={`font-semibold ${heading}`}>BioMistral</strong> shows a different failure mode. The base BioMistral-7B model failed entirely — it continued the clinical narrative rather than producing JSON. DARE, the instruction-tuned variant, followed the JSON format reliably on notes within the token budget. When it extracts, it extracts correctly (oncology precision: 1.000). The recall floor is a generation budget problem, not a model capability problem.
       </p>
 
       <h2 className={`text-2xl font-semibold mt-10 mb-4 ${heading}`}>Why this matters beyond the benchmark</h2>
@@ -265,7 +265,7 @@ export default function MedicationExtractionPost() {
         A system with oncology recall of 0.30 isn't adding noise to your cohort. It's systematically undercounting it. The patients most likely to be missed are those whose documentation is most complex. Complex documentation tracks with complex disease. Complex disease tracks with worse outcomes. You've introduced selection bias at the data layer, and it won't appear anywhere in your aggregate extraction metrics.
       </p>
       <p className="mb-8">
-Epidemiologists call this differential misclassification. When missingness is correlated with the outcome of interest, bias compounds rather than cancels. It doesn't average out with more data.
+        Epidemiologists call this differential misclassification. It doesn't average out with more data. The question to ask before using any extraction system isn't "what's the F1 score." It's "for this drug class and this specific analysis, is this system's recall acceptable?"
       </p>
 
       <h2 className={`text-2xl font-semibold mt-10 mb-4 ${heading}`}>The more tractable fixes</h2>
@@ -273,39 +273,8 @@ Epidemiologists call this differential misclassification. When missingness is co
         The few-shot example selection problem is fixable. A better set samples from narrative prose sections, includes at least one oncology note with AUC dosing in running text, and checks that the example distribution matches the note types in the target corpus.
       </p>
       <p className="mb-8">
-        The BioMistral truncation problem is also fixable - increasing the output token budget to 1024 would recover most of the truncated extractions. Neither fix addresses the structural finding: oncology recall is limited across all current approaches because chemotherapy documentation is systematically harder than the general medication documentation these systems were designed around.
+        The BioMistral truncation problem is also fixable — increasing the output token budget to 1024 would recover most of the truncated extractions. Neither fix addresses the structural finding: oncology recall is limited across all current approaches because chemotherapy documentation is systematically harder than the general medication documentation these systems were designed around.
       </p>
-
-
-      <hr style={{ borderColor, margin: '2rem 0' }} />
-
-      <h2 className={`text-xl font-semibold mb-4 ${heading}`}>References</h2>
-      <ol className={`text-sm space-y-3 ${muted}`} style={{ listStyleType: 'decimal', paddingLeft: '1.25rem' }}>
-        <li>
-          Henry S, Buchan K, Filannino M, Stubbs A, Uzuner O. 2018 n2c2 shared task on adverse drug events and medication extraction in electronic health records.{' '}
-          <em>J Am Med Inform Assoc.</em> 2020;27(1):3–12.{' '}
-          <a href="https://doi.org/10.1093/jamia/ocz166" className={`underline ${link}`} target="_blank" rel="noopener noreferrer">
-            doi:10.1093/jamia/ocz166
-          </a>
-        </li>
-        <li>
-          Labrak Y, Bazoge A, Morin E, et al. BioMistral: A Collection of Open-Source Pretrained Large Language Models for Medical Domains. arXiv preprint. 2024.{' '}
-          <a href="https://arxiv.org/abs/2402.10373" className={`underline ${link}`} target="_blank" rel="noopener noreferrer">
-            arXiv:2402.10373
-          </a>
-        </li>
-        <li>
-          Nelson SJ, Zeng K, Kilbourne J, Powell T, Moore R. Normalized names for clinical drugs: RxNorm at 6 years.{' '}
-          <em>J Am Med Inform Assoc.</em> 2011;18(4):441–445.{' '}
-          <a href="https://doi.org/10.1136/amiajnl-2011-000116" className={`underline ${link}`} target="_blank" rel="noopener noreferrer">
-            doi:10.1136/amiajnl-2011-000116
-          </a>
-        </li>
-        <li>
-          Rothman KJ, Greenland S, Lash TL.{' '}
-          <em>Modern Epidemiology.</em> 3rd ed. Philadelphia: Lippincott Williams & Wilkins; 2008. (Differential misclassification, Ch. 9.)
-        </li>
-      </ol>
 
       <hr style={{ borderColor, margin: '2rem 0' }} />
 
